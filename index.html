@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="rw">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101b35"><meta name="description" content="UBUBIKO SMART — Inventory and stock management">
+<title>UBUBIKO SMART | Inventory Management</title>
+<style>
+:root{--navy:#101b35;--navy2:#172746;--gold:#e7b84b;--gold2:#f5d98b;--ink:#172033;--muted:#738097;--line:#e8edf4;--paper:#f4f6fa;--white:#fff;--green:#16865d;--red:#c64d54;--blue:#4778c7;--shadow:0 12px 34px #17274612}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;transition:background .3s,color .3s}.app{min-height:100vh;display:flex}.sidebar{width:258px;background:linear-gradient(180deg,var(--navy),#0c152a);color:#dce5f5;position:fixed;inset:0 auto 0 0;z-index:20;display:flex;flex-direction:column;padding:22px 15px;transition:transform .25s}.brand{display:flex;align-items:center;gap:11px;padding:2px 9px 24px;border-bottom:1px solid #ffffff18}.brand-mark{width:42px;height:42px;border-radius:13px;background:linear-gradient(145deg,var(--gold2),var(--gold));color:#19233a;display:grid;place-items:center;font-size:22px;font-weight:900;box-shadow:0 5px 18px #e7b84b33}.brand strong{display:block;color:#fff;font-size:15px;letter-spacing:.08em}.brand small{color:#98a8c3;font-size:10px;letter-spacing:.14em}.nav-label{font-size:10px;text-transform:uppercase;letter-spacing:.16em;color:#7486a5;padding:23px 11px 9px}.nav{display:grid;gap:4px;overflow:auto}.nav button{border:0;background:transparent;color:#aebbd1;border-radius:10px;padding:11px 12px;display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;font:inherit;transition:.2s}.nav button:hover{background:#ffffff0d;color:white}.nav button.active{background:linear-gradient(90deg,#e7b84b25,#e7b84b0b);color:#ffdc87;box-shadow:inset 3px 0 var(--gold)}.nav .ico{width:19px;text-align:center;font-size:16px}.side-bottom{margin-top:auto;padding:15px 9px 0;border-top:1px solid #ffffff18;color:#8798b4;font-size:11px}.side-user{display:flex;align-items:center;gap:10px;margin-top:13px;color:#eaf0fa}.avatar{width:34px;height:34px;border-radius:50%;background:#e7b84b;color:#1a2740;display:grid;place-items:center;font-weight:800}.main{margin-left:258px;width:calc(100% - 258px);min-width:0;min-height:100vh;display:flex;flex-direction:column}.topbar{height:76px;background:#ffffffed;backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:10}.top-left{display:flex;align-items:center;gap:14px}.menu-btn{display:none;border:0;background:#f0f3f8;border-radius:9px;padding:9px;cursor:pointer}.crumb{color:var(--muted);font-size:12px}.top-actions{display:flex;align-items:center;gap:10px}.select,.btn,.icon-btn{border:1px solid var(--line);background:white;color:var(--ink);border-radius:9px;padding:9px 12px;font:inherit;cursor:pointer}.select{padding:8px 10px}.icon-btn{width:37px;height:37px;padding:0;font-size:16px}.role-pill{background:#fff8e7;color:#9b6d13;border:1px solid #f2dfb4;border-radius:30px;padding:7px 11px;font-size:11px;font-weight:700}.role-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:#8290a5;font-weight:800;margin-left:3px}.role-select{border-color:#e6d6ae;background:#fffaf0;color:#76571a;font-weight:700;min-width:112px}.content{max-width:1440px;width:100%;flex:1;margin:0 auto;padding:30px 32px 44px}.page-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:25px}.eyebrow{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#b1842d;font-weight:800}.page-head h1{margin:5px 0 4px;font-size:27px;letter-spacing:-.04em;color:var(--navy)}.page-head p{margin:0;color:var(--muted)}.head-actions{display:flex;gap:9px;flex-wrap:wrap}.btn-primary{background:var(--navy);border-color:var(--navy);color:white}.btn-primary:hover{background:#23375e}.btn-gold{background:var(--gold);border-color:var(--gold);color:#202b40;font-weight:700}.btn:disabled{opacity:.45;cursor:not-allowed}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:19px}.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:18px 19px;box-shadow:var(--shadow);position:relative;overflow:hidden}.stat:after{content:"";position:absolute;width:80px;height:80px;border-radius:50%;right:-25px;top:-30px;background:#e7b84b12}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.stat-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#fff6e2;color:#a87919;font-size:17px}.stat strong{display:block;font-size:27px;letter-spacing:-.04em;margin:12px 0 3px;color:var(--navy)}.stat small{font-size:11px;color:var(--muted)}.positive{color:var(--green)!important}.panels{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,1fr);gap:18px}.panel{background:white;border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px}.panel-head{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}.panel-head h3{margin:0;font-size:14px;color:var(--navy)}.panel-head small{color:var(--muted)}.panel-body{padding:18px 19px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;white-space:nowrap}th{text-align:left;color:#8290a5;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:12px 17px;background:#fafbfd;border-bottom:1px solid var(--line)}td{padding:13px 17px;border-bottom:1px solid #eef1f6;font-size:12px}tbody tr:last-child td{border-bottom:0}.product{display:flex;align-items:center;gap:10px}.product-icon{width:34px;height:34px;border-radius:9px;background:#f4f6fa;display:grid;place-items:center;font-size:17px}.product b{display:block;font-size:12px}.product small{color:var(--muted);font-size:10px}.status{display:inline-flex;align-items:center;gap:5px;border-radius:30px;padding:5px 9px;font-size:10px;font-weight:700;background:#eaf7f0;color:#16865d}.status.warn{background:#fff5df;color:#a77716}.status.danger{background:#fff0f0;color:#bd4c53}.status.info{background:#edf3ff;color:#4778c7}.status:before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}.alert-list{display:grid;gap:12px}.alert{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px;border:1px solid var(--line);border-radius:11px}.alert b{display:block;font-size:12px}.alert small{color:var(--muted);font-size:10px}.alert-num{font-size:11px;font-weight:800;color:var(--red);background:#fff0f0;padding:6px 8px;border-radius:7px}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.quick{border:1px solid var(--line);border-radius:11px;padding:13px;text-align:left;background:#fff;cursor:pointer;transition:.2s}.quick:hover{border-color:#e4bd65;transform:translateY(-2px)}.quick span{display:block;font-size:18px;margin-bottom:7px}.quick b{font-size:11px;color:var(--navy)}.quick small{display:block;font-size:10px;color:var(--muted);margin-top:3px}.bar-chart{height:150px;display:flex;align-items:end;gap:12px;padding:8px 4px 0}.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:7px;height:100%;justify-content:end}.bar{width:min(100%,28px);border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#f1cc75,#dba638);min-height:8px}.bar-col small{font-size:9px;color:var(--muted)}.empty{padding:35px;text-align:center;color:var(--muted)}.toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap}.search{border:1px solid var(--line);border-radius:9px;padding:9px 12px;font:inherit;min-width:200px;outline:none}.search:focus,.select:focus{border-color:#d8ad4d;box-shadow:0 0 0 3px #e7b84b20}.module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.module-card{border:1px solid var(--line);border-radius:12px;padding:16px;background:white}.module-card h4{margin:8px 0 4px}.module-card p{margin:0;color:var(--muted);font-size:11px}.permission{font-size:10px;color:#a87919;background:#fff6e2;padding:4px 7px;border-radius:20px}.toast{position:fixed;right:22px;bottom:22px;background:#14223d;color:white;padding:12px 17px;border-radius:11px;box-shadow:0 10px 35px #101b3540;z-index:50;opacity:0;transform:translateY(10px);transition:.25s;pointer-events:none}.toast.show{opacity:1;transform:translateY(0)}.modal-backdrop{position:fixed;inset:0;background:#0b1427a8;display:none;place-items:center;z-index:60;padding:18px}.modal-backdrop.open{display:grid}.modal{width:min(460px,100%);background:white;border-radius:16px;padding:22px;box-shadow:0 25px 80px #0003}.modal h2{margin:0 0 6px;color:var(--navy)}.modal p{margin:0 0 18px;color:var(--muted);font-size:12px}.field{display:grid;gap:6px;margin:12px 0}.field label{font-size:11px;font-weight:700;color:#53617a}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;font:inherit}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.fade-language{animation:langFade 1s ease}@keyframes langFade{0%{opacity:.35}100%{opacity:1}}.footer{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;text-align:center;color:#78859b;font-size:11px;font-weight:600;letter-spacing:.025em;padding:20px 24px;margin-top:auto;border-top:1px solid #e3e9f1;background:linear-gradient(120deg,#fff 0%,#f7f9fc 52%,#fff8e9 100%)}.footer:before,.footer:after{content:"";width:28px;height:3px;border-radius:5px;background:linear-gradient(90deg,var(--gold),var(--navy));display:block}[data-theme="dark"] .footer{color:#aab6ca;border-color:#283751;background:linear-gradient(120deg,#111d33,#172746 55%,#25233a)}@media(max-width:600px){.footer{padding:17px 14px;font-size:10px;gap:7px}.footer:before,.footer:after{width:16px}}.mobile-scrim{display:none}
+.app{display:none}.app.authenticated{display:flex}
+.login-shell{min-height:100vh;display:grid;place-items:center;padding:24px;background:radial-gradient(circle at 15% 15%,#e7b84b22,transparent 32%),linear-gradient(135deg,#0c152a,#172746 62%,#101b35)}
+.login-card{width:min(460px,100%);background:#fff;border-radius:22px;padding:30px;box-shadow:0 28px 80px #050d1f70}
+.login-brand{display:flex;align-items:center;gap:13px;margin-bottom:25px}.login-brand strong{display:block;color:var(--navy);letter-spacing:.07em}.login-brand small{color:var(--muted);font-size:10px;letter-spacing:.13em}
+.login-eyebrow{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#b1842d;font-weight:800}.login-card h1{font-size:28px;color:var(--navy);margin:7px 0}.login-sub{color:var(--muted);margin:0 0 22px;font-size:13px}
+.login-field{display:grid;gap:7px;margin:14px 0}.login-field label{font-size:12px;font-weight:700;color:#53617a}.login-field input{width:100%;border:1px solid var(--line);border-radius:10px;padding:12px 13px;font:inherit;outline:none}.login-field input:focus{border-color:#d8ad4d;box-shadow:0 0 0 3px #e7b84b20}
+.login-submit{width:100%;margin-top:8px;padding:12px;border:0;border-radius:10px;background:var(--navy);color:white;font:inherit;font-weight:800;cursor:pointer}
+.demo-box{display:none!important;margin-top:19px;padding:13px 14px;background:#f7f8fb;border:1px solid var(--line);border-radius:11px;font-size:11px;color:#53617a}.demo-box b{display:block;color:var(--navy);margin-bottom:7px}.demo-accounts{display:grid;grid-template-columns:1fr 1fr;gap:5px 12px}.demo-accounts span{font-family:ui-monospace,monospace}
+.login-bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}.login-bottom label{font-size:11px;color:var(--muted)}.login-bottom select{border:1px solid var(--line);border-radius:9px;padding:8px;background:white;font:inherit}.login-error{min-height:18px;color:#bd4c53;font-size:11px;margin-top:8px}.login-note{font-size:10px;color:#8a95a8;text-align:center;margin:16px 0 0}
+.chat-suggestions{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chat-suggestions button{border:1px solid var(--line);background:#fff;color:#53617a;border-radius:20px;padding:7px 10px;font:inherit;font-size:10px;cursor:pointer}.chat-line{padding:10px 12px;border-radius:11px;margin:9px 0;background:#f5f7fa;font-size:12px;white-space:pre-wrap}.chat-line.user{background:#fff7e7;margin-left:8%}.chat-line.assistant{margin-right:8%}
+@media(max-width:480px){.login-card{padding:23px}.demo-accounts{grid-template-columns:1fr}.login-bottom{align-items:flex-start;flex-direction:column}}
+@media(max-width:1050px){.stats{grid-template-columns:repeat(2,1fr)}.panels{grid-template-columns:1fr}.module-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:720px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.mobile-scrim.show{display:block;position:fixed;inset:0;background:#07112680;z-index:15}.main{margin-left:0;width:100%}.menu-btn{display:block}.topbar{height:64px;padding:0 15px}.content{padding:22px 15px 35px}.page-head{display:block}.head-actions{margin-top:15px}.stats{gap:10px}.stat{padding:14px}.stat strong{font-size:23px}.panels{display:block}.module-grid{grid-template-columns:1fr 1fr}.role-pill{display:none}.role-label{display:none}.crumb{display:none}}
+@media(max-width:420px){.module-grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.top-actions{gap:5px}.select{max-width:105px}.stat-top{font-size:10px}}
+html[data-theme="dark"]{color-scheme:dark;--ink:#e7edf7;--muted:#9aa9bf;--line:#2b3850;--paper:#0d1524;--white:#172337;--navy:#e6edf8;--navy2:#1b2a42;--shadow:0 12px 34px #0004}
+html[data-theme="dark"] body{background:var(--paper);color:var(--ink)}
+html[data-theme="dark"] .topbar{background:#111d30ed;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .page-head h1,html[data-theme="dark"] .panel-head h3,html[data-theme="dark"] .stat strong,html[data-theme="dark"] .quick b,html[data-theme="dark"] .modal h2{color:#e6edf8}
+html[data-theme="dark"] .panel,html[data-theme="dark"] .stat,html[data-theme="dark"] .module-card,html[data-theme="dark"] .quick,html[data-theme="dark"] .modal{background:#172337;border-color:var(--line);color:var(--ink)}
+html[data-theme="dark"] .select,html[data-theme="dark"] .btn,html[data-theme="dark"] .icon-btn,html[data-theme="dark"] .search,html[data-theme="dark"] .field input,html[data-theme="dark"] .field select{background:#111d30;color:#e6edf8;border-color:#35445d}
+html[data-theme="dark"] .select option,html[data-theme="dark"] .field select option{background:#172337;color:#e6edf8}
+html[data-theme="dark"] th{background:#111d30;color:#aab8cc;border-color:var(--line)}html[data-theme="dark"] td{border-color:#2b3850;color:#dce5f2}
+html[data-theme="dark"] .product-icon,html[data-theme="dark"] .menu-btn{background:#26354d;color:#e6edf8}
+html[data-theme="dark"] .quick span,html[data-theme="dark"] .alert,html[data-theme="dark"] .chat-line{background:#1d2b41;border-color:#35445d;color:#e1e9f5}
+html[data-theme="dark"] .chat-line.user{background:#3a3020}html[data-theme="dark"] .chat-suggestions button{background:#172337;color:#dce5f2;border-color:#35445d}
+html[data-theme="dark"] .field label,html[data-theme="dark"] .login-field label{color:#c1ccdc}
+html[data-theme="dark"] .login-card{background:#172337;color:#e6edf8}html[data-theme="dark"] .login-brand strong,html[data-theme="dark"] .login-card h1{color:#e6edf8}
+html[data-theme="dark"] .login-field input,html[data-theme="dark"] .login-bottom select{background:#111d30;color:#e6edf8;border-color:#35445d}
+html[data-theme="dark"] .login-sub,html[data-theme="dark"] .login-bottom label{color:#aab8cc}html[data-theme="dark"] .login-submit{background:#e7b84b;color:#182238}
+html[data-theme="dark"] .status{background:#173d32;color:#78d5ad}html[data-theme="dark"] .status.warn{background:#44371c;color:#f0c66d}html[data-theme="dark"] .status.danger{background:#48262c;color:#ff9ca3}html[data-theme="dark"] .status.info{background:#203653;color:#9bc0ff}
+html[data-theme="dark"] .permission{background:#44371c;color:#f0c66d}html[data-theme="dark"] .role-pill{background:#3b311d;color:#f0cc79;border-color:#66532b}
+html[data-theme="dark"] .btn-primary{background:#e7b84b;color:#182238;border-color:#e7b84b}html[data-theme="dark"] .btn-gold{background:#e7b84b;color:#182238}html[data-theme="dark"] .login-note{color:#9aa9bf}
+.theme-toggle{white-space:nowrap;display:inline-flex;align-items:center;gap:6px}@media(max-width:720px){.theme-toggle{padding:8px}.theme-toggle .theme-label{display:none}}@media print{.sidebar,.topbar,.footer,.toast,.head-actions,.menu-btn{display:none!important}.main{margin:0!important;width:100%!important}.content{max-width:none!important;padding:0!important}.panel,.stat{box-shadow:none!important;break-inside:avoid}th{background:#eee!important;color:#111!important}td{color:#111!important}}
+</style>
+</head>
+<body>
+<section class="login-shell" id="loginShell"><div class="login-card">
+<div class="login-brand"><div class="brand-mark">U</div><div><strong>UBUBIKO SMART</strong><small>INVENTORY MANAGEMENT</small></div></div>
+<div class="login-eyebrow">INVENTORY MANAGEMENT</div><h1 id="loginTitle">Murakaza neza</h1><p class="login-sub" id="loginSubtitle">Injira kugira ngo ukomeze kuri dashboard y'ububiko.</p>
+<form onsubmit="event.preventDefault();login()">
+<div class="login-field"><label id="usernameLabel" for="loginUsername">Izina ukoresha</label><input id="loginUsername" autocomplete="username" required placeholder="Username"></div>
+<div class="login-field"><label id="passwordLabel" for="loginPassword">Ijambo ry'ibanga</label><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Password"></div>
+<button class="login-submit" id="loginButton" type="submit">Injira →</button><div class="login-error" id="loginError" role="alert"></div></form>
+<div class="demo-box"><b id="demoTitle">Konti zo kugerageza</b><div class="demo-accounts"><span>admin / admin123</span><span>manager / manager123</span><span>cashier / cashier123</span><span>storekeeper / store123</span></div></div>
+<div class="login-bottom"><label id="loginLanguageLabel" for="loginLanguage">Ururimi / Language / Langue</label><select id="loginLanguage" onchange="changeLang(this.value)"><option value="rw">🇷🇼 Ikinyarwanda</option><option value="en">🇬🇧 English</option><option value="fr">🇫🇷 Français</option></select><button class="btn theme-toggle" id="loginThemeToggle" type="button" onclick="toggleTheme()" aria-label="Toggle color theme">🌙 <span class="theme-label">Dark</span></button></div>
+<p class="login-note" id="loginNote">Demo login only · Do not use real passwords</p></div></section>
+<div class="app" id="mainApp">
+<aside class="sidebar" id="sidebar">
+ <div class="brand"><div class="brand-mark">U</div><div><strong>UBUBIKO SMART</strong><small>INVENTORY MANAGEMENT</small></div></div>
+ <div class="nav-label" data-i18n="workspace">Workspace</div>
+ <nav class="nav" id="nav"></nav>
+ <div class="side-bottom"><div data-i18n="signedIn">Signed in as</div><div class="side-user"><div class="avatar" id="avatar">A</div><div><b id="userName">Administrator</b><br><span id="userRole">Admin</span></div></div></div>
+</aside>
+<div class="mobile-scrim" id="scrim" onclick="toggleMenu()"></div>
+<main class="main">
+ <header class="topbar"><div class="top-left"><button class="menu-btn" onclick="toggleMenu()">☰</button><div><div class="crumb" data-i18n="breadcrumb">Inventory / Overview</div><b id="topTitle">Dashboard</b></div></div><div class="top-actions"><span class="role-pill" id="rolePill">UBURENGANZIRA: ADMIN</span><select class="select" id="language" aria-label="Language"><option value="rw">🇷🇼 Kinyarwanda</option><option value="en">🇬🇧 English</option><option value="fr">🇫🇷 Français</option></select><button class="btn theme-toggle" id="themeToggle" type="button" onclick="toggleTheme()" aria-label="Toggle color theme">🌙 <span class="theme-label">Dark</span></button><button class="btn" id="logoutButton" onclick="logout()">Sohoka</button></div></header>
+ <section class="content" id="content"></section>
+ <footer class="footer" id="footer">Byakozwe na Remy, Divin, Mireille na L5ideas · UBUBIKO SMART</footer>
+</main>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modal-backdrop" id="modalBackdrop" onclick="if(event.target===this)closeModal()"><div class="modal"><h2 id="modalTitle">Add product</h2><p id="modalDesc">Enter product details</p><div id="modalFields"></div><div class="modal-actions"><button class="btn" onclick="closeModal()" data-i18n="cancel">Cancel</button><button class="btn btn-primary" id="modalSave" onclick="saveModal()" data-i18n="save">Save</button></div></div></div>
+<script>
+const T={
+rw:{workspace:"Aho ukorera",roleLabel:"Uruhare",signedIn:"Winjiye nka",breadcrumb:"Ububiko / Incamake",dashboard:"Incamake",products:"Ibicuruzwa",movements:"Ibicuruzwa byinjiye n'iby asohotse",requests:"Ubusabe bw'ibicuruzwa",returns:"Ibicuruzwa byagaruwe",users:"Abakoresha n'ubuyobozi",audit:"Amateka y'ibikorwa",assistant:"Umufasha w'ubwenge",suppliers:"Abatanga ibicuruzwa",customers:"Abakiriya",reports:"Raporo",settings:"Igenamiterere",welcome:"Murakaza neza muri UBUBIKO SMART",overview:"Dore uko ububiko buhagaze uyu munsi.",addProduct:"Ongeraho igicuruzwa",export:"Sohora raporo",totalProducts:"Ibicuruzwa byose",stockValue:"Agaciro k'ububiko",sales:"Ibyagurishijwe",lowStock:"Ibicuruzwa bike",fromLast:"Ugereranyije n'igihe gishize",stockOverview:"Incamake y'ububiko",last7:"Iminsi 7 ishize",lowAlerts:"Ibicuruzwa biri hafi gushira",viewAll:"Reba byose",quickActions:"Ibikorwa byihuse",newRequest:"Saba ibicuruzwa",receiveStock:"Injiza ibicuruzwa",recordSale:"Andika igurisha",recentActivity:"Ibikorwa biheruka",product:"Igicuruzwa",category:"Icyiciro",quantity:"Umubare",price:"Igiciro",status:"Imiterere",action:"Igikorwa",search:"Shakisha...",all:"Byose",available:"Birahari",low:"Bike",out:"Byashize",cancel:"Hagarika",save:"Bika",name:"Izina",minimum:"Umubare ntarengwa",add:"Ongeraho",noPermission:"Ntabwo wemerewe gukora iki gikorwa.",saved:"Byabitswe neza.",pending:"Birategereje",approved:"Byemejwe",processed:"Byatunganyijwe",rejected:"Byanzwe",moduleInfo:"Igenzura n'imicungire y'iki gice.",access:"Uburenganzira",readOnly:"Gusoma gusa",fullAccess:"Uburenganzira bwose",create:"Kurema",update:"Guhindura",delete:"Gusiba",noRecords:"Nta makuru ahari.",assistantIntro:"Ndi umufasha wa UBUBIKO SMART. Nshobora kugufasha kumenya uko ububiko buhagaze.",ask:"Baza ikibazo kijyanye n'ububiko...",send:"Ohereza",adminOnly:"Iki gice kigenewe Admin gusa.",usersTitle:"Abakoresha n'uruhare rwabo",auditTitle:"Amateka y'ibikorwa (ntahindurwa)",settingsTitle:"Igenamiterere rya sisitemu",supplier:"Utanga ibicuruzwa",customer:"Umukiriya",date:"Itariki",reference:"Nomero",type:"Ubwoko",role:"Uruhare",permissions:"Uburenganzira",systemSettings:"Igenamiterere rusange",personalSettings:"Igenamiterere ryawe",language:"Ururimi",theme:"Imigaragarire",stockIn:"Ibyinjiye",stockOut:"Ibyasohotse",request:"Ubusabe",return:"Igarura",exported:"Raporo yateguwe.",welcomeRole:"Uruhare rwawe",totalValue:"Agaciro kose",profit:"Inyungu y'igerageza",lowQty:"Umubare muke",units:"ibice",recent:"Ibiheruka",demo:"Igerageza",denied:"Igikorwa cyanzwe kubera uburenganzira buke."},
+en:{workspace:"Workspace",roleLabel:"Role",signedIn:"Signed in as",breadcrumb:"Inventory / Overview",dashboard:"Dashboard",products:"Products",movements:"Stock Movements",requests:"Stock Requests",returns:"Returns",users:"Admin & Users",audit:"Audit Log",assistant:"Stock AI Assistant",suppliers:"Suppliers",customers:"Customers",reports:"Reports",settings:"Settings",welcome:"Welcome to UBUBIKO SMART",overview:"Here is your inventory overview for today.",addProduct:"Add Product",export:"Export Report",totalProducts:"Total Products",stockValue:"Stock Value",sales:"Sales (Demo)",lowStock:"Low Stock Items",fromLast:"Compared with last period",stockOverview:"Stock Overview",last7:"Last 7 days",lowAlerts:"Low Stock Alerts",viewAll:"View all",quickActions:"Quick Actions",newRequest:"New Request",receiveStock:"Receive Stock",recordSale:"Record Sale",recentActivity:"Recent Activity",product:"Product",category:"Category",quantity:"Quantity",price:"Price",status:"Status",action:"Action",search:"Search...",all:"All",available:"Available",low:"Low",out:"Out of stock",cancel:"Cancel",save:"Save",name:"Name",minimum:"Minimum quantity",add:"Add",noPermission:"You are not allowed to perform this action.",saved:"Saved successfully.",pending:"Pending",approved:"Approved",processed:"Processed",rejected:"Rejected",moduleInfo:"Access and management for this module.",access:"Access",readOnly:"Read only",fullAccess:"Full access",create:"Create",update:"Update",delete:"Delete",noRecords:"No records found.",assistantIntro:"I am the UBUBIKO SMART assistant. Ask me about your inventory and stock operations.",ask:"Ask about your inventory...",send:"Send",adminOnly:"This module is restricted to Admin.",usersTitle:"Users & Roles",auditTitle:"Audit Log (immutable)",settingsTitle:"System Settings",supplier:"Supplier",customer:"Customer",date:"Date",reference:"Reference",type:"Type",role:"Role",permissions:"Permissions",systemSettings:"System settings",personalSettings:"Personal preferences",language:"Language",theme:"Appearance",stockIn:"Stock In",stockOut:"Stock Out",request:"Request",return:"Return",exported:"Report prepared.",welcomeRole:"Your role",totalValue:"Total value",profit:"Demo profit",lowQty:"Low quantity",units:"units",recent:"Recent",demo:"Demo",denied:"Action denied by permission policy."},
+fr:{workspace:"Espace de travail",roleLabel:"Rôle",signedIn:"Connecté en tant que",breadcrumb:"Stock / Aperçu",dashboard:"Tableau de bord",products:"Produits",movements:"Mouvements de stock",requests:"Demandes de stock",returns:"Retours",users:"Administration et utilisateurs",audit:"Journal d'audit",assistant:"Assistant IA du stock",suppliers:"Fournisseurs",customers:"Clients",reports:"Rapports",settings:"Paramètres",welcome:"Bienvenue dans UBUBIKO SMART",overview:"Voici l'état de votre stock aujourd'hui.",addProduct:"Ajouter un produit",export:"Exporter le rapport",totalProducts:"Total des produits",stockValue:"Valeur du stock",sales:"Ventes (démo)",lowStock:"Articles en stock faible",fromLast:"Par rapport à la période précédente",stockOverview:"Aperçu du stock",last7:"7 derniers jours",lowAlerts:"Alertes de stock faible",viewAll:"Tout voir",quickActions:"Actions rapides",newRequest:"Nouvelle demande",receiveStock:"Réceptionner le stock",recordSale:"Enregistrer une vente",recentActivity:"Activité récente",product:"Produit",category:"Catégorie",quantity:"Quantité",price:"Prix",status:"Statut",action:"Action",search:"Rechercher...",all:"Tous",available:"Disponible",low:"Faible",out:"Épuisé",cancel:"Annuler",save:"Enregistrer",name:"Nom",minimum:"Quantité minimale",add:"Ajouter",noPermission:"Vous n'êtes pas autorisé à effectuer cette action.",saved:"Enregistré avec succès.",pending:"En attente",approved:"Approuvé",processed:"Traité",rejected:"Rejeté",moduleInfo:"Accès et gestion de ce module.",access:"Accès",readOnly:"Lecture seule",fullAccess:"Accès complet",create:"Créer",update:"Modifier",delete:"Supprimer",noRecords:"Aucun enregistrement.",assistantIntro:"Je suis l'assistant UBUBIKO SMART. Posez vos questions sur le stock.",ask:"Posez une question sur le stock...",send:"Envoyer",adminOnly:"Ce module est réservé à l'administrateur.",usersTitle:"Utilisateurs et rôles",auditTitle:"Journal d'audit (inaltérable)",settingsTitle:"Paramètres système",supplier:"Fournisseur",customer:"Client",date:"Date",reference:"Référence",type:"Type",role:"Rôle",permissions:"Autorisations",systemSettings:"Paramètres système",personalSettings:"Préférences personnelles",language:"Langue",theme:"Apparence",stockIn:"Entrée",stockOut:"Sortie",request:"Demande",return:"Retour",exported:"Rapport préparé.",welcomeRole:"Votre rôle",totalValue:"Valeur totale",profit:"Profit démo",lowQty:"Quantité faible",units:"unités",recent:"Récent",demo:"Démo",denied:"Action refusée par la politique d'autorisation."}
+};
+const navItems=[["dashboard","▦"],["products","▣"],["movements","⇄"],["requests","⇧"],["returns","↩"],["users","♙"],["audit","▤"],["assistant","✧"],["suppliers","♧"],["customers","♧"],["reports","▥"],["settings","⚙"]];
+const permissions={
+Admin:{dashboard:"r",products:"crud",movements:"cr",requests:"cru",returns:"cru",users:"crud",audit:"r",assistant:"r",suppliers:"crud",customers:"crud",reports:"r",settings:"crud"},
+Manager:{dashboard:"r",products:"cru",movements:"r",requests:"cru",returns:"cru",users:"-",audit:"operational",assistant:"r",suppliers:"cru",customers:"cru",reports:"r",settings:"-"},
+Cashier:{dashboard:"r",products:"-",movements:"sale",requests:"-",returns:"cr",users:"-",audit:"-",assistant:"r",suppliers:"-",customers:"cru",reports:"own",settings:"-"},
+Storekeeper:{dashboard:"r",products:"r",movements:"cr",requests:"cr",returns:"receive",users:"-",audit:"-",assistant:"r",suppliers:"r",customers:"-",reports:"stock",settings:"-"}
+};
+let role="Admin",currentUsername="",theme=(function(){try{return localStorage.getItem("ububiko-theme")==="dark"?"dark":"light"}catch(e){return "light"}})(),lang=(function(){try{const saved=localStorage.getItem("ububiko-language");return ["rw","en","fr"].includes(saved)?saved:"rw"}catch(e){return "rw"}})(),page="dashboard",filter="all",query="",modalKind="";
+let products=loadCollection("ububiko-products-v1",[
+{id:1,name:"Isukari",sku:"UB-001",category:"Ibiribwa",qty:8,min:15,price:1800,icon:"🍚"},
+{id:2,name:"Isabune",sku:"UB-002",category:"Isuku",qty:42,min:12,price:1200,icon:"🧼"},
+{id:3,name:"Amavuta yo guteka",sku:"UB-003",category:"Ibiribwa",qty:6,min:10,price:3500,icon:"🫗"},
+{id:4,name:"Umuceri",sku:"UB-004",category:"Ibiribwa",qty:65,min:20,price:2200,icon:"🌾"},
+{id:5,name:"Amakayi",sku:"UB-005",category:"Ibikoresho",qty:0,min:8,price:900,icon:"📒"},
+{id:6,name:"Isukari y'ifu",sku:"UB-006",category:"Ibiribwa",qty:23,min:10,price:2000,icon:"🥣"},
+{id:7,name:"Kawunga",sku:"UB-007",category:"Ibiribwa",qty:5,min:10,price:1500,icon:"🌽"},
+{id:8,name:"Amazi",sku:"UB-008",category:"Ibinyobwa",qty:100,min:25,price:500,icon:"💧"}
+]);
+let movements=loadCollection("ububiko-movements-v1",[{id:"MV-1046",product:"Umuceri",type:"stockOut",qty:3,unitPrice:2200,total:6600,date:"2026-11-06",by:"Cashier"},{id:"MV-1045",product:"Isabune",type:"stockOut",qty:4,unitPrice:1200,total:4800,date:"2026-11-06",by:"Cashier"},{id:"MV-1044",product:"Isukari",type:"stockOut",qty:5,unitPrice:1800,total:9000,date:"2026-11-06",by:"Cashier"},{id:"MV-1042",product:"Isukari",type:"stockIn",qty:20,date:"2026-11-05",by:"Admin"},{id:"MV-1041",product:"Isabune",type:"stockOut",qty:5,unitPrice:1200,total:6000,date:"2026-11-05",by:"Cashier"},{id:"MV-1040",product:"Umuceri",type:"stockIn",qty:15,date:"2026-11-04",by:"Storekeeper"},{id:"MV-1039",product:"Amavuta yo guteka",type:"stockOut",qty:3,unitPrice:3500,total:10500,date:"2026-11-04",by:"Cashier"}]);
+let requests=loadCollection("ububiko-requests-v1",[{id:"RQ-0201",product:"Isukari",qty:30,status:"pending",by:"Storekeeper"},{id:"RQ-0200",product:"Umuceri",qty:20,status:"approved",by:"Cashier"},{id:"RQ-0199",product:"Isabune",qty:10,status:"processed",by:"Storekeeper"}]);
+let audit=loadCollection("ububiko-audit-v1",[{date:"2026-11-05 09:42",actor:"Admin",action:"Session started",target:"Dashboard"},{date:"2026-11-05 09:15",actor:"Storekeeper",action:"Stock received",target:"Umuceri +15"},{date:"2026-11-04 16:30",actor:"Manager",action:"Request approved",target:"RQ-0200"}]);
+function loadCollection(key,fallback){try{const value=JSON.parse(localStorage.getItem(key)||"null");return Array.isArray(value)?value:fallback}catch(e){return fallback}}function persistCollection(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){notify("Could not save data in this browser.")}}
+let suppliers=loadCollection("ububiko-suppliers-v1",[{id:"SUP-001",name:"Kigali Wholesale Ltd",contact:"Jean Claude",phone:"0788111222",email:"sales@kigaliwholesale.rw",items:"Ibiribwa",status:"active",notes:"Demo supplier"},{id:"SUP-002",name:"Isuku Supplies",contact:"Aline Uwase",phone:"0788333444",email:"info@isukusupplies.rw",items:"Ibikoresho by’isuku",status:"active",notes:"Demo supplier"}]);
+let customers=loadCollection("ububiko-customers-v1",[{id:"CUS-001",name:"Jean Bosco",phone:"0788000001",email:"",notes:"Regular customer"},{id:"CUS-002",name:"Aline Mukamana",phone:"0788000002",email:"",notes:""},{id:"CUS-003",name:"Eric Ndayisenga",phone:"0788000003",email:"",notes:"Wholesale customer"},{id:"CUS-004",name:"Claudine Uwase",phone:"0788000004",email:"",notes:""}]);
+[{id:"CUS-003",name:"Eric Ndayisenga",phone:"0788000003",email:"",notes:"Wholesale customer"},{id:"CUS-004",name:"Claudine Uwase",phone:"0788000004",email:"",notes:""}].forEach(sample=>{if(!customers.some(c=>c.id===sample.id||c.phone===sample.phone))customers.push(sample)});
+let returnsData=loadCollection("ububiko-returns-v1",[{id:"RET-001",customer:"Jean Bosco",product:"Isabune",qty:1,reason:"Damaged packaging",refund:1200,status:"pending",date:"2026-11-06",by:"Cashier"},{id:"RET-002",customer:"Aline Mukamana",product:"Umuceri",qty:1,reason:"Wrong item supplied",refund:2200,status:"approved",date:"2026-11-05",by:"Cashier"},{id:"RET-003",customer:"Eric Ndayisenga",product:"Amavuta yo guteka",qty:2,reason:"Packaging returned unopened",refund:7000,status:"restocked",date:"2026-11-04",by:"Manager"}]);
+[{id:"RET-002",customer:"Aline Mukamana",product:"Umuceri",qty:1,reason:"Wrong item supplied",refund:2200,status:"approved",date:"2026-11-05",by:"Cashier"},{id:"RET-003",customer:"Eric Ndayisenga",product:"Amavuta yo guteka",qty:2,reason:"Packaging returned unopened",refund:7000,status:"restocked",date:"2026-11-04",by:"Manager"}].forEach(sample=>{if(!returnsData.some(x=>x.id===sample.id))returnsData.push(sample)});
+const LOGIN_TEXT={
+rw:{title:"Murakaza neza",subtitle:"Injira kugira ngo ukomeze kuri dashboard y'ububiko.",username:"Izina ukoresha",password:"Ijambo ry'ibanga",submit:"Injira →",demo:"Konti zo kugerageza",language:"Ururimi / Language / Langue",logout:"Sohoka",bad:"Izina cyangwa ijambo ry'ibanga si byo. Ongera ugerageze.",note:"Igerageza gusa · Ntukoreshe ijambo ry'ibanga ryawe bwite.",u:"Andika izina ukoresha",p:"Andika ijambo ry'ibanga"},
+en:{title:"Welcome back",subtitle:"Sign in to continue to your inventory dashboard.",username:"Username",password:"Password",submit:"Sign in →",demo:"Demo accounts",language:"Language / Ururimi / Langue",logout:"Sign out",bad:"Incorrect username or password. Please try again.",note:"Demo login only · Do not use real passwords",u:"Enter username",p:"Enter password"},
+fr:{title:"Bon retour",subtitle:"Connectez-vous pour accéder au tableau de bord du stock.",username:"Nom d'utilisateur",password:"Mot de passe",submit:"Se connecter →",demo:"Comptes de démonstration",language:"Langue / Language / Ururimi",logout:"Déconnexion",bad:"Nom d'utilisateur ou mot de passe incorrect. Réessayez.",note:"Connexion de démonstration uniquement · N'utilisez pas vos vrais mots de passe.",u:"Saisissez votre nom",p:"Saisissez votre mot de passe"}
+};
+const DEMO_USERS={admin:{password:"admin123",role:"Admin"},manager:{password:"manager123",role:"Manager"},cashier:{password:"cashier123",role:"Cashier"},storekeeper:{password:"store123",role:"Storekeeper"}};
+const USER_STORE_KEY="ububiko-demo-users-v1";
+function loadUserAccounts(){let saved=null;try{saved=JSON.parse(localStorage.getItem(USER_STORE_KEY)||"null")}catch(e){}const base=Object.entries(DEMO_USERS).map(([username,a])=>({username,password:a.password,role:a.role,blocked:false,builtIn:true}));if(!Array.isArray(saved))return base;const byName=new Map(base.map(u=>[u.username,u]));saved.forEach(u=>{if(u&&typeof u.username==="string"&&typeof u.password==="string"&&["Admin","Manager","Cashier","Storekeeper"].includes(u.role)){const old=byName.get(u.username);byName.set(u.username,{...old,...u,builtIn:!!(old&&old.builtIn)})}});return [...byName.values()]}
+let userAccounts=loadUserAccounts();
+function persistUserAccounts(){try{localStorage.setItem(USER_STORE_KEY,JSON.stringify(userAccounts))}catch(e){notify("Unable to save user changes in this browser.")}}
+function applyTheme(){document.documentElement.setAttribute("data-theme",theme);const label=theme==="dark"?(lang==="rw"?"Urumuri":lang==="fr"?"Clair":"Light"):(lang==="rw"?"Umwijima":lang==="fr"?"Sombre":"Dark");const icon=theme==="dark"?"☀️":"🌙";["themeToggle","loginThemeToggle"].forEach(id=>{const el=document.getElementById(id);if(el)el.innerHTML=icon+' <span class="theme-label">'+label+"</span>"})}
+function toggleTheme(){theme=theme==="dark"?"light":"dark";try{localStorage.setItem("ububiko-theme",theme)}catch(e){}applyTheme();if(document.getElementById("mainApp").classList.contains("authenticated")&&page==="settings")render();notify(lang==="rw"?(theme==="dark"?"Uburyo bw’umwijima bwafunguwe":"Uburyo bw’urumuri bwafunguwe"):theme==="dark"?"Dark mode enabled":"Light mode enabled")}
+function updateLoginLanguage(){const x=LOGIN_TEXT[lang];applyTheme();document.documentElement.lang=lang;document.getElementById("loginTitle").textContent=x.title;document.getElementById("loginSubtitle").textContent=x.subtitle;document.getElementById("usernameLabel").textContent=x.username;document.getElementById("passwordLabel").textContent=x.password;document.getElementById("loginButton").textContent=x.submit;document.getElementById("demoTitle").textContent=x.demo;document.getElementById("loginLanguageLabel").textContent=x.language;document.getElementById("loginNote").textContent=x.note;document.getElementById("loginUsername").placeholder=x.u;document.getElementById("loginPassword").placeholder=x.p;document.getElementById("logoutButton").textContent=x.logout;document.getElementById("loginLanguage").value=lang;const top=document.getElementById("language");if(top)top.value=lang}
+function login(){const u=document.getElementById("loginUsername").value.trim().toLowerCase(),p=document.getElementById("loginPassword").value,a=userAccounts.find(x=>x.username.toLowerCase()===u);if(!a||a.password!==p||a.blocked){document.getElementById("loginError").textContent=LOGIN_TEXT[lang].bad;return}role=a.role;currentUsername=a.username;page="dashboard";document.getElementById("loginError").textContent="";document.getElementById("loginPassword").value="";document.getElementById("loginShell").style.display="none";document.getElementById("mainApp").classList.add("authenticated");recordAudit("Demo session started",role);render();notify(lang==="rw"?"Murakaza neza, "+u:lang==="fr"?"Bienvenue, "+u:"Welcome, "+u)}
+function logout(){recordAudit("Demo session ended",role);currentUsername="";document.getElementById("mainApp").classList.remove("authenticated");document.getElementById("loginShell").style.display="grid";document.getElementById("loginUsername").value="";document.getElementById("loginPassword").value="";document.getElementById("loginError").textContent="";updateLoginLanguage()}
+const t=k=>T[lang][k]||T.en[k]||k;
+const fmt=n=>new Intl.NumberFormat(lang==="rw"?"en-US":lang==="fr"?"fr-FR":"en-US").format(n);
+function allowed(module,act="r"){const p=(permissions[role]||{})[module]||"-";if(p==="-")return false;if(act==="r")return true;if(p==="crud")return true;if((p==="sale"||p==="receive")&&act==="c")return true;return p.includes(act)}
+function notify(msg){let el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2600)}
+function recordAudit(action,target){audit.unshift({date:new Date().toLocaleString(),actor:role,action,target});persistCollection("ububiko-audit-v1",audit)}
+function toggleMenu(){document.getElementById("sidebar").classList.toggle("open");document.getElementById("scrim").classList.toggle("show")}
+function setPage(p){if(!allowed(p)){notify(t("noPermission"));return}page=p;filter="all";query="";render();document.getElementById("sidebar").classList.remove("open");document.getElementById("scrim").classList.remove("show")}
+function renderNav(){document.getElementById("nav").innerHTML=navItems.filter(([k])=>allowed(k)).map(([k,ic])=>'<button class="'+(page===k?'active':'')+'" onclick="setPage(&quot;'+k+'&quot;)"><span class="ico">'+ic+'</span><span>'+t(k)+'</span></button>').join("")}
+function render(){document.documentElement.lang=lang;document.getElementById("language").value=lang;document.getElementById("topTitle").textContent=t(page);const roleLabel=lang==="rw"?({Admin:"UMUYOBOZI",Manager:"UMUCUNGAMUTUNGO",Cashier:"UCURUZA",Storekeeper:"USHINZWE UBUBIKO"}[role]):lang==="fr"?({Admin:"ADMINISTRATEUR",Manager:"GESTIONNAIRE",Cashier:"CAISSIER",Storekeeper:"MAGASINIER"}[role]):role.toUpperCase();document.getElementById("rolePill").textContent=(lang==="rw"?"UBURENGANZIRA: ":lang==="fr"?"ACCÈS : ":"ACCESS: ")+roleLabel;document.getElementById("userName").textContent=role==="Admin"?(lang==="rw"?"Umuyobozi":lang==="fr"?"Administrateur":"Administrator"):role;document.getElementById("userRole").textContent=roleLabel;document.getElementById("avatar").textContent=role[0];document.getElementById("logoutButton").textContent=LOGIN_TEXT[lang].logout;document.getElementById("footer").innerHTML='<span class="footer-mark">✦</span><span>'+(lang==="rw"?"Byakozwe na Remy, Divin, Mireille na L5ideas":lang==="fr"?"Réalisé par Remy, Divin, Mireille et L5ideas":"By Remy, Divin, Mireille and L5ideas")+'</span><span aria-hidden="true">·</span><strong>UBUBIKO SMART</strong><span aria-hidden="true">·</span><span>'+(lang==="rw"?"Sisitemu yo gucunga ububiko":"Smart inventory management")+'</span>';renderNav();document.getElementById("content").classList.remove("fade-language");void document.getElementById("content").offsetWidth;document.getElementById("content").classList.add("fade-language");document.getElementById("content").innerHTML=page==="dashboard"?dashboard():page==="products"?productPage():page==="movements"?movementPage():page==="requests"?requestPage():page==="returns"?returnsPage():page==="users"?usersPage():page==="audit"?auditPage():page==="assistant"?assistantPage():page==="suppliers"?suppliersPage():page==="customers"?customersPage():page==="reports"?reportsPage():settingsPage();document.querySelectorAll("[data-i18n]").forEach(el=>{let key=el.dataset.i18n;if(T[lang][key])el.textContent=t(key)})}
+function head(title,desc,actions=""){return '<div class="page-head"><div><div class="eyebrow">UBUBIKO SMART / '+t("workspace")+'</div><h1>'+title+'</h1><p>'+desc+'</p></div><div class="head-actions">'+actions+'</div></div>'}
+function cashierDashboard(){const sales=movements.filter(m=>m.type==="stockOut"),total=sales.reduce((n,m)=>n+m.qty*(products.find(p=>p.name===m.product)?.price||0),0),refunds=returnsData.filter(r=>r.status==="approved").reduce((n,r)=>n+r.refund,0);return head(lang==="rw"?"Incamake y'ubucuruzi":"Sales overview",lang==="rw"?"Cashier abona iby'ubucuruzi n'abakiriya gusa.":"Cashier access is limited to sales and customers.",'<button class="btn btn-gold" onclick="setPage(&quot;customers&quot;)">＋ '+t("customers")+'</button>')+'<div class="stats"><div class="stat"><div class="stat-top">'+t("sales")+'</div><strong>'+fmt(total)+' RWF</strong><small>'+sales.length+' sales</small></div><div class="stat"><div class="stat-top">'+t("customers")+'</div><strong>'+customers.length+'</strong></div><div class="stat"><div class="stat-top">Approved refunds</div><strong>'+fmt(refunds)+' RWF</strong></div></div><div class="panel"><div class="panel-head"><h3>Sales history</h3></div>'+movementTable(sales)+'</div>'}
+function dashboard(){if(role==="Cashier")return cashierDashboard();let total=products.reduce((a,p)=>a+p.qty,0),value=products.reduce((a,p)=>a+p.qty*p.price,0),low=products.filter(p=>p.qty<=p.min).length;return head(t("welcome"),t("overview"),'<button class="btn" onclick="printReport()">▤ Print / PDF</button><button class="btn btn-gold" onclick="exportReport()">↧ '+t("export")+'</button><button class="btn btn-gold" onclick="openProductModal()">＋ '+t("addProduct")+'</button>')+
+'<div class="stats"><div class="stat"><div class="stat-top">'+t("totalProducts")+'<span class="stat-icon">▣</span></div><strong>'+products.length+'</strong><small class="positive">↑ 4.8% '+t("fromLast")+'</small></div><div class="stat"><div class="stat-top">'+t("stockValue")+'<span class="stat-icon">◈</span></div><strong>'+fmt(value)+' <small>RWF</small></strong><small>'+t("totalValue")+'</small></div><div class="stat"><div class="stat-top">'+t("sales")+'<span class="stat-icon">↗</span></div><strong>248</strong><small class="positive">↑ 8.2% '+t("fromLast")+'</small></div><div class="stat"><div class="stat-top">'+t("lowStock")+'<span class="stat-icon">⚑</span></div><strong>'+low+'</strong><small>'+t("lowAlerts")+'</small></div></div>'+
+'<div class="panels"><div><div class="panel"><div class="panel-head"><h3>'+t("stockOverview")+'</h3><small>'+t("last7")+'</small></div><div class="panel-body"><div class="bar-chart">'+[42,65,52,82,58,94,73].map((v,i)=>'<div class="bar-col"><div class="bar" style="height:'+v+'%"></div><small>'+(lang==="rw"?["Mbe","Kab","Gat","Kan","Gat","Gat","Cyu"]:lang==="fr"?["Lun","Mar","Mer","Jeu","Ven","Sam","Dim"]:["Mon","Tue","Wed","Thu","Fri","Sat","Sun"])[i]+'</small></div>').join("")+'</div></div><div class="panel"><div class="panel-head"><h3>'+t("recentActivity")+'</h3><button class="btn" onclick="setPage(\'movements\')">'+t("viewAll")+'</button></div>'+movementTable(movements.slice(0,4))+'</div></div><div><div class="panel"><div class="panel-head"><h3>'+t("lowAlerts")+'</h3><button class="btn" onclick="setPage(\'products\')">'+t("viewAll")+'</button></div><div class="panel-body"><div class="alert-list">'+products.filter(p=>p.qty<=p.min).map(p=>'<div class="alert"><div><b>'+p.icon+' '+p.name+'</b><small>'+p.qty+' / '+p.min+' '+t("units")+'</small></div><span class="alert-num">'+(p.qty===0?t("out"):t("low"))+'</span></div>').join("")+'</div></div></div><div class="panel"><div class="panel-head"><h3>'+t("quickActions")+'</h3></div><div class="panel-body"><div class="quick-grid"><button class="quick" onclick="openRequestModal()"><span>⇧</span><b>'+t("newRequest")+'</b><small>'+t("request")+'</small></button><button class="quick" onclick="openMovementModal()"><span>⇩</span><b>'+t("receiveStock")+'</b><small>'+t("stockIn")+'</small></button><button class="quick" onclick="openMovementModal(true)"><span>↗</span><b>'+t("recordSale")+'</b><small>'+t("stockOut")+'</small></button><button class="quick" onclick="setPage(\'reports\')"><span>▥</span><b>'+t("reports")+'</b><small>'+t("export")+'</small></button></div></div></div></div></div>'}
+function productPage(){if(!allowed("products"))return denied();let rows=products.filter(p=>(filter==="all"||filter==="low"&&p.qty<=p.min||filter==="available"&&p.qty>p.min&&p.qty>0||filter==="out"&&p.qty===0)&&(!query||p.name.toLowerCase().includes(query.toLowerCase())||p.sku.toLowerCase().includes(query.toLowerCase())));let body=rows.map(p=>'<tr><td><div class="product"><div class="product-icon">'+p.icon+'</div><div><b>'+p.name+'</b><small>'+p.id+'</small></div></div></td><td>'+p.sku+'</td><td>'+p.category+'</td><td><b>'+p.qty+'</b></td><td>'+fmt(p.price)+' RWF</td><td>'+stockStatus(p)+'</td><td>'+(allowed("products","u")?'<button class="btn" onclick="editProduct('+p.id+')">✎</button>':'—')+'</td></tr>').join("");if(!body)body='<tr><td colspan="7" class="empty">'+t("noRecords")+'</td></tr>';return head(t("products"),t("moduleInfo"),allowed("products","c")?'<button class="btn btn-gold" onclick="openProductModal()">＋ '+t("addProduct")+'</button>':'')+'<div class="panel"><div class="panel-head"><div class="toolbar"><input class="search" placeholder="'+t("search")+'" value="'+query.replace(/"/g,"&quot;")+'" oninput="query=this.value;render()"><select class="select" onchange="filter=this.value;render()"><option value="all">'+t("all")+'</option><option value="available">'+t("available")+'</option><option value="low">'+t("low")+'</option><option value="out">'+t("out")+'</option></select></div><small>'+rows.length+' '+t("product")+'</small></div><div class="table-wrap"><table><thead><tr><th>'+t("product")+'</th><th>SKU</th><th>'+t("category")+'</th><th>'+t("quantity")+'</th><th>'+t("price")+'</th><th>'+t("status")+'</th><th>'+t("action")+'</th></tr></thead><tbody>'+body+'</tbody></table></div></div>'}
+function stockStatus(p){return p.qty===0?'<span class="status danger">'+t("out")+'</span>':p.qty<=p.min?'<span class="status warn">'+t("low")+'</span>':'<span class="status">'+t("available")+'</span>'}
+function movementTable(rows){const cash=role==="Cashier";return '<div class="table-wrap"><table><thead><tr><th>'+t("reference")+'</th><th>'+t("product")+'</th><th>'+t("type")+'</th><th>'+t("quantity")+'</th>'+(cash?'<th>Amount (RWF)</th>':'')+'<th>'+t("date")+'</th><th>'+t("role")+'</th></tr></thead><tbody>'+rows.map(m=>'<tr><td><b>'+m.id+'</b></td><td>'+safeText(m.product)+'</td><td><span class="status '+(m.type==="stockOut"?"warn":"")+'">'+t(m.type)+'</span></td><td>'+m.qty+'</td>'+(cash?'<td>'+fmt(m.total??(m.qty*(m.unitPrice??(products.find(p=>p.name===m.product)?.price||0))))+'</td>':'')+'<td>'+m.date+'</td><td>'+safeText(m.by)+'</td></tr>').join("")+'</tbody></table></div>'}
+function movementPage(){if(!allowed("movements"))return denied();const rows=role==="Cashier"?movements.filter(m=>m.type==="stockOut"):movements;const action=role==="Cashier"?'<button class="btn btn-gold" onclick="openMovementModal(true)">＋ '+t("recordSale")+'</button>':allowed("movements","c")?'<button class="btn btn-gold" onclick="openMovementModal()">＋ '+t("receiveStock")+'</button>':'';return head(t("movements"),t("moduleInfo"),action)+'<div class="panel">'+movementTable(rows)+'</div>'}
+function requestPage(){if(!allowed("requests"))return denied();return head(t("requests"),t("moduleInfo"),allowed("requests","c")?'<button class="btn btn-gold" onclick="openRequestModal()">＋ '+t("newRequest")+'</button>':'')+'<div class="panel"><div class="table-wrap"><table><thead><tr><th>'+t("reference")+'</th><th>'+t("product")+'</th><th>'+t("quantity")+'</th><th>'+t("status")+'</th><th>'+t("role")+'</th><th>'+t("action")+'</th></tr></thead><tbody>'+requests.map(r=>'<tr><td><b>'+r.id+'</b></td><td>'+r.product+'</td><td>'+r.qty+'</td><td>'+requestStatus(r.status)+'</td><td>'+r.by+'</td><td>'+(r.status==="pending"&&(role==="Admin"||role==="Manager")?'<button class="btn" onclick="approveRequest(\''+r.id+'\')">'+t("approved")+'</button>':'—')+'</td></tr>').join("")+'</tbody></table></div></div>'}
+function requestStatus(s){return '<span class="status '+(s==="pending"?"warn":s==="rejected"?"danger":s==="approved"?"info":"")+'">'+t(s)+'</span>'}
+function supplierText(key){const labels={rw:{add:"Ongeraho utanga ibicuruzwa",name:"Izina ry'ikigo",contact:"Umuntu ushinzwe",phone:"Telefoni",email:"Imeyili",items:"Ibicuruzwa atanga",status:"Imiterere",active:"Arakora",inactive:"Ntagikora",notes:"Ibisobanuro",edit:"Hindura",remove:"Siba",total:"Abatanga bose",activeCount:"Abakora",supplied:"Ibyiciro by'ibicuruzwa",empty:"Nta mutanga urabikwa. Kanda Ongeraho kugira ngo utangire.",confirm:"Urashaka koko gusiba uyu mutanga?",saved:"Amakuru y'utanga yabitswe.",duplicate:"Iyi telefoni cyangwa imeyili isanzwe ikoreshwa."},en:{add:"Add supplier",name:"Company name",contact:"Contact person",phone:"Phone",email:"Email",items:"Products supplied",status:"Status",active:"Active",inactive:"Inactive",notes:"Notes",edit:"Edit",remove:"Delete",total:"Total suppliers",activeCount:"Active suppliers",supplied:"Product categories",empty:"No suppliers yet. Select Add supplier to get started.",confirm:"Are you sure you want to delete this supplier?",saved:"Supplier details saved.",duplicate:"That phone number or email is already in use."},fr:{add:"Ajouter un fournisseur",name:"Nom de l'entreprise",contact:"Personne à contacter",phone:"Téléphone",email:"E-mail",items:"Produits fournis",status:"Statut",active:"Actif",inactive:"Inactif",notes:"Notes",edit:"Modifier",remove:"Supprimer",total:"Total fournisseurs",activeCount:"Fournisseurs actifs",supplied:"Catégories fournies",empty:"Aucun fournisseur. Cliquez sur Ajouter pour commencer.",confirm:"Voulez-vous vraiment supprimer ce fournisseur ?",saved:"Fournisseur enregistré.",duplicate:"Ce téléphone ou cet e-mail est déjà utilisé."}};return (labels[lang]||labels.rw)[key]||key}
+function suppliersPage(){if(!allowed("suppliers"))return denied();const canCreate=allowed("suppliers","c"),canUpdate=allowed("suppliers","u"),canDelete=allowed("suppliers","d"),active=suppliers.filter(x=>x.status!=="inactive").length,categories=new Set(suppliers.map(x=>x.items).filter(Boolean)).size;return head(t("suppliers"),lang==="rw"?"Andika, reba kandi ucunge ibigo bigemura ibicuruzwa.":lang==="fr"?"Enregistrez et gérez les entreprises qui fournissent vos produits.":"Register and manage the businesses that supply your inventory.",canCreate?'<button class="btn btn-gold" onclick="openSupplierModal()">＋ '+supplierText("add")+'</button>':'')+'<div class="stats"><div class="stat"><div class="stat-top">'+supplierText("total")+'<span class="stat-icon">♧</span></div><strong>'+suppliers.length+'</strong><small>'+t("suppliers")+'</small></div><div class="stat"><div class="stat-top">'+supplierText("activeCount")+'<span class="stat-icon">✓</span></div><strong>'+active+'</strong><small>'+supplierText("active")+'</small></div><div class="stat"><div class="stat-top">'+supplierText("supplied")+'<span class="stat-icon">▤</span></div><strong>'+categories+'</strong><small>'+t("category")+'</small></div></div><div class="panel"><div class="panel-head"><h3>'+t("suppliers")+'</h3><span class="permission">'+suppliers.length+' records</span></div><div class="table-wrap"><table><thead><tr><th>'+supplierText("name")+'</th><th>'+supplierText("contact")+'</th><th>'+supplierText("phone")+'</th><th>'+supplierText("email")+'</th><th>'+supplierText("items")+'</th><th>'+supplierText("status")+'</th><th>'+t("action")+'</th></tr></thead><tbody>'+(suppliers.length?suppliers.map(x=>'<tr><td><b>'+safeText(x.name)+'</b><br><small>'+safeText(x.notes||"")+'</small></td><td>'+safeText(x.contact||"—")+'</td><td>'+safeText(x.phone)+'</td><td>'+safeText(x.email||"—")+'</td><td>'+safeText(x.items||"—")+'</td><td><span class="status '+(x.status==="inactive"?"danger":"")+'">'+supplierText(x.status==="inactive"?"inactive":"active")+'</span></td><td>'+(canUpdate?'<button class="btn" onclick="editSupplier(\''+x.id+'\')">'+supplierText("edit")+'</button> ':'')+(canDelete?'<button class="btn" onclick="deleteSupplier(\''+x.id+'\')">'+supplierText("remove")+'</button>':'')+(!canUpdate&&!canDelete?"—":"")+'</td></tr>').join(""):'<tr><td colspan="7" class="empty">'+supplierText("empty")+'</td></tr>')+'</tbody></table></div></div>'}
+function openSupplierModal(){if(!allowed("suppliers","c"))return notify(t("noPermission"));const labels={name:supplierText("name"),contact:supplierText("contact"),phone:supplierText("phone"),email:supplierText("email"),items:supplierText("items"),status:supplierText("status"),notes:supplierText("notes")};openModal(supplierText("add"),lang==="rw"?"Uzuza amakuru y'utanga ibicuruzwa.":"Enter the supplier's contact and supply details.",'<div class="field"><label>'+labels.name+'</label><input id="fSupplierName" maxlength="100" required></div><div class="field"><label>'+labels.contact+'</label><input id="fSupplierContact" maxlength="100"></div><div class="field"><label>'+labels.phone+'</label><input id="fSupplierPhone" maxlength="30" required></div><div class="field"><label>'+labels.email+'</label><input id="fSupplierEmail" type="email" maxlength="120"></div><div class="field"><label>'+labels.items+'</label><input id="fSupplierItems" maxlength="160" placeholder="Ibiribwa, ibikoresho..."></div><div class="field"><label>'+labels.status+'</label><select id="fSupplierStatus"><option value="active">'+supplierText("active")+'</option><option value="inactive">'+supplierText("inactive")+'</option></select></div><div class="field"><label>'+labels.notes+'</label><input id="fSupplierNotes" maxlength="240"></div>',"supplier")}
+function editSupplier(id){if(!allowed("suppliers","u"))return notify(t("noPermission"));const x=suppliers.find(v=>v.id===id);if(!x)return notify(t("denied"));openSupplierModal();modalKind="editSupplier:"+id;document.getElementById("modalTitle").textContent=supplierText("edit");document.getElementById("fSupplierName").value=x.name;document.getElementById("fSupplierContact").value=x.contact||"";document.getElementById("fSupplierPhone").value=x.phone;document.getElementById("fSupplierEmail").value=x.email||"";document.getElementById("fSupplierItems").value=x.items||"";document.getElementById("fSupplierStatus").value=x.status||"active";document.getElementById("fSupplierNotes").value=x.notes||""}
+function deleteSupplier(id){if(!allowed("suppliers","d"))return notify(t("noPermission"));const x=suppliers.find(v=>v.id===id);if(!x)return notify(t("denied"));if(!confirm(supplierText("confirm")+" "+x.name))return;suppliers=suppliers.filter(v=>v.id!==id);persistCollection("ububiko-suppliers-v1",suppliers);recordAudit("Supplier deleted",x.name);render();notify(t("saved"))}
+function customersPage(){if(!allowed("customers"))return denied();return head(t("customers"),lang==="rw"?"Andika kandi urebe amakuru y'abakiriya.":"Manage customer contact records.",allowed("customers","c")?'<button class="btn btn-gold" onclick="openCustomerModal()">＋ '+t("add")+'</button>':'')+'<div class="panel"><div class="panel-head"><h3>'+t("customers")+'</h3><span class="permission">'+customers.length+' records</span></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Email</th><th>Notes</th></tr></thead><tbody>'+customers.map(c=>'<tr><td>'+safeText(c.id)+'</td><td><b>'+safeText(c.name)+'</b></td><td>'+safeText(c.phone)+'</td><td>'+safeText(c.email||"—")+'</td><td>'+safeText(c.notes||"—")+'</td></tr>').join("")+'</tbody></table></div></div>'}
+function returnsPage(){if(!allowed("returns"))return denied();return head(t("returns"),lang==="rw"?"Andika ibicuruzwa byagaruwe, genzura amafaranga, kandi ukurikirane uko byakiriwe.":"Register returns, review refunds and track restocking.",["Admin","Manager","Cashier"].includes(role)?'<button class="btn btn-gold" onclick="openReturnModal()">＋ '+(lang==="rw"?"Andika igarura":"Register return")+'</button>':'')+'<div class="panel"><div class="panel-head"><h3>'+t("returns")+'</h3><span class="permission">'+returnsData.length+' records</span></div><div class="table-wrap"><table><thead><tr><th>Reference</th><th>Customer</th><th>Product</th><th>Qty</th><th>Refund (RWF)</th><th>Status</th><th>Action</th></tr></thead><tbody>'+returnsData.map(r=>'<tr><td><b>'+r.id+'</b></td><td>'+safeText(r.customer)+'</td><td>'+safeText(r.product)+'</td><td>'+r.qty+'</td><td>'+fmt(r.refund)+'</td><td>'+requestStatus(r.status)+'</td><td>'+(r.status==="pending"&&(role==="Admin"||role==="Manager")?'<button class="btn" onclick="approveReturn(\''+r.id+'\')">Approve refund</button>':r.status==="approved"&&(role==="Admin"||role==="Manager"||role==="Storekeeper")?'<button class="btn" onclick="receiveReturn(\''+r.id+'\')">Restock</button>':"—")+'</td></tr>').join("")+'</tbody></table></div></div>'}
+function simplePage(module,icon){if(!allowed(module))return denied();let title=t(module);return head(title,t("moduleInfo"),'<button class="btn btn-gold" onclick="notify(t(\'saved\'))">＋ '+t("add")+'</button>')+'<div class="module-grid">'+[[icon,title,t("access")],[ "▤",t("recentActivity"),t("recent")],[ "✓",t("status"),t("available")]].map(x=>'<div class="module-card"><span>'+x[0]+'</span><h4>'+x[1]+'</h4><p>'+x[2]+'</p></div>').join("")+'</div>'}
+function openCustomerModal(){if(!allowed("customers","c"))return notify(t("noPermission"));openModal(lang==="rw"?"Ongeraho umukiriya":"Add customer","Customer contact details",'<div class="field"><label>Name</label><input id="fCustomerName" required></div><div class="field"><label>Phone</label><input id="fCustomerPhone" required></div><div class="field"><label>Email</label><input id="fCustomerEmail" type="email"></div><div class="field"><label>Notes</label><input id="fCustomerNotes"></div>',"customer")}
+function openReturnModal(){if(!allowed("returns","c"))return notify(t("noPermission"));openModal(lang==="rw"?"Andika igarura":"Register product return","Select customer, product, quantity and refund amount.",'<div class="field"><label>Customer</label><select id="fReturnCustomer">'+customers.map(c=>'<option>'+safeText(c.name)+'</option>').join("")+'</select></div><div class="field"><label>Product</label><select id="fReturnProduct">'+products.map(p=>'<option>'+safeText(p.name)+'</option>').join("")+'</select></div><div class="field"><label>Quantity</label><input id="fReturnQty" type="number" min="1" value="1" required></div><div class="field"><label>Refund amount (RWF)</label><input id="fReturnRefund" type="number" min="0" value="0" required></div><div class="field"><label>Reason</label><input id="fReturnReason" required></div>',"return")}
+function approveReturn(id){if(role!=="Admin"&&role!=="Manager")return notify(t("noPermission"));const r=returnsData.find(x=>x.id===id);if(!r||r.status!=="pending")return notify(t("denied"));r.status="approved";persistCollection("ububiko-returns-v1",returnsData);recordAudit("Return refund approved",id);render();notify(t("saved"))}
+function receiveReturn(id){if(!["Admin","Manager","Storekeeper"].includes(role))return notify(t("noPermission"));const r=returnsData.find(x=>x.id===id),p=products.find(x=>x.name===r?.product);if(!r||r.status!=="approved"||!p)return notify(t("denied"));p.qty+=r.qty;r.status="restocked";persistCollection("ububiko-returns-v1",returnsData);movements.unshift({id:"MV-"+(1043+movements.length),product:p.name,type:"stockIn",qty:r.qty,date:new Date().toISOString().slice(0,10),by:role});recordAudit("Returned goods restocked",id);persistCollection("ububiko-products-v1",products);persistCollection("ububiko-movements-v1",movements);render();notify(t("saved"))}
+function openUserModal(){if(role!=="Admin")return notify(t("noPermission"));openModal(lang==="rw"?"Ongeraho umukoresha":lang==="fr"?"Ajouter un utilisateur":"Add user",lang==="rw"?"Uzuza amakuru y'uwemerewe gukoresha sisitemu.":lang==="fr"?"Saisissez les informations du compte.":"Enter the new account details.",'<div class="field"><label>Username</label><input id="fUserName" autocomplete="off" required></div><div class="field"><label>Password</label><input id="fUserPass" type="password" minlength="8" required></div><div class="field"><label>'+t("role")+'</label><select id="fUserRole"><option>Admin</option><option>Manager</option><option>Cashier</option><option>Storekeeper</option></select></div>',"user")}
+function blockUser(username){if(role!=="Admin")return notify(t("noPermission"));const u=userAccounts.find(x=>x.username===username);if(!u)return;if(u.username.toLowerCase()===String(currentUsername).toLowerCase())return notify(lang==="rw"?"Ntushobora guhagarika konti winjiyemo.":"You cannot block the account currently in use.");if(!u.blocked&&u.role==="Admin"){const activeAdmins=userAccounts.filter(x=>x.role==="Admin"&&!x.blocked);if(activeAdmins.length<=1)return notify(lang==="rw"?"Hagomba gusigara nibura Admin umwe ukora.":"At least one active Admin account must remain.");}const prompt=lang==="rw"?(u.blocked?"Uremeza kongera gufungura konti ya "+u.username+"?":"Uremeza guhagarika konti ya "+u.username+" ("+u.role+")? Ntazongera kwinjira kugeza uyifunguye."):(u.blocked?"Unblock "+u.username+"?":"Block "+u.username+" ("+u.role+")? They cannot sign in until you unblock them.");if(!window.confirm(prompt))return;u.blocked=!u.blocked;u.updatedAt=new Date().toISOString();u.updatedBy=currentUsername;persistUserAccounts();recordAudit(u.blocked?"Admin blocked user account":"Admin unblocked user account",u.username+" ("+u.role+")");render();notify(u.blocked?(lang==="rw"?"Konti ya "+u.username+" yahagaritswe.":"Account "+u.username+" blocked."):(lang==="rw"?"Konti ya "+u.username+" yongeye gukora.":"Account "+u.username+" unblocked."))}
+function openResetPasswordModal(username){if(role!=="Admin")return notify(t("noPermission"));const account=userAccounts.find(x=>x.username===username);if(!account||account.username.toLowerCase()===String(currentUsername).toLowerCase())return notify(lang==="rw"?"Koresha Igenamiterere uhindure ijambo ryawe bwite.":"Use Settings to change your own password.");openModal(lang==="rw"?"Hindurira "+account.username+" ijambo ry'ibanga":"Reset password for "+account.username,lang==="rw"?"Admin wenyine ni we wemerewe guhindura ijambo ry'ibanga ry'undi mukoresha.":"Only Admin can reset another user's password.",'<div class="field"><label>'+(lang==="rw"?"Ijambo rishya (inyuguti 8 nibura)":"New password (8 characters minimum)")+'</label><input id="fResetPass" type="password" minlength="8" autocomplete="new-password" required></div><div class="field"><label>'+(lang==="rw"?"Emeza ijambo rishya":"Confirm new password")+'</label><input id="fResetPassConfirm" type="password" minlength="8" autocomplete="new-password" required></div>',"resetPassword:"+username)}
+function usersPage(){if(role!=="Admin")return denied(true);const labels=lang==="rw"?{add:"＋ Ongeraho umukoresha",accounts:"Konti z'abakoresha",username:"Izina ukoresha",state:"Imiterere",active:"Irahari",blocked:"Yahagaritswe",block:"Hagarika",unblock:"Emeza kongera gukora"}:lang==="fr"?{add:"＋ Ajouter un utilisateur",accounts:"Comptes utilisateurs",username:"Nom d'utilisateur",state:"État",active:"Actif",blocked:"Bloqué",block:"Bloquer",unblock:"Débloquer"}:{add:"＋ Add user",accounts:"User accounts",username:"Username",state:"Status",active:"Active",blocked:"Blocked",block:"Block",unblock:"Unblock"};return head(t("usersTitle"),t("moduleInfo"),'<button class="btn btn-gold" onclick="openUserModal()">'+labels.add+'</button>')+'<div class="panel"><div class="panel-head"><h3>'+labels.accounts+'</h3><span class="permission">'+userAccounts.length+' accounts</span></div><div class="table-wrap"><table><thead><tr><th>'+labels.username+'</th><th>'+t("role")+'</th><th>'+labels.state+'</th><th>'+t("action")+'</th></tr></thead><tbody>'+userAccounts.map(u=>'<tr><td><b>'+safeText(u.username)+'</b>'+(u.builtIn?' <small>· Demo</small>':'')+'</td><td>'+u.role+'</td><td><span class="status '+(u.blocked?'danger':'')+'">'+(u.blocked?labels.blocked:labels.active)+'</span></td><td>'+(u.username.toLowerCase()===String(currentUsername).toLowerCase()?'<span class="permission">'+(lang==="rw"?"Konti yawe":"Your account")+'</span>':'<button class="btn" onclick="openResetPasswordModal('+JSON.stringify(u.username).replace(/</g,"\\u003c")+')">'+(lang==="rw"?"Hindura ijambo":"Reset password")+'</button> <button class="btn '+(u.blocked?'btn-gold':'')+'" onclick="blockUser('+JSON.stringify(u.username).replace(/</g,"\\u003c")+')">'+(u.blocked?labels.unblock:labels.block)+'</button>')+'</td></tr>').join("")+'</tbody></table></div><div class="panel-body"><small>'+ (lang==="rw"?"Admin ashobora guhagarika cyangwa kongera gufungura konti z'abandi bakozi bose, harimo Admin, Manager, Cashier na Storekeeper. Konti winjiyemo ntishobora kwihagarika kandi hagomba gusigara nibura Admin umwe ukora. Impinduka zibikwa muri browser ukoresha.":"Admin can block or unblock every other account, including Admin, Manager, Cashier and Storekeeper. Your current account cannot block itself, and at least one active Admin must remain. Changes are stored in this browser.")+'</small></div></div><div class="panel"><div class="panel-head"><h3>'+t("permissions")+'</h3><span class="permission">DEFAULT DENY</span></div><div class="table-wrap"><table><thead><tr><th>'+t("role")+'</th>'+navItems.map(n=>'<th>'+t(n[0])+'</th>').join("")+'</tr></thead><tbody>'+Object.entries(permissions).map(([r,mods])=>'<tr><td><b>'+r+'</b></td>'+navItems.map(n=>'<td>'+ (mods[n[0]]==="crud"?'<span class="status">CRUD</span>':mods[n[0]]==="-"?'<span class="status danger">—</span>':'<span class="status info">'+mods[n[0]].toUpperCase()+'</span>')+'</td>').join("")+'</tr>').join("")+'</tbody></table></div><div class="panel-body"><small>Admin: full access · Manager: operational approvals · Cashier: sales and own customer records · Storekeeper: stock handling. Backend enforcement is required for production.</small></div></div>'}
+function auditPage(){if(role!=="Admin"&&role!=="Manager")return denied(true);return head(t("auditTitle"),t("moduleInfo"))+'<div class="panel"><div class="table-wrap"><table><thead><tr><th>'+t("date")+'</th><th>'+t("role")+'</th><th>'+t("action")+'</th><th>'+t("reference")+'</th></tr></thead><tbody>'+audit.map(a=>'<tr><td>'+a.date+'</td><td>'+a.actor+'</td><td>'+a.action+'</td><td>'+a.target+'</td></tr>').join("")+'</tbody></table></div><div class="panel-body"><span class="status">APPEND ONLY</span> <small>Audit records cannot be edited or deleted from this interface.</small></div></div>'}
+function assistantPage(){if(!allowed("assistant"))return denied();const prompts=role==="Cashier"?["What are total sales?","How many customers?","What refunds are approved?","How do I print sales report?"]:lang==="rw"?["Nshaka isukari","Ni ibihe bicuruzwa bike?","Hasigaye bingahe?","Ni ibihe byashize?","Igiciro cyumuceri ni ikihe?","Nabona nte raporo?"]:lang==="fr"?["Je cherche le sucre","Quels produits sont bas ?","Combien en reste-t-il ?","Quels produits sont épuisés ?","Quel est le prix du riz ?","Comment exporter un rapport ?"]:["I need sugar","Which products are low?","How many are left?","Which products are out of stock?","What is the price of rice?","How do I export a report?"];return head(t("assistant"),t("moduleInfo"))+'<div class="panel"><div class="panel-body" style="min-height:320px"><div class="alert"><div><b>✧ UBUBIKO SMART AI</b><small>'+t("assistantIntro")+'</small></div><span class="status">STOCK-AWARE DEMO</span></div><div class="chat-suggestions">'+prompts.map(q=>'<button type="button" onclick="askQuick('+JSON.stringify(q).replace(/</g,"\\u003c")+')">'+q+'</button>').join("")+'</div><div id="chatLog" style="padding:8px 2px;color:#53617a"><div class="chat-line assistant"><b>✧ UBUBIKO AI:</b> '+t("assistantIntro")+'</div></div><div class="toolbar"><input class="search" id="chatInput" style="flex:1" placeholder="'+t("ask")+'" onkeydown="if(event.key===\'Enter\')askAssistant()"><button class="btn btn-primary" onclick="askAssistant()">'+t("send")+'</button></div></div></div>'}
+function safeText(v){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function askQuick(q){const e=document.getElementById("chatInput");if(e){e.value=q;askAssistant()}}
+function answerStockQuestion(raw){
+const q=raw.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9\s']/g," ").replace(/\s+/g," ").trim(),rw=lang==="rw",fr=lang==="fr";
+const say=(a,b,c)=>rw?a:fr?c:b,has=(...a)=>a.some(x=>q.includes(x));
+const alias={"Isukari":["sugar","sucre"],"Isabune":["soap","savon"],"Amavuta yo guteka":["cooking oil","huile"],"Umuceri":["rice","riz"],"Amakayi":["notebooks","cahiers"],"Isukari y'ifu":["powdered sugar","sucre en poudre"]};
+const product=[...products].sort((x,y)=>y.name.length-x.name.length).find(p=>q.includes(p.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""))||(alias[p.name]||[]).some(x=>q.includes(x)));
+const low=products.filter(p=>p.qty>0&&p.qty<=p.min),out=products.filter(p=>p.qty===0),units=products.reduce((n,p)=>n+p.qty,0),value=products.reduce((n,p)=>n+p.qty*p.price,0),money=n=>fmt(n)+" RWF",list=a=>a.length?a.map(p=>p.name+" ("+p.qty+")").join(", "):say("Nta bicuruzwa bihari.","No items found.","Aucun article.");
+const rules=[
+[/^(hi|hello|hey|muraho|mwaramutse|mwiriwe|bonjour|salut)/,()=>say("Muraho! Mubaze ku bicuruzwa, umubare, ibiciro, ibyinjira, ibyasohotse, ubusabe cyangwa raporo.","Hello! Ask about products, quantities, prices, stock movements, requests or reports.","Bonjour ! Posez vos questions sur les produits, quantités, prix, mouvements, demandes ou rapports.")],
+[/help|ubufasha|aide|nabaza|questions/,()=>say("Urugero: Nshaka isukari; Ni ibihe bicuruzwa bike?; Hasigaye bingahe?; Igiciro cy'umuceri ni ikihe?; Ni ubuhe busabe butegereje?; Nabona nte raporo?","Try: I need sugar; Which items are low?; How many are left?; What is the rice price?; Which requests are pending?; How do I export a report?","Exemples : Je cherche du sucre ; Quels articles sont bas ? ; Combien en reste-t-il ? ; Quel est le prix du riz ? ; Quelles demandes sont en attente ?")],
+[/how many product|products do we have|total products|ibicuruzwa bingahe|ibicuruzwa byose|combien de produits/,()=>say("Dufite ubwoko "+products.length+" bw'ibicuruzwa.","There are "+products.length+" product types.","Le système contient "+products.length+" types de produits.")],
+[/total quantity|total units|units in stock|umubare wose|ibice byose|quantite totale|hasigaye bingahe|ibice bisigaye|how much.*left|how many.*left|combien.*reste/,()=>say("Umubare wose uri mu bubiko ni "+units+" ibice.","The total stock quantity is "+units+" units.","La quantité totale en stock est de "+units+" unités.")],
+[/stock value|value of stock|agaciro k.*ububiko|agaciro kose|valeur du stock/,()=>say("Agaciro k'ububiko ni "+money(value)+".","The inventory value is "+money(value)+".","La valeur du stock est de "+money(value)+".")],
+[/low stock|running low|bike|stock faible|faible/,()=>say("Ibicuruzwa biri hasi y'umubare ntarengwa: "+list(low)+".","Low-stock products: "+list(low)+".","Produits en stock faible : "+list(low)+".")],
+[/out of stock|out stock|sold out|byashize|ntabihari|epuise|rupture/,()=>say("Ibicuruzwa byashize: "+list(out)+".","Out-of-stock products: "+list(out)+".","Produits épuisés : "+list(out)+".")],
+[/list products|all products|ibicuruzwa mufite|mufite ibihe|liste des produits/,()=>say("Ibicuruzwa: "+products.map(p=>p.name+" ("+p.qty+")").join(", ")+".","Products: "+products.map(p=>p.name+" ("+p.qty+")").join(", ")+".","Produits : "+products.map(p=>p.name+" ("+p.qty+")").join(", ")+".")],
+[/receive stock|stock in|kwinjiza|kwakira ibicuruzwa|receptionner|entree de stock/,()=>say("Kwinjiza stock: jya kuri Stock Movements, hitamo Receive Stock, hitamo igicuruzwa n'umubare, ubike.","To receive stock: open Stock Movements, choose Receive Stock, select product and quantity, then save.","Pour réceptionner : ouvrez Mouvements de stock, choisissez Réceptionner, sélectionnez produit et quantité, puis enregistrez.")],
+[/issue stock|record sale|sell product|gusohora|kugurisha|stock out|sortie de stock/,()=>say("Gusohora stock: jya kuri Stock Movements, hitamo Record Sale, hitamo igicuruzwa n'umubare ubike. Ntushobora gusohora ibirenze ibihari.","To issue stock: open Stock Movements, choose Record Sale, select product and quantity, then save. You cannot issue more than available.","Pour sortir du stock : ouvrez Mouvements, choisissez Enregistrer une vente, sélectionnez produit et quantité. La quantité ne peut dépasser le stock disponible.")],
+[/request stock|new request|gusaba ibicuruzwa|ubusabe bushya|demander du stock/,()=>say("Jya kuri Stock Requests, hitamo New Request, hitamo igicuruzwa n'umubare wohereze. Admin cyangwa Manager ashobora kubyemeza.","Open Stock Requests, choose New Request, select product and quantity, then submit. Admin or Manager can approve it.","Ouvrez Demandes de stock, choisissez Nouvelle demande, indiquez produit et quantité, puis envoyez. Admin ou Manager peut approuver.")],
+[/pending request|requests pending|ubusabe butegereje|ubusabe butaremezwa|demandes en attente/,()=>{const p=requests.filter(x=>x.status==="pending");return say("Ubusabe butegereje: "+p.length+". "+(p.map(x=>x.id+" "+x.product+" x"+x.qty).join("; ")||"Nta buhari"),"Pending requests: "+p.length+". "+(p.map(x=>x.id+" "+x.product+" x"+x.qty).join("; ")||"None"),"Demandes en attente : "+p.length+". "+(p.map(x=>x.id+" "+x.product+" x"+x.qty).join("; ")||"Aucune"))}],
+[/approve request|kwemeza ubusabe|approuver une demande/,()=>say("Admin cyangwa Manager ni bo bemerewe kwemeza ubusabe. Jya kuri Stock Requests, ushake ubusabe butegereje ukande Approve.","Only Admin or Manager can approve requests. Open Stock Requests and select Approve on a pending request.","Seuls Admin ou Manager peuvent approuver. Ouvrez Demandes de stock et cliquez sur Approuver.")],
+[/stock movement|movement history|amateka ya stock|historique des mouvements/,()=>say("Jya kuri Stock Movements urebe ibyinjijwe n'ibyakuwe mu bubiko, itariki, umubare n'uwabikoze.","Open Stock Movements to view receipts, issues, dates, quantities and responsible users.","Ouvrez Mouvements de stock pour voir entrées, sorties, dates, quantités et responsables.")],
+[/stock received|what came in|ibyinjiye|ibyinjijwe|entrees|entrées/,()=>{const a=movements.filter(m=>m.type==="stockIn");return say("Ibyinjiye: "+(a.map(m=>m.product+" +"+m.qty+" ("+m.date+")").join("; ")||"Nta byinjiye"),"Received: "+(a.map(m=>m.product+" +"+m.qty+" ("+m.date+")").join("; ")||"None"),"Entrées : "+(a.map(m=>m.product+" +"+m.qty+" ("+m.date+")").join("; ")||"Aucune"))}],
+[/stock issued|what went out|iby asohotse|ibyoherejwe|sorties/,()=>{const a=movements.filter(m=>m.type==="stockOut");return say("Ibyasohotse: "+(a.map(m=>m.product+" -"+m.qty+" ("+m.date+")").join("; ")||"Nta byasohotse"),"Issued: "+(a.map(m=>m.product+" -"+m.qty+" ("+m.date+")").join("; ")||"None"),"Sorties : "+(a.map(m=>m.product+" -"+m.qty+" ("+m.date+")").join("; ")||"Aucune"))}],
+[/report|raporo|rapport/,()=>say("Raporo ziri muri Reports. Zigaragaza ibicuruzwa, agaciro ka stock, ibicuruzwa bike n'amateka.","Reports shows products, stock value, low-stock items and movement history.","Rapports affiche les produits, la valeur du stock, les faibles stocks et l'historique.")],
+[/export|download report|gukuramo raporo|kohereza raporo|exporter|telecharger/,()=>say("Jya kuri Reports ukande Export Report. Hazakurwamo dosiye CSV ifunguka muri Excel.","Open Reports and click Export Report. A CSV file will download and open in Excel.","Ouvrez Rapports et cliquez sur Exporter. Un fichier CSV sera téléchargé.")],
+[/sales|sold|igurisha|ibyagurishijwe|ventes|vente/,()=>say("Andika igurisha muri Stock Movements ukoresheje Record Sale. Imibare ya Sales kuri dashboard ni demo gusa.","Record sales in Stock Movements using Record Sale. Dashboard sales figures are demo values only.","Enregistrez les ventes dans Mouvements avec Enregistrer une vente. Les chiffres du tableau de bord sont des valeurs de démonstration.")],
+[/supplier|suppliers|utanga|abatanga|fournisseur/,()=>say("Igice cya Suppliers ni cyo kigenewe amakuru y'abatanga ibicuruzwa.","Use Suppliers for supplier information.","Utilisez Fournisseurs pour les informations des fournisseurs.")],
+[/customer|customers|umukiriya|abakiriya|client/,()=>say("Igice cya Customers kibika amakuru y'abakiriya. Uburenganzira bugengwa n'uruhare rwawe.","Customers contains customer information. Editing access depends on your role.","Clients contient les informations des clients. Les droits dépendent de votre rôle.")],
+[/permission|allowed|uburenganzira|wemerewe|role|rôle|access/,()=>say("Storekeeper akora ibikorwa bya stock yemerewe ariko ntashobora kwemeza ubusabe. Manager na Admin bashobora kubwemeza.","Storekeeper can perform permitted stock tasks but cannot approve requests. Manager and Admin can approve them.","Le magasinier peut effectuer les opérations autorisées mais ne peut pas approuver. Manager et Admin le peuvent.")],
+[/update product|edit product|guhindura igicuruzwa|kuvugurura igicuruzwa|modifier un produit/,()=>say("Jya kuri Products, shaka igicuruzwa, ukoreshe Edit niba uruhare rwawe rubikwemerera.","Open Products, find the item and select Edit if your role permits it.","Ouvrez Produits, trouvez l'article et choisissez Modifier si votre rôle le permet.")],
+[/delete product|remove product|gusiba igicuruzwa|supprimer un produit/,()=>say("Gusiba burundu bigomba kugenzurwa na Admin. Iyi demo ntishyira mu bikorwa gusiba burundu.","Permanent deletion should be controlled by Admin. This demo does not implement permanent deletion.","La suppression définitive doit être contrôlée par Admin. Cette démo ne l'implémente pas.")],
+[/audit|who changed|amateka y'ibikorwa|uwakoze iki|journal d'audit/,()=>say("Audit Log igaragaza ibikorwa n'uruhare rwabikoze. Muri demo, ayo makuru abikwa muri browser gusa.","Audit Log shows actions and roles. In this demo, records exist only in browser memory.","Le journal d'audit affiche les actions et rôles. Dans cette démo, les données restent dans le navigateur.")],
+[/return|garura|kugarura|ibicuruzwa byagaruwe|retour/,()=>say("Ibicuruzwa byagaruwe biri muri Returns. Banza ugenzure ubuziranenge n'umubare mbere yo kubisubiza muri stock.","Returned products are handled in Returns. Check condition and quantity before returning them to stock.","Les retours se gèrent dans Retours. Vérifiez l'état et la quantité avant remise en stock.")],
+[/minimum stock|minimum quantity|reorder level|umubare ntarengwa|minimum de stock|seuil/,()=>say("Ibicuruzwa bifite umubare ungana cyangwa uri munsi ya minimum bigaragara muri Low Stock Alerts.","Items at or below minimum appear in Low Stock Alerts.","Les articles au niveau minimum ou en dessous apparaissent dans les alertes.")],
+[/category|categories|ibyiciro|icyiciro|categorie|catégorie/,()=>say("Ibyiciro bihari: "+[...new Set(products.map(p=>p.category))].join(", ")+".","Available categories: "+[...new Set(products.map(p=>p.category))].join(", ")+".","Catégories disponibles : "+[...new Set(products.map(p=>p.category))].join(", ")+".")],
+[/today|uyu munsi|aujourd'hui|aujourdhui/,()=>{const n=movements.filter(m=>m.date===new Date().toISOString().slice(0,10)).length;return say("Ibikorwa bya stock byanditswe uyu munsi: "+n+".","Stock movements recorded today: "+n+".","Mouvements enregistrés aujourd'hui : "+n+".")}],
+[/how to search|find a product|gushaka igicuruzwa|nabona nte|chercher un produit|rechercher/,()=>say("Jya kuri Products wandike izina cyangwa SKU mu gasanduku ka Search. Ushobora no kumbaza izina ry'igicuruzwa.","Open Products and enter the name or SKU in Search. You can also ask me for a product by name.","Ouvrez Produits et saisissez le nom ou le SKU dans Recherche.")],
+[/how to use|uko nakoresha|uko ikora|ukora gute|ikora gute|nakora nte|how does it work|comment utiliser|comment ca marche/,()=>say("Dashboard ireba incamake; Products ireba ibicuruzwa; Stock Movements yandika ibyinjira n'ibisohoka; Stock Requests icunga ubusabe; Reports ikora raporo.","Dashboard shows the overview; Products lists items; Stock Movements records receipts/issues; Stock Requests manages requests; Reports provides summaries.","Tableau de bord affiche l'aperçu ; Produits liste les articles ; Mouvements enregistre entrées/sorties ; Demandes gère les requêtes ; Rapports fournit les synthèses.")],
+[/thank|murakoze|thanks|merci/,()=>say("Murakoze! Mubaze ikindi kijyanye n'ububiko.","You're welcome! Ask another inventory question.","Avec plaisir ! Posez une autre question sur le stock.")]
+];
+if(role==="Cashier"){const sales=movements.filter(m=>m.type==="stockOut"),total=sales.reduce((n,m)=>n+m.qty*(products.find(p=>p.name===m.product)?.price||0),0),refunds=returnsData.filter(r=>r.status==="approved").reduce((n,r)=>n+r.refund,0);if(/sales|sale|igurisha|ibyagurishijwe|amafaranga|revenue/.test(q))return say("Amafaranga y'igurisha ni "+money(total)+".","Recorded sales value is "+money(total)+".","Le montant des ventes est "+money(total)+".");if(/customer|customers|abakiriya|umukiriya|clients/.test(q))return say("Abakiriya banditse ni "+customers.length+".","Registered customers: "+customers.length+".","Clients enregistrés : "+customers.length+".");if(/refund|return|igarura|garura|yasubijwe|remboursement/.test(q))return say("Amafaranga yemejwe gusubizwa ni "+money(refunds)+".","Approved refunds total "+money(refunds)+".","Les remboursements approuvés totalisent "+money(refunds)+".");return say("Baza ku igurisha, abakiriya, amafaranga yasubijwe cyangwa raporo.","Ask about sales, customers, refunds or reports.","Demandez les ventes, les clients, les remboursements ou les rapports.")}if(/pending return|returns pending|igarura ritegereje|ibigaruwe bitaremezwa|retours en attente/.test(q)){const pending=returnsData.filter(r=>r.status==="pending");return say("Igarura zitegereje kwemezwa: "+pending.length+". "+(pending.map(r=>r.id+" "+r.product+" x"+r.qty).join("; ")||"Nta rihari."),"Pending returns: "+pending.length+". "+(pending.map(r=>r.id+" "+r.product+" x"+r.qty).join("; ")||"None."),"Retours en attente : "+pending.length+". "+(pending.map(r=>r.id+" "+r.product+" x"+r.qty).join("; ")||"Aucun."))}if(/customer|customers|abakiriya|umukiriya|clients/.test(q))return say("Abakiriya banditse ni "+customers.length+".","Registered customers: "+customers.length+".","Clients enregistrés : "+customers.length+".");if(/sales|sale|igurisha|ibyagurishijwe|revenue|ventes/.test(q)){const total=movements.filter(m=>m.type==="stockOut").reduce((n,m)=>n+(m.total??m.qty*(m.unitPrice??(products.find(p=>p.name===m.product)?.price||0))),0);return say("Agaciro k'ibyagurishijwe ni "+money(total)+".","Recorded sales value is "+money(total)+".","Valeur des ventes enregistrées : "+money(total)+".")}if(product){if(has("price","igiciro","prix","cost","angahe"))return say(product.name+" igura "+money(product.price)+".","The price of "+product.name+" is "+money(product.price)+".","Le prix de "+product.name+" est de "+money(product.price)+".");if(has("minimum","min","ntarengwa","seuil"))return say(product.name+" ifite umubare ntarengwa wa "+product.min+".","The minimum level for "+product.name+" is "+product.min+".","Le seuil minimum de "+product.name+" est "+product.min+".");return say(product.name+": hasigaye "+product.qty+"; igiciro "+money(product.price)+"; umubare ntarengwa "+product.min+". "+(product.qty===0?"Cyashize.":product.qty<=product.min?"Kiri munsi y'umubare usabwa.":"Kirahari."),product.name+": "+product.qty+" units left; price "+money(product.price)+"; minimum "+product.min+". "+(product.qty===0?"Out of stock.":product.qty<=product.min?"Below minimum.":"Available."),product.name+" : "+product.qty+" unités ; prix "+money(product.price)+" ; minimum "+product.min+". "+(product.qty===0?"Épuisé.":product.qty<=product.min?"Sous le minimum.":"Disponible."))}
+const match=rules.find(([re])=>re.test(q));return match?match[1]():say("Sinamenye neza. Mubaze ku izina ry'igicuruzwa, umubare, igiciro, stock nke, ibyashize, ubusabe cyangwa raporo.","I did not understand. Ask about a product, quantity, price, low stock, out-of-stock items, requests or reports.","Je n'ai pas compris. Demandez un produit, une quantité, un prix, les stocks faibles, les ruptures, les demandes ou les rapports.")
+}
+function askAssistant(){const el=document.getElementById("chatInput"),log=document.getElementById("chatLog");if(!el||!log)return;const q=String(el.value||"").trim();if(!q)return;let answer;try{answer=answerStockQuestion(q)}catch(error){console.error("UBUBIKO AI error:",error);answer=lang==="rw"?"Habaye ikibazo mu gusubiza. Ongera ugerageze.":"The assistant encountered an error. Please retry."}log.insertAdjacentHTML("beforeend",'<div class="chat-line user"><b>'+safeText(role)+':</b> '+safeText(q)+'</div><div class="chat-line assistant"><b>✧ UBUBIKO AI:</b> '+safeText(answer)+'</div>');el.value="";log.scrollTop=log.scrollHeight}
+function reportsPage(){if(!allowed("reports"))return denied();if(role==="Cashier"){const sales=movements.filter(m=>m.type==="stockOut"),total=sales.reduce((n,m)=>n+m.qty*(products.find(p=>p.name===m.product)?.price||0),0);return head(t("reports"),t("moduleInfo"),'<button class="btn" onclick="printReport()">▤ Print / PDF</button><button class="btn btn-gold" onclick="exportReport()">↧ '+t("export")+'</button>')+'<div class="stats"><div class="stat"><div class="stat-top">Sales total</div><strong>'+fmt(total)+' RWF</strong></div><div class="stat"><div class="stat-top">Transactions</div><strong>'+sales.length+'</strong></div></div><div class="panel"><div class="panel-head"><h3>Sales report</h3></div>'+movementTable(sales)+'</div>'}let val=products.reduce((a,p)=>a+p.qty*p.price,0);return head(t("reports"),t("moduleInfo"),'<button class="btn" onclick="printReport()">▤ Print / PDF</button><button class="btn btn-gold" onclick="exportReport()">↧ '+t("export")+'</button>')+'<div class="stats"><div class="stat"><div class="stat-top">'+t("totalProducts")+'</div><strong>'+products.length+'</strong></div><div class="stat"><div class="stat-top">'+t("totalValue")+'</div><strong>'+fmt(val)+' RWF</strong></div><div class="stat"><div class="stat-top">'+t("lowStock")+'</div><strong>'+products.filter(p=>p.qty<=p.min).length+'</strong></div><div class="stat"><div class="stat-top">'+t("movements")+'</div><strong>'+movements.length+'</strong></div></div><div class="panel"><div class="panel-head"><h3>'+t("stockOverview")+'</h3></div>'+movementTable(movements)+'</div>'}
+function settingsPage(){const dark=theme==="dark";const appearance=lang==="rw"?"Imiterere y'ibara":lang==="fr"?"Apparence":"Appearance";const help=lang==="rw"?"Hitamo uburyo bw'urumuri cyangwa umwijima. Ibyo wahisemo birabikwa muri browser.":lang==="fr"?"Choisissez le mode clair ou sombre. Votre préférence est mémorisée dans ce navigateur.":"Choose light or dark appearance. Your preference is saved in this browser.";const action=lang==="rw"?(dark?"Hindura urumuri":"Hindura umwijima"):lang==="fr"?(dark?"Passer au clair":"Passer au sombre"):(dark?"Switch to light":"Switch to dark");const securityTitle=lang==="rw"?"Umutekano wa konti yawe":lang==="fr"?"Sécurité de votre compte":"Your account security";const securityHelp=lang==="rw"?"Ushobora guhindura ijambo ry'ibanga ryawe gusa. Andika iryo ukoresha ubu, hanyuma ushyiremo irishya. Guhindurira undi konti bikorwa na Admin gusa.":lang==="fr"?"Vous pouvez modifier uniquement votre propre mot de passe. La réinitialisation du compte d'une autre personne est réservée à l'administrateur.":"You can change only your own password. Resetting another person's password is reserved for the Admin.";return head(t("settingsTitle"),t("moduleInfo"))+'<div class="panels"><div class="panel"><div class="panel-head"><h3>'+t("personalSettings")+'</h3></div><div class="panel-body"><div class="field"><label>'+t("language")+'</label><select class="select" style="width:100%" onchange="changeLang(this.value)"><option value="rw" '+(lang==="rw"?"selected":"")+'>'+T.rw.language+'</option><option value="en" '+(lang==="en"?"selected":"")+'>'+T.en.language+'</option><option value="fr" '+(lang==="fr"?"selected":"")+'>'+T.fr.language+'</option></select></div><div class="field"><label>'+appearance+'</label><button class="btn theme-toggle" type="button" onclick="toggleTheme()">'+(dark?"☀️":"🌙")+' '+action+'</button><small>'+help+'</small></div></div></div><div class="panel"><div class="panel-head"><h3>'+securityTitle+'</h3></div><div class="panel-body"><p>'+securityHelp+'</p><div class="field"><label>'+(lang==="rw"?"Ijambo ry'ibanga ririho":"Current password")+'</label><input id="currentOwnPassword" type="password" autocomplete="current-password"></div><div class="field"><label>'+(lang==="rw"?"Ijambo ry'ibanga rishya":"New password")+'</label><input id="newOwnPassword" type="password" minlength="8" autocomplete="new-password"></div><div class="field"><label>'+(lang==="rw"?"Ongera wandike irishya":"Confirm new password")+'</label><input id="confirmOwnPassword" type="password" minlength="8" autocomplete="new-password"></div><button class="btn btn-primary" onclick="changeOwnPassword()">'+(lang==="rw"?"Bika ijambo rishya":"Update password")+'</button></div></div><div class="panel"><div class="panel-head"><h3>'+t("systemSettings")+'</h3></div><div class="panel-body"><p>'+t("adminOnly")+'</p><span class="permission">DEFAULT DENY</span></div></div></div>'}
+function changeOwnPassword(){const account=userAccounts.find(x=>x.username.toLowerCase()===String(currentUsername).toLowerCase());if(!account)return notify(lang==="rw"?"Konti ntiyabonetse.":"Account not found.");const current=document.getElementById("currentOwnPassword").value,next=document.getElementById("newOwnPassword").value,confirmNext=document.getElementById("confirmOwnPassword").value;if(current!==account.password)return notify(lang==="rw"?"Ijambo ry'ibanga ririho si ryo.":"Current password is incorrect.");if(next.length<8)return notify(lang==="rw"?"Ijambo rishya rigomba kugira nibura inyuguti 8.":"New password must be at least 8 characters.");if(next!==confirmNext)return notify(lang==="rw"?"Amagambo y'ibanga mashya ntahura.":"New passwords do not match.");if(next===current)return notify(lang==="rw"?"Hitamo ijambo ry'ibanga ritandukanye n'irya mbere.":"Choose a password different from the current one.");account.password=next;account.passwordUpdatedAt=new Date().toISOString();account.passwordUpdatedBy=currentUsername;persistUserAccounts();recordAudit("User changed own password",currentUsername);["currentOwnPassword","newOwnPassword","confirmOwnPassword"].forEach(id=>document.getElementById(id).value="");notify(lang==="rw"?"Ijambo ry'ibanga ryawe ryahinduwe.":"Your password has been updated.")}
+function denied(admin=false){return head(t(page),t("moduleInfo"))+'<div class="panel"><div class="panel-body empty"><div style="font-size:32px">🔒</div><h3>'+t("noPermission")+'</h3><p>'+t("denied")+'</p>'+(admin?'<span class="permission">ADMIN ONLY</span>':'')+'</div></div>'}
+function changeLang(v){if(!["rw","en","fr"].includes(v))return;lang=v;try{localStorage.setItem("ububiko-language",v)}catch(e){}updateLoginLanguage();if(document.getElementById("mainApp").classList.contains("authenticated"))render()}
+document.getElementById("language").addEventListener("change",e=>changeLang(e.target.value));
+
+function openModal(title,desc,fields,kind){modalKind=kind;document.getElementById("modalTitle").textContent=title;document.getElementById("modalDesc").textContent=desc;document.getElementById("modalFields").innerHTML=fields;document.getElementById("modalBackdrop").classList.add("open")}
+function closeModal(){document.getElementById("modalBackdrop").classList.remove("open")}
+function openProductModal(){if(!allowed("products","c"))return notify(t("noPermission"));openModal(t("addProduct"),t("moduleInfo"),'<div class="field"><label>'+t("name")+'</label><input id="fName" required></div><div class="field"><label>'+t("category")+'</label><input id="fCategory" value="Ibiribwa"></div><div class="field"><label>'+t("quantity")+'</label><input id="fQty" type="number" min="0" value="1"></div><div class="field"><label>'+t("price")+' (RWF)</label><input id="fPrice" type="number" min="0" value="1000"></div><div class="field"><label>'+t("minimum")+'</label><input id="fMin" type="number" min="0" value="5"></div>',"product")}
+function editProduct(id){if(!allowed("products","u"))return notify(t("noPermission"));let p=products.find(x=>x.id===id);openModal(t("update"),p.name,'<div class="field"><label>'+t("quantity")+'</label><input id="fQty" type="number" min="0" value="'+p.qty+'"></div><div class="field"><label>'+t("price")+'</label><input id="fPrice" type="number" value="'+p.price+'"></div>',"edit:"+id)}
+function openMovementModal(out=false){if(!allowed("movements","c"))return notify(t("noPermission"));if(out&&role!=="Admin"&&role!=="Cashier")return notify(t("noPermission"));openModal(out?t("recordSale"):t("receiveStock"),t("moduleInfo"),'<div class="field"><label>'+t("product")+'</label><select id="fProduct">'+products.map(p=>'<option value="'+p.id+'">'+p.name+' ('+p.qty+')</option>').join("")+'</select></div><div class="field"><label>'+t("quantity")+'</label><input id="fQty" type="number" min="1" value="1"></div>',out?"out":"in")}
+function openRequestModal(){if(!allowed("requests","c"))return notify(t("noPermission"));openModal(t("newRequest"),t("moduleInfo"),'<div class="field"><label>'+t("product")+'</label><select id="fProduct">'+products.map(p=>'<option value="'+p.id+'">'+p.name+'</option>').join("")+'</select></div><div class="field"><label>'+t("quantity")+'</label><input id="fQty" type="number" min="1" value="5"></div>',"request")}
+function saveModal(){let kind=modalKind;if(kind==="product"&&!allowed("products","c"))return notify(t("noPermission"));if(kind.startsWith("edit:")&&!allowed("products","u"))return notify(t("noPermission"));if((kind==="in"||kind==="out")&&!allowed("movements","c"))return notify(t("noPermission"));if(kind==="in"&&role==="Cashier"||kind==="out"&&!["Admin","Cashier"].includes(role))return notify(t("noPermission"));if(kind==="request"&&!allowed("requests","c"))return notify(t("noPermission"));if(kind==="customer"&&!allowed("customers","c"))return notify(t("noPermission"));if((kind==="supplier"||kind.startsWith("editSupplier:"))&&!allowed("suppliers",kind==="supplier"?"c":"u"))return notify(t("noPermission"));if(kind==="return"&&!["Admin","Manager","Cashier"].includes(role))return notify(t("noPermission"));if(kind==="user"&&role!=="Admin")return notify(t("noPermission"));if(kind==="product"){let name=document.getElementById("fName").value.trim();if(!name)return notify(t("name"));let p={id:Math.max(0,...products.map(x=>x.id))+1,name,sku:"UB-"+String(products.length+1).padStart(3,"0"),category:document.getElementById("fCategory").value,qty:+document.getElementById("fQty").value,min:+document.getElementById("fMin").value,price:+document.getElementById("fPrice").value,icon:"📦"};products.push(p);recordAudit("Product created",name)}
+else if(kind.startsWith("edit:")){let p=products.find(x=>x.id===+kind.split(":")[1]);p.qty=+document.getElementById("fQty").value;p.price=+document.getElementById("fPrice").value;recordAudit("Product updated",p.name)}
+else if(kind==="in"||kind==="out"){let p=products.find(x=>x.id===+document.getElementById("fProduct").value),q=+document.getElementById("fQty").value;if(!q||q<1)return;if(kind==="out"&&p.qty<q)return notify(t("denied"));p.qty+=kind==="in"?q:-q;let id="MV-"+(1043+movements.length);movements.unshift({id,product:p.name,type:kind==="in"?"stockIn":"stockOut",qty:q,unitPrice:p.price,total:kind==="out"?q*p.price:0,date:new Date().toISOString().slice(0,10),by:role});recordAudit(kind==="in"?"Stock received":"Stock issued",p.name+" "+q)}
+else if(kind==="request"){let p=products.find(x=>x.id===+document.getElementById("fProduct").value),q=+document.getElementById("fQty").value;requests.unshift({id:"RQ-"+String(201+requests.length).padStart(4,"0"),product:p.name,qty:q,status:"pending",by:role});recordAudit("Request created",p.name)}
+else if(kind==="supplier"||kind.startsWith("editSupplier:")){const id=kind.startsWith("editSupplier:")?kind.slice("editSupplier:".length):"",name=document.getElementById("fSupplierName").value.trim(),contact=document.getElementById("fSupplierContact").value.trim(),phone=document.getElementById("fSupplierPhone").value.trim(),email=document.getElementById("fSupplierEmail").value.trim(),items=document.getElementById("fSupplierItems").value.trim(),status=document.getElementById("fSupplierStatus").value,notes=document.getElementById("fSupplierNotes").value.trim();if(!name||!phone)return notify(lang==="rw"?"Izina ry'ikigo na telefoni birakenewe.":"Company name and phone are required.");if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return notify("Enter a valid email address.");if(suppliers.some(x=>x.id!==id&&(x.phone.replace(/\s/g,"")===phone.replace(/\s/g,"")||(email&&x.email.toLowerCase()===email.toLowerCase()))))return notify(supplierText("duplicate"));const record={id:id||"SUP-"+String(Math.max(0,...suppliers.map(x=>Number(String(x.id).replace(/\\D/g,""))||0))+1).padStart(3,"0"),name,contact,phone,email,items,status,notes};if(id){const index=suppliers.findIndex(x=>x.id===id);if(index<0)return notify(t("denied"));suppliers[index]=record;recordAudit("Supplier updated",name)}else{suppliers.unshift(record);recordAudit("Supplier created",name)}persistCollection("ububiko-suppliers-v1",suppliers)}
+else if(kind==="customer"){const name=document.getElementById("fCustomerName").value.trim(),phone=document.getElementById("fCustomerPhone").value.trim();if(!name||!phone)return notify("Name and phone are required.");customers.push({id:"CUS-"+String(customers.length+1).padStart(3,"0"),name,phone,email:document.getElementById("fCustomerEmail").value.trim(),notes:document.getElementById("fCustomerNotes").value.trim()});persistCollection("ububiko-customers-v1",customers);recordAudit("Customer created",name)}
+else if(kind==="return"){const customer=document.getElementById("fReturnCustomer").value,product=document.getElementById("fReturnProduct").value,qty=+document.getElementById("fReturnQty").value,refund=+document.getElementById("fReturnRefund").value,reason=document.getElementById("fReturnReason").value.trim();if(!qty||qty<1||refund<0||!reason)return notify("Check return details.");returnsData.unshift({id:"RET-"+String(returnsData.length+1).padStart(3,"0"),customer,product,qty,reason,refund,status:"pending",date:new Date().toISOString().slice(0,10),by:role});persistCollection("ububiko-returns-v1",returnsData);recordAudit("Return registered",product+" x"+qty)}
+else if(kind.startsWith("resetPassword:")){if(role!=="Admin")return notify(t("noPermission"));const target=kind.slice("resetPassword:".length),account=userAccounts.find(x=>x.username===target);if(!account||account.username.toLowerCase()===String(currentUsername).toLowerCase())return notify(lang==="rw"?"Ntushobora gukoresha ubu buryo kuri konti winjiyemo.":"You cannot reset your own password here.");const next=document.getElementById("fResetPass").value,confirmNext=document.getElementById("fResetPassConfirm").value;if(next.length<8)return notify(lang==="rw"?"Ijambo rishya rigomba kugira nibura inyuguti 8.":"New password must be at least 8 characters.");if(next!==confirmNext)return notify(lang==="rw"?"Amagambo y'ibanga mashya ntahura.":"New passwords do not match.");account.password=next;account.passwordUpdatedAt=new Date().toISOString();account.passwordUpdatedBy=currentUsername;recordAudit("Admin reset user password",target);persistUserAccounts()}
+else if(kind==="user"){const username=document.getElementById("fUserName").value.trim().toLowerCase(),password=document.getElementById("fUserPass").value,userRole=document.getElementById("fUserRole").value;if(!/^[a-z0-9._-]{3,24}$/.test(username))return notify(lang==="rw"?"Izina rigomba kugira inyuguti 3–24, imibare cyangwa . _ - gusa.":"Username must be 3–24 characters (letters, numbers, . _ -).");if(password.length<8)return notify(lang==="rw"?"Ijambo ry’ibanga rigomba kugira nibura inyuguti 8.":"Password must be at least 8 characters.");if(userAccounts.some(u=>u.username.toLowerCase()===username))return notify(lang==="rw"?"Iri zina risanzwe rikoreshwa.":"That username already exists.");userAccounts.push({username,password,role:userRole,blocked:false,builtIn:false,createdAt:new Date().toISOString()});persistUserAccounts();recordAudit("Employee account created",username+" ("+userRole+")")}
+persistCollection("ububiko-products-v1",products);persistCollection("ububiko-movements-v1",movements);persistCollection("ububiko-requests-v1",requests);closeModal();render();notify(t("saved"))}
+function approveRequest(id){if(role!=="Admin"&&role!=="Manager")return notify(t("noPermission"));let r=requests.find(x=>x.id===id);if(!r||r.status!=="pending")return notify(t("denied"));r.status="approved";persistCollection("ububiko-requests-v1",requests);recordAudit("Request approved",id);render();notify(t("saved"))}
+function printReport(){if(!allowed("reports"))return notify(t("noPermission"));window.print()}
+function exportReport(){if(!allowed("reports"))return notify(t("noPermission"));const rows=role==="Cashier"?[["Reference","Product","Quantity","Amount RWF","Date","By"],...movements.filter(m=>m.type==="stockOut").map(m=>[m.id,m.product,m.qty,m.total??m.qty*(m.unitPrice??(products.find(p=>p.name===m.product)?.price||0)),m.date,m.by])]:[["Product","SKU","Quantity","Minimum","Price RWF"],...products.map(p=>[p.name,p.sku,p.qty,p.min,p.price])];const csv=rows.map(row=>row.map(value=>'"'+String(value??"").replace(/"/g,'""')+'"').join(",")).join("\r\n");const blob=new Blob(["\uFEFF",csv],{type:"text/csv;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=role==="Cashier"?"ububiko-sales-report.csv":"ububiko-stock-report.csv";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);notify(t("exported"))}
+updateLoginLanguage();
+
+/* UBUBIKO SMART — frontend hardening and usability enhancements */
+(function(){
+  const oldSaveModal = saveModal;
+  const originalDashboard = dashboard;
+  const makeRef = (prefix, rows, width=4) => {
+    const max = rows.reduce((n,x)=>Math.max(n, Number(String(x.id||"").replace(/\D/g,""))||0), 0);
+    return prefix + String(max+1).padStart(width,"0");
+  };
+  const inlineArg = v => safeText("\'"+String(v).replace(/\\/g,"\\\\").replace(/\'/g,"\\'")+"\'");
+  const persistAll = () => {
+    persistCollection("ububiko-products-v1",products);
+    persistCollection("ububiko-movements-v1",movements);
+    persistCollection("ububiko-requests-v1",requests);
+    persistCollection("ububiko-returns-v1",returnsData);
+    persistCollection("ububiko-suppliers-v1",suppliers);
+    persistCollection("ububiko-customers-v1",customers);
+    persistCollection("ububiko-audit-v1",audit);
+  };
+  const salesTotal = rows => rows.filter(m=>m.type==="stockOut").reduce((n,m)=>{
+    const p=products.find(x=>x.name===m.product);
+    return n + Number(m.total ?? (m.qty * (m.unitPrice ?? p?.price ?? 0)));
+  },0);
+
+  /* Escape all dynamic text at the point it enters HTML. */
+  movementTable = function(rows){
+    const cash=role==="Cashier";
+    return '<div class="table-wrap"><table><thead><tr><th>'+t("reference")+'</th><th>'+t("product")+'</th><th>'+t("type")+'</th><th>'+t("quantity")+'</th>'+(cash?'<th>Amount (RWF)</th>':'')+'<th>'+t("date")+'</th><th>'+t("role")+'</th></tr></thead><tbody>'+
+      (rows.length?rows.map(m=>'<tr><td><b>'+safeText(m.id)+'</b></td><td>'+safeText(m.product)+'</td><td><span class="status '+(m.type==="stockOut"?"warn":"")+'">'+t(m.type)+'</span></td><td>'+fmt(Number(m.qty)||0)+'</td>'+(cash?'<td>'+fmt(Number(m.total ?? ((Number(m.qty)||0)*Number(m.unitPrice ?? (products.find(p=>p.name===m.product)?.price ?? 0)))))+'</td>':'')+'<td>'+safeText(m.date)+'</td><td>'+safeText(m.by)+'</td></tr>').join(""):'<tr><td colspan="'+(cash?7:6)+'" class="empty">'+t("noRecords")+'</td></tr>')+
+      '</tbody></table></div>';
+  };
+
+  dashboard = function(){
+    if(role==="Cashier") return cashierDashboard();
+    const activeProducts=products.filter(p=>!p.archived);
+    const total=activeProducts.reduce((n,p)=>n+(Number(p.qty)||0),0);
+    const value=activeProducts.reduce((n,p)=>n+(Number(p.qty)||0)*(Number(p.price)||0),0);
+    const low=activeProducts.filter(p=>p.qty<=p.min).length;
+    const sales=salesTotal(movements);
+    const days=Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()-(6-i));return d.toISOString().slice(0,10)});
+    const daily=days.map(day=>movements.filter(m=>m.type==="stockOut"&&m.date===day).reduce((n,m)=>n+Number(m.qty||0),0));
+    const max=Math.max(1,...daily);
+    const dayLabels=days.map(day=>{const d=new Date(day+"T12:00:00");return d.toLocaleDateString(lang==="fr"?"fr-FR":lang==="rw"?"en":"en-US",{weekday:"short"})});
+    return head(t("welcome"),t("overview"),'<button class="btn" onclick="printReport()">▤ Print / PDF</button><button class="btn btn-gold" onclick="exportReport()">↧ '+t("export")+'</button><button class="btn btn-gold" onclick="openProductModal()">＋ '+t("addProduct")+'</button>')+
+      '<div class="stats"><div class="stat"><div class="stat-top">'+t("totalProducts")+'<span class="stat-icon">▣</span></div><strong>'+activeProducts.length+'</strong><small>'+fmt(total)+' '+t("units")+'</small></div><div class="stat"><div class="stat-top">'+t("stockValue")+'<span class="stat-icon">◈</span></div><strong>'+fmt(value)+' <small>RWF</small></strong><small>'+t("totalValue")+'</small></div><div class="stat"><div class="stat-top">'+t("sales")+'<span class="stat-icon">↗</span></div><strong>'+fmt(sales)+' <small>RWF</small></strong><small>'+movements.filter(m=>m.type==="stockOut").length+' transactions</small></div><div class="stat"><div class="stat-top">'+t("lowStock")+'<span class="stat-icon">⚑</span></div><strong>'+low+'</strong><small>'+t("lowAlerts")+'</small></div></div>'+
+      '<div class="panels"><div><div class="panel"><div class="panel-head"><h3>'+t("stockOverview")+'</h3><small>'+t("last7")+' · Units issued</small></div><div class="panel-body"><div class="bar-chart">'+daily.map((v,i)=>'<div class="bar-col"><div class="bar" title="'+v+' units" style="height:'+Math.max(5,v/max*100)+'%"></div><small>'+safeText(dayLabels[i])+'</small></div>').join("")+'</div></div></div><div class="panel"><div class="panel-head"><h3>'+t("recentActivity")+'</h3><button class="btn" onclick="setPage(\'movements\')">'+t("viewAll")+'</button></div>'+movementTable(movements.slice(0,5))+'</div></div><div><div class="panel"><div class="panel-head"><h3>'+t("lowAlerts")+'</h3><button class="btn" onclick="setPage(\'products\')">'+t("viewAll")+'</button></div><div class="panel-body"><div class="alert-list">'+(activeProducts.filter(p=>p.qty<=p.min).map(p=>'<div class="alert"><div><b>'+safeText(p.icon||"📦")+' '+safeText(p.name)+'</b><small>'+fmt(p.qty)+' / '+fmt(p.min)+' '+t("units")+'</small></div><span class="alert-num">'+(p.qty===0?t("out"):t("low"))+'</span></div>').join("")||'<div class="empty">'+t("noRecords")+'</div>')+'</div></div></div><div class="panel"><div class="panel-head"><h3>'+t("quickActions")+'</h3></div><div class="panel-body"><div class="quick-grid"><button class="quick" onclick="openRequestModal()"><span>⇧</span><b>'+t("newRequest")+'</b><small>'+t("request")+'</small></button><button class="quick" onclick="openMovementModal()"> <span>⇩</span><b>'+t("receiveStock")+'</b><small>'+t("stockIn")+'</small></button><button class="quick" onclick="openMovementModal(true)"><span>↗</span><b>'+t("recordSale")+'</b><small>'+t("stockOut")+'</small></button><button class="quick" onclick="setPage(\'reports\')"><span>▥</span><b>'+t("reports")+'</b><small>'+t("export")+'</small></button></div></div></div></div></div>';
+  };
+
+  productPage = function(){
+    if(!allowed("products"))return denied();
+    const rows=products.filter(p=>(filter==="archived"?!!p.archived:!p.archived)&&
+      (filter==="all"||filter==="archived"||filter==="low"&&p.qty<=p.min||filter==="available"&&p.qty>p.min&&p.qty>0||filter==="out"&&p.qty===0)&&
+      (!query||[p.name,p.sku,p.category].some(v=>String(v||"").toLowerCase().includes(query.toLowerCase()))));
+    const body=rows.map(p=>'<tr><td><div class="product"><div class="product-icon">'+safeText(p.icon||"📦")+'</div><div><b>'+safeText(p.name)+'</b><small>'+safeText(p.id)+'</small></div></div></td><td>'+safeText(p.sku)+'</td><td>'+safeText(p.category)+'</td><td><b>'+fmt(p.qty)+'</b></td><td>'+fmt(p.price)+' RWF</td><td>'+stockStatus(p)+'</td><td>'+(allowed("products","u")?'<button class="btn" onclick="editProduct('+Number(p.id)+')">✎</button> ':'')+(allowed("products","d")?'<button class="btn" onclick="archiveProduct('+Number(p.id)+')">'+(p.archived?"Restore":"Archive")+'</button>':'—')+'</td></tr>').join("");
+    const filters='<option value="all">'+t("all")+'</option><option value="available">'+t("available")+'</option><option value="low">'+t("low")+'</option><option value="out">'+t("out")+'</option>'+(role==="Admin"?'<option value="archived">Archived</option>':'');
+    return head(t("products"),t("moduleInfo"),allowed("products","c")?'<button class="btn btn-gold" onclick="openProductModal()">＋ '+t("addProduct")+'</button>':'')+'<div class="panel"><div class="panel-head"><div class="toolbar"><input class="search" aria-label="Search products" placeholder="'+t("search")+'" value="'+safeText(query)+'" oninput="query=this.value;render()"><select class="select" aria-label="Filter products" onchange="filter=this.value;render()">'+filters.replace('value="'+filter+'"','value="'+filter+'" selected')+'</select></div><small>'+rows.length+' '+t("product")+'</small></div><div class="table-wrap"><table><thead><tr><th>'+t("product")+'</th><th>SKU</th><th>'+t("category")+'</th><th>'+t("quantity")+'</th><th>'+t("price")+'</th><th>'+t("status")+'</th><th>'+t("action")+'</th></tr></thead><tbody>'+(body||'<tr><td colspan="7" class="empty">'+t("noRecords")+'</td></tr>')+'</tbody></table></div></div>';
+  };
+
+  editProduct = function(id){
+    if(!allowed("products","u"))return notify(t("noPermission"));
+    const p=products.find(x=>x.id===id); if(!p)return notify(t("denied"));
+    openModal(t("update"),safeText(p.name),'<div class="field"><label>'+t("name")+'</label><input id="fName" maxlength="100" value="'+safeText(p.name)+'" required></div><div class="field"><label>SKU</label><input id="fSku" maxlength="40" value="'+safeText(p.sku)+'" required></div><div class="field"><label>'+t("category")+'</label><input id="fCategory" maxlength="80" value="'+safeText(p.category)+'"></div><div class="field"><label>'+t("quantity")+'</label><input id="fQty" type="number" min="0" step="1" value="'+Number(p.qty)+'" required></div><div class="field"><label>'+t("price")+' (RWF)</label><input id="fPrice" type="number" min="0" step="1" value="'+Number(p.price)+'" required></div><div class="field"><label>'+t("minimum")+'</label><input id="fMin" type="number" min="0" step="1" value="'+Number(p.min)+'" required></div>',"edit:"+id);
+  };
+
+  archiveProduct = function(id){
+    if(!allowed("products","d"))return notify(t("noPermission"));
+    const p=products.find(x=>x.id===id);if(!p)return notify(t("denied"));
+    if(p.archived){p.archived=false;recordAudit("Product restored",p.name);}
+    else {if(p.qty>0)return notify(lang==="rw"?"Banza usohore stock isigaye mbere yo guhisha igicuruzwa.":"Move remaining stock before archiving this product.");if(!confirm("Archive "+p.name+"? Historical transactions will be kept."))return;p.archived=true;recordAudit("Product archived",p.name);}
+    persistCollection("ububiko-products-v1",products);render();notify(t("saved"));
+  };
+
+  requestPage = function(){
+    if(!allowed("requests"))return denied();
+    const rows=requests.map(r=>'<tr><td><b>'+safeText(r.id)+'</b></td><td>'+safeText(r.product)+'</td><td>'+fmt(r.qty)+'</td><td>'+requestStatus(r.status)+'</td><td>'+safeText(r.by)+'</td><td>'+(r.status==="pending"&&["Admin","Manager"].includes(role)?'<button class="btn" onclick="approveRequest('+inlineArg(r.id)+')">Approve</button> <button class="btn" onclick="rejectRequest('+inlineArg(r.id)+')">Reject</button>':r.status==="approved"&&["Admin","Manager"].includes(role)?'<button class="btn btn-gold" onclick="processRequest('+inlineArg(r.id)+')">Receive stock</button>':'—')+'</td></tr>').join("");
+    return head(t("requests"),t("moduleInfo"),allowed("requests","c")?'<button class="btn btn-gold" onclick="openRequestModal()">＋ '+t("newRequest")+'</button>':'')+'<div class="panel"><div class="table-wrap"><table><thead><tr><th>'+t("reference")+'</th><th>'+t("product")+'</th><th>'+t("quantity")+'</th><th>'+t("status")+'</th><th>'+t("role")+'</th><th>'+t("action")+'</th></tr></thead><tbody>'+(rows||'<tr><td colspan="6" class="empty">'+t("noRecords")+'</td></tr>')+'</tbody></table></div></div>';
+  };
+  rejectRequest = function(id){if(!["Admin","Manager"].includes(role))return notify(t("noPermission"));const r=requests.find(x=>x.id===id);if(!r||r.status!=="pending")return notify(t("denied"));r.status="rejected";persistCollection("ububiko-requests-v1",requests);recordAudit("Request rejected",id);render();notify(t("saved"));};
+  processRequest = function(id){
+    if(!["Admin","Manager"].includes(role))return notify(t("noPermission"));
+    const r=requests.find(x=>x.id===id),p=products.find(x=>x.name===r?.product);
+    if(!r||r.status!=="approved"||!p)return notify(t("denied"));
+    p.qty+=Number(r.qty);r.status="processed";
+    const ref=makeRef("MV-",movements,4);
+    movements.unshift({id:ref,product:p.name,type:"stockIn",qty:Number(r.qty),date:new Date().toISOString().slice(0,10),by:role,source:r.id});
+    persistAll();recordAudit("Approved request received",r.id+" / "+p.name+" +"+r.qty);render();notify(t("saved"));
+  };
+  approveRequest = function(id){if(!["Admin","Manager"].includes(role))return notify(t("noPermission"));const r=requests.find(x=>x.id===id);if(!r||r.status!=="pending")return notify(t("denied"));r.status="approved";persistCollection("ububiko-requests-v1",requests);recordAudit("Request approved",id);render();notify(t("saved"));};
+
+  cashierDashboard = function(){
+    const sales=movements.filter(m=>m.type==="stockOut"),total=salesTotal(movements),refunds=returnsData.filter(r=>r.status==="approved").reduce((n,r)=>n+Number(r.refund||0),0);
+    return head(lang==="rw"?"Incamake y'ubucuruzi":"Sales overview",lang==="rw"?"Cashier abona iby'ubucuruzi n'abakiriya gusa.":"Cashier access is limited to sales and customers.",'<button class="btn btn-gold" onclick="setPage(\'customers\')">＋ '+t("customers")+'</button><button class="btn btn-gold" onclick="openMovementModal(true)">＋ '+t("recordSale")+'</button>')+'<div class="stats"><div class="stat"><div class="stat-top">'+t("sales")+'</div><strong>'+fmt(total)+' RWF</strong><small>'+sales.length+' sales</small></div><div class="stat"><div class="stat-top">'+t("customers")+'</div><strong>'+customers.length+'</strong></div><div class="stat"><div class="stat-top">Approved refunds</div><strong>'+fmt(refunds)+' RWF</strong></div></div><div class="panel"><div class="panel-head"><h3>Sales history</h3></div>'+movementTable(sales)+'</div>';
+  };
+
+  returnsPage = function(){
+    if(!allowed("returns"))return denied();
+    const rows=returnsData.map(r=>'<tr><td><b>'+safeText(r.id)+'</b></td><td>'+safeText(r.customer)+'</td><td>'+safeText(r.product)+'</td><td>'+fmt(r.qty)+'</td><td>'+fmt(r.refund)+'</td><td>'+requestStatus(r.status)+'</td><td>'+(r.status==="pending"&&["Admin","Manager"].includes(role)?'<button class="btn" onclick="approveReturn('+inlineArg(r.id)+')">Approve refund</button>':r.status==="approved"&&["Admin","Manager","Storekeeper"].includes(role)?'<button class="btn" onclick="receiveReturn('+inlineArg(r.id)+')">Restock</button>':'—')+'</td></tr>').join("");
+    return head(t("returns"),lang==="rw"?"Andika ibicuruzwa byagaruwe, genzura amafaranga, kandi ukurikirane uko byakiriwe.":"Register returns, review refunds and track restocking.",["Admin","Manager","Cashier"].includes(role)?'<button class="btn btn-gold" onclick="openReturnModal()">＋ '+(lang==="rw"?"Andika igarura":"Register return")+'</button>':'')+'<div class="panel"><div class="panel-head"><h3>'+t("returns")+'</h3><span class="permission">'+returnsData.length+' records</span></div><div class="table-wrap"><table><thead><tr><th>Reference</th><th>Customer</th><th>Product</th><th>Qty</th><th>Refund (RWF)</th><th>Status</th><th>Action</th></tr></thead><tbody>'+(rows||'<tr><td colspan="7" class="empty">'+t("noRecords")+'</td></tr>')+'</tbody></table></div></div>';
+  };
+  receiveReturn = function(id){
+    if(!["Admin","Manager","Storekeeper"].includes(role))return notify(t("noPermission"));
+    const r=returnsData.find(x=>x.id===id),p=products.find(x=>x.name===r?.product);
+    if(!r||r.status!=="approved"||!p)return notify(t("denied"));
+    p.qty+=Number(r.qty);r.status="restocked";const ref=makeRef("MV-",movements,4);
+    movements.unshift({id:ref,product:p.name,type:"stockIn",qty:Number(r.qty),date:new Date().toISOString().slice(0,10),by:role,source:r.id});
+    persistAll();recordAudit("Returned goods restocked",id);render();notify(t("saved"));
+  };
+
+  /* Consistent, collision-free customer IDs and safe customer rendering. */
+  customersPage = function(){
+    if(!allowed("customers"))return denied();
+    const canEdit=allowed("customers","u"),canDelete=allowed("customers","d");
+    const rows=customers.filter(c=>!query||[c.name,c.phone,c.email,c.id].some(v=>String(v||"").toLowerCase().includes(query.toLowerCase())));
+    return head(t("customers"),lang==="rw"?"Andika kandi urebe amakuru y'abakiriya.":"Manage customer contact records.",allowed("customers","c")?'<button class="btn btn-gold" onclick="openCustomerModal()">＋ '+t("add")+'</button>':'')+'<div class="panel"><div class="panel-head"><div class="toolbar"><input class="search" placeholder="'+t("search")+'" value="'+safeText(query)+'" oninput="query=this.value;render()"></div><span class="permission">'+rows.length+' records</span></div><div class="table-wrap"><table><thead><tr><th>ID</th><th>Name</th><th>Phone</th><th>Email</th><th>Notes</th><th>Action</th></tr></thead><tbody>'+(rows.map(c=>'<tr><td>'+safeText(c.id)+'</td><td><b>'+safeText(c.name)+'</b></td><td>'+safeText(c.phone)+'</td><td>'+safeText(c.email||"—")+'</td><td>'+safeText(c.notes||"—")+'</td><td>'+(canEdit?'<button class="btn" onclick="editCustomer('+inlineArg(c.id)+')">Edit</button> ':'')+(canDelete?'<button class="btn" onclick="deleteCustomer('+inlineArg(c.id)+')">Delete</button>':'')+'</td></tr>').join("")||'<tr><td colspan="6" class="empty">'+t("noRecords")+'</td></tr>')+'</tbody></table></div></div>';
+  };
+  editCustomer = function(id){
+    if(!allowed("customers","u"))return notify(t("noPermission"));const c=customers.find(x=>x.id===id);if(!c)return notify(t("denied"));
+    openModal("Edit customer","Update customer contact details.",'<div class="field"><label>Name</label><input id="fCustomerName" maxlength="100" value="'+safeText(c.name)+'" required></div><div class="field"><label>Phone</label><input id="fCustomerPhone" maxlength="30" value="'+safeText(c.phone)+'" required></div><div class="field"><label>Email</label><input id="fCustomerEmail" type="email" maxlength="120" value="'+safeText(c.email||"")+'"></div><div class="field"><label>Notes</label><input id="fCustomerNotes" maxlength="240" value="'+safeText(c.notes||"")+'"></div>',"editCustomer:"+id);
+  };
+  deleteCustomer = function(id){if(!allowed("customers","d"))return notify(t("noPermission"));const c=customers.find(x=>x.id===id);if(!c)return notify(t("denied"));if(returnsData.some(r=>r.customer===c.name))return notify("This customer has return history and cannot be deleted.");if(!confirm("Delete customer "+c.name+"?"))return;customers=customers.filter(x=>x.id!==id);persistCollection("ububiko-customers-v1",customers);recordAudit("Customer deleted",c.name);render();notify(t("saved"));};
+
+  /* Wrap the existing save routine with strict validation and additional edit flows. */
+  saveModal = function(){
+    const kind=modalKind;
+    const num=id=>{const e=document.getElementById(id);return e?Number(e.value):NaN;};
+    const required=(id,label)=>{const e=document.getElementById(id);if(!e||!String(e.value||"").trim()){notify(label+" is required.");return false;}return true;};
+    const nonnegative=(id,label,allowZero=true)=>{const v=num(id);if(!Number.isFinite(v)||v<0||(!allowZero&&v<1)||!Number.isInteger(v)){notify(label+" must be a valid "+(allowZero?"non-negative":"positive")+" whole number.");return false;}return true;};
+    if(kind==="editCustomer:"+kind.slice(13)){
+      /* handled below; this branch intentionally never matches */
+    }
+    if(kind.startsWith("editCustomer:")){
+      if(!allowed("customers","u"))return notify(t("noPermission"));
+      const id=kind.slice("editCustomer:".length),c=customers.find(x=>x.id===id);
+      if(!c)return notify(t("denied"));
+      if(!required("fCustomerName","Name")||!required("fCustomerPhone","Phone"))return;
+      const name=document.getElementById("fCustomerName").value.trim(),phone=document.getElementById("fCustomerPhone").value.trim(),email=document.getElementById("fCustomerEmail").value.trim();
+      if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return notify("Enter a valid email address.");
+      if(customers.some(x=>x.id!==id&&x.phone.replace(/\s/g,"")===phone.replace(/\s/g,"")))return notify("That phone number is already registered.");
+      Object.assign(c,{name,phone,email,notes:document.getElementById("fCustomerNotes").value.trim()});
+      persistCollection("ububiko-customers-v1",customers);recordAudit("Customer updated",name);closeModal();render();notify(t("saved"));return;
+    }
+    if(kind==="edit:"+kind.slice(5)){
+      if(!allowed("products","u"))return notify(t("noPermission"));
+      if(!required("fName","Name")||!required("fSku","SKU")||!nonnegative("fQty","Quantity")||!nonnegative("fPrice","Price")||!nonnegative("fMin","Minimum quantity"))return;
+      const id=Number(kind.slice(5)),p=products.find(x=>x.id===id);if(!p)return notify(t("denied"));
+      const name=document.getElementById("fName").value.trim(),sku=document.getElementById("fSku").value.trim();
+      if(products.some(x=>x.id!==id&&x.sku.toLowerCase()===sku.toLowerCase()))return notify("SKU already exists.");
+      if(products.some(x=>x.id!==id&&x.name.toLowerCase()===name.toLowerCase()))return notify("A product with that name already exists.");
+      Object.assign(p,{name,sku,category:document.getElementById("fCategory").value.trim()||"General",qty:num("fQty"),price:num("fPrice"),min:num("fMin")});
+      persistCollection("ububiko-products-v1",products);recordAudit("Product updated",name);closeModal();render();notify(t("saved"));return;
+    }
+    if(kind==="product"){
+      if(!required("fName","Name")||!required("fCategory","Category")||!nonnegative("fQty","Quantity")||!nonnegative("fPrice","Price")||!nonnegative("fMin","Minimum quantity"))return;
+      const name=document.getElementById("fName").value.trim();
+      if(products.some(x=>x.name.toLowerCase()===name.toLowerCase()))return notify("A product with that name already exists.");
+    }
+    if(kind==="in"||kind==="out"||kind==="request"){
+      if(!nonnegative("fQty","Quantity",false))return;
+      if(!document.getElementById("fProduct")?.value)return notify("Select a product.");
+    }
+    if(kind==="customer"){
+      if(!required("fCustomerName","Name")||!required("fCustomerPhone","Phone"))return;
+      const phone=document.getElementById("fCustomerPhone").value.trim();
+      if(customers.some(x=>x.phone.replace(/\s/g,"")===phone.replace(/\s/g,"")))return notify("That phone number is already registered.");
+    }
+    if(kind==="return"){
+      if(!required("fReturnReason","Reason")||!nonnegative("fReturnQty","Quantity",false)||!nonnegative("fReturnRefund","Refund amount"))return;
+      const p=products.find(x=>x.name===document.getElementById("fReturnProduct").value),q=num("fReturnQty");
+      if(!p||q<1)return notify("Select a valid product and quantity.");
+    }
+    if(kind==="in"||kind==="out"){
+      const p=products.find(x=>x.id===num("fProduct"));
+      if(!p||p.archived)return notify("This product is unavailable.");
+      if(kind==="out"&&p.qty<num("fQty"))return notify(t("denied"));
+    }
+    oldSaveModal();
+  };
+
+  /* Fix IDs for new movement records even when older demo IDs are irregular. */
+  openMovementModal = function(out=false){
+    if(!allowed("movements","c"))return notify(t("noPermission"));
+    if(out&&role!=="Admin"&&role!=="Cashier")return notify(t("noPermission"));
+    const available=products.filter(p=>!p.archived&&(out?p.qty>0:true));
+    if(!available.length)return notify("No eligible products available.");
+    openModal(out?t("recordSale"):t("receiveStock"),t("moduleInfo"),'<div class="field"><label>'+t("product")+'</label><select id="fProduct">'+available.map(p=>'<option value="'+Number(p.id)+'">'+safeText(p.name)+' ('+fmt(p.qty)+')</option>').join("")+'</select></div><div class="field"><label>'+t("quantity")+'</label><input id="fQty" type="number" min="1" step="1" value="1" required></div>',out?"out":"in");
+  };
+  /* Replace the legacy reference generation after the legacy save routine. */
+  const legacySave = saveModal;
+  saveModal = function(){
+    const kind=modalKind;
+    if(kind==="in"||kind==="out"){
+      if(!allowed("movements","c"))return notify(t("noPermission"));
+      const p=products.find(x=>x.id===Number(document.getElementById("fProduct")?.value)),q=Number(document.getElementById("fQty")?.value);
+      if(!p||!Number.isInteger(q)||q<1||!Number.isFinite(q))return notify("Enter a valid quantity.");
+      if(kind==="out"&&p.qty<q)return notify(t("denied"));
+      p.qty += kind==="in"?q:-q;
+      const ref=makeRef("MV-",movements,4);
+      movements.unshift({id:ref,product:p.name,type:kind==="in"?"stockIn":"stockOut",qty:q,unitPrice:p.price,total:kind==="out"?q*p.price:0,date:new Date().toISOString().slice(0,10),by:role});
+      persistCollection("ububiko-products-v1",products);persistCollection("ububiko-movements-v1",movements);recordAudit(kind==="in"?"Stock received":"Stock issued",p.name+" "+q);closeModal();render();notify(t("saved"));return;
+    }
+    if(kind==="request"){
+      if(!allowed("requests","c"))return notify(t("noPermission"));
+      const p=products.find(x=>x.id===Number(document.getElementById("fProduct")?.value)),q=Number(document.getElementById("fQty")?.value);
+      if(!p||p.archived||!Number.isInteger(q)||q<1)return notify("Enter a valid request.");
+      requests.unshift({id:makeRef("RQ-",requests,4),product:p.name,qty:q,status:"pending",by:role,createdAt:new Date().toISOString()});
+      persistCollection("ububiko-requests-v1",requests);recordAudit("Request created",p.name+" x"+q);closeModal();render();notify(t("saved"));return;
+    }
+    legacySave();
+  };
+
+
+  assistantPage = function(){
+    if(!allowed("assistant"))return denied();
+    const prompts=role==="Cashier"?["What are total sales?","How many customers?","What refunds are approved?","How do I print sales report?"]:lang==="rw"?["Nshaka isukari","Ni ibihe bicuruzwa bike?","Hasigaye bingahe?","Ni ibihe byashize?","Igiciro cyumuceri ni ikihe?","Nabona nte raporo?"]:lang==="fr"?["Je cherche le sucre","Quels produits sont bas ?","Combien en reste-t-il ?","Quels produits sont épuisés ?","Quel est le prix du riz ?","Comment exporter un rapport ?"]:["I need sugar","Which products are low?","How many are left?","Which products are out of stock?","What is the price of rice?","How do I export a report?"];
+    return head(t("assistant"),t("moduleInfo"))+'<div class="panel"><div class="panel-body" style="min-height:320px"><div class="alert"><div><b>✧ UBUBIKO SMART AI</b><small>'+t("assistantIntro")+'</small></div><span class="status">STOCK-AWARE DEMO</span></div><div class="chat-suggestions">'+prompts.map(q=>'<button type="button" onclick="askQuick('+inlineArg(q)+')">'+safeText(q)+'</button>').join("")+'</div><div id="chatLog" style="padding:8px 2px;color:#53617a"><div class="chat-line assistant"><b>✧ UBUBIKO AI:</b> '+t("assistantIntro")+'</div></div><div class="toolbar"><input class="search" id="chatInput" style="flex:1" placeholder="'+t("ask")+'" onkeydown="if(event.key===\'Enter\')askAssistant()"><button class="btn btn-primary" onclick="askAssistant()">'+t("send")+'</button></div></div></div>';
+  };
+
+  /* Correct sales totals consistently and include complete operational exports. */
+  reportsPage = function(){
+    if(!allowed("reports"))return denied();
+    if(role==="Cashier"){const sales=movements.filter(m=>m.type==="stockOut"),total=salesTotal(movements);return head(t("reports"),t("moduleInfo"),'<button class="btn" onclick="printReport()">▤ Print / PDF</button><button class="btn btn-gold" onclick="exportReport()">↧ '+t("export")+'</button>')+'<div class="stats"><div class="stat"><div class="stat-top">Sales total</div><strong>'+fmt(total)+' RWF</strong></div><div class="stat"><div class="stat-top">Transactions</div><strong>'+sales.length+'</strong></div></div><div class="panel"><div class="panel-head"><h3>Sales report</h3></div>'+movementTable(sales)+'</div>';}
+    const val=products.reduce((a,p)=>a+(Number(p.qty)||0)*(Number(p.price)||0),0);
+    return head(t("reports"),t("moduleInfo"),'<button class="btn" onclick="printReport()">▤ Print / PDF</button><button class="btn btn-gold" onclick="exportReport()">↧ '+t("export")+'</button><button class="btn" onclick="exportBackup()">Backup JSON</button>')+'<div class="stats"><div class="stat"><div class="stat-top">'+t("totalProducts")+'</div><strong>'+products.length+'</strong></div><div class="stat"><div class="stat-top">'+t("totalValue")+'</div><strong>'+fmt(val)+' RWF</strong></div><div class="stat"><div class="stat-top">'+t("lowStock")+'</div><strong>'+products.filter(p=>!p.archived&&p.qty<=p.min).length+'</strong></div><div class="stat"><div class="stat-top">'+t("movements")+'</div><strong>'+movements.length+'</strong></div><div class="stat"><div class="stat-top">Sales total</div><strong>'+fmt(salesTotal(movements))+' RWF</strong></div></div><div class="panel"><div class="panel-head"><h3>'+t("recentActivity")+'</h3></div>'+movementTable(movements)+'</div>';
+  };
+
+  exportBackup = function(){
+    const data={app:"UBUBIKO SMART",formatVersion:1,exportedAt:new Date().toISOString(),products,movements,requests,returnsData,suppliers,customers,audit};
+    const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=url;a.download="ububiko-smart-backup-"+new Date().toISOString().slice(0,10)+".json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);notify("Backup exported. Keep it somewhere safe.");
+  };
+  importBackup = function(input){
+    if(role!=="Admin")return notify(t("noPermission"));
+    const file=input?.files?.[0];if(!file)return;
+    const reader=new FileReader();
+    reader.onload=()=>{try{
+      const d=JSON.parse(reader.result);
+      const keys=["products","movements","requests","returnsData","suppliers","customers","audit"];
+      if(d.app!=="UBUBIKO SMART"||d.formatVersion!==1||!keys.every(k=>Array.isArray(d[k])))throw new Error("Invalid backup format");
+      if(!confirm("Replace current inventory data with this backup? This cannot be undone.")){input.value="";return;}
+      products=d.products;movements=d.movements;requests=d.requests;returnsData=d.returnsData;suppliers=d.suppliers;customers=d.customers;audit=d.audit;
+      persistAll();recordAudit("Backup restored",file.name);render();notify("Backup restored successfully.");
+    }catch(e){notify("Backup file is invalid or unsupported.");}input.value="";};
+    reader.onerror=()=>notify("Could not read the backup file.");reader.readAsText(file);
+  };
+
+
+  usersPage = function(){
+    if(role!=="Admin")return denied(true);
+    const labels=lang==="rw"?{add:"＋ Ongeraho umukoresha",accounts:"Konti z'abakoresha",username:"Izina ukoresha",state:"Imiterere",active:"Irahari",blocked:"Yahagaritswe",block:"Hagarika",unblock:"Emeza kongera gukora"}:lang==="fr"?{add:"＋ Ajouter un utilisateur",accounts:"Comptes utilisateurs",username:"Nom d'utilisateur",state:"État",active:"Actif",blocked:"Bloqué",block:"Bloquer",unblock:"Débloquer"}:{add:"＋ Add user",accounts:"User accounts",username:"Username",state:"Status",active:"Active",blocked:"Blocked",block:"Block",unblock:"Unblock"};
+    const rows=userAccounts.map(u=>'<tr><td><b>'+safeText(u.username)+'</b>'+(u.builtIn?' <small>· Demo</small>':'')+'</td><td>'+safeText(u.role)+'</td><td><span class="status '+(u.blocked?'danger':'')+'">'+(u.blocked?labels.blocked:labels.active)+'</span></td><td>'+(u.username.toLowerCase()===String(currentUsername).toLowerCase()?'<span class="permission">'+(lang==="rw"?"Konti yawe":"Your account")+'</span>':'<button class="btn" onclick="openResetPasswordModal('+inlineArg(u.username)+')">'+(lang==="rw"?"Hindura ijambo":"Reset password")+'</button> <button class="btn '+(u.blocked?'btn-gold':'')+'" onclick="blockUser('+inlineArg(u.username)+')">'+(u.blocked?labels.unblock:labels.block)+'</button>')+'</td></tr>').join("");
+    return head(t("usersTitle"),t("moduleInfo"),'<button class="btn btn-gold" onclick="openUserModal()">'+labels.add+'</button>')+'<div class="panel"><div class="panel-head"><h3>'+labels.accounts+'</h3><span class="permission">'+userAccounts.length+' accounts</span></div><div class="table-wrap"><table><thead><tr><th>'+labels.username+'</th><th>'+t("role")+'</th><th>'+labels.state+'</th><th>'+t("action")+'</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="panel-body"><small>'+ (lang==="rw"?"Impinduka zibikwa muri browser ukoresha.":"Changes are stored in this browser only.")+'</small></div></div>';
+  };
+
+  /* Add local-only backup controls to Settings; no password records are exported. */
+  const baseSettingsPage=settingsPage;
+  settingsPage = function(){
+    const html=baseSettingsPage();
+    if(role!=="Admin")return html;
+    return html.replace('</div></div></div>', '</div></div><div class="panel"><div class="panel-head"><h3>Local data backup</h3></div><div class="panel-body"><p>Export or restore inventory data stored in this browser. User passwords and login accounts are never included in the backup.</p><div class="toolbar"><button class="btn btn-primary" type="button" onclick="exportBackup()">Export JSON backup</button><label class="btn" for="backupImport">Restore from JSON</label><input id="backupImport" type="file" accept="application/json,.json" style="display:none" onchange="importBackup(this)"></div><small>Restoring replaces the current local data. Export a backup before making major changes.</small></div></div></div>');
+  };
+
+  /* Better dialog ergonomics and safe keyboard dismissal. */
+  document.getElementById("modalBackdrop")?.setAttribute("role","presentation");
+  document.querySelector(".modal")?.setAttribute("role","dialog");
+  document.querySelector(".modal")?.setAttribute("aria-modal","true");
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"&&document.getElementById("modalBackdrop")?.classList.contains("open"))closeModal();});
+  const originalLogin=login;
+  login=function(){
+    const username=document.getElementById("loginUsername").value.trim().toLowerCase();
+    if(!username){document.getElementById("loginError").textContent=LOGIN_TEXT[lang].bad;return;}
+    originalLogin();
+  };
+})();
+
+
+
+/* Final data-integrity and output-safety pass */
+(function(){
+  const previousSave = saveModal;
+  const nextRef = (prefix, rows, width=3) => prefix + String(rows.reduce((n,x)=>Math.max(n,Number(String(x.id||"").replace(/\D/g,""))||0),0)+1).padStart(width,"0");
+  requestStatus = function(status){
+    const label=({pending:t("pending"),approved:t("approved"),processed:t("processed"),rejected:t("rejected"),restocked:"Restocked"})[status]||String(status||"—");
+    return '<span class="status '+(status==="pending"?"warn":status==="rejected"?"danger":status==="approved"?"info":"")+'">'+safeText(label)+'</span>';
+  };
+  auditPage = function(){
+    if(role!=="Admin"&&role!=="Manager")return denied(true);
+    return head(t("auditTitle"),t("moduleInfo"))+'<div class="panel"><div class="table-wrap"><table><thead><tr><th>'+t("date")+'</th><th>'+t("role")+'</th><th>'+t("action")+'</th><th>'+t("reference")+'</th></tr></thead><tbody>'+(audit.length?audit.map(a=>'<tr><td>'+safeText(a.date)+'</td><td>'+safeText(a.actor)+'</td><td>'+safeText(a.action)+'</td><td>'+safeText(a.target)+'</td></tr>').join(""):'<tr><td colspan="4" class="empty">'+t("noRecords")+'</td></tr>')+'</tbody></table></div><div class="panel-body"><span class="status">APPEND ONLY</span> <small>Audit records cannot be edited or deleted from this interface. Browser storage is not tamper-proof.</small></div></div>';
+  };
+  saveModal = function(){
+    const kind=modalKind;
+    const val=id=>Number(document.getElementById(id)?.value);
+    const text=id=>String(document.getElementById(id)?.value||"").trim();
+    const validInt=(id,min=0)=>Number.isInteger(val(id))&&val(id)>=min;
+    if(kind==="product"){
+      if(!allowed("products","c"))return notify(t("noPermission"));
+      if(!text("fName")||!text("fCategory")||!validInt("fQty")||!validInt("fPrice")||!validInt("fMin"))return notify("Complete all fields using valid non-negative whole numbers.");
+      if(products.some(p=>p.name.toLowerCase()===text("fName").toLowerCase()))return notify("A product with that name already exists.");
+      const id=Math.max(0,...products.map(p=>Number(p.id)||0))+1;
+      const sku=nextRef("UB-",products,3);
+      products.push({id,name:text("fName"),sku,category:text("fCategory"),qty:val("fQty"),min:val("fMin"),price:val("fPrice"),icon:"📦"});
+      persistCollection("ububiko-products-v1",products);recordAudit("Product created",text("fName"));closeModal();render();notify(t("saved"));return;
+    }
+    if(kind==="customer"){
+      if(!allowed("customers","c"))return notify(t("noPermission"));
+      if(!text("fCustomerName")||!text("fCustomerPhone"))return notify("Name and phone are required.");
+      const phone=text("fCustomerPhone");
+      if(customers.some(c=>String(c.phone||"").replace(/\s/g,"")===phone.replace(/\s/g,"")))return notify("That phone number is already registered.");
+      const email=text("fCustomerEmail");
+      if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return notify("Enter a valid email address.");
+      const id=nextRef("CUS-",customers,3);
+      customers.push({id,name:text("fCustomerName"),phone,email,notes:text("fCustomerNotes")});
+      persistCollection("ububiko-customers-v1",customers);recordAudit("Customer created",text("fCustomerName"));closeModal();render();notify(t("saved"));return;
+    }
+    if(kind==="return"){
+      if(!allowed("returns","c"))return notify(t("noPermission"));
+      const qty=val("fReturnQty"),refund=val("fReturnRefund"),product=text("fReturnProduct"),customer=text("fReturnCustomer"),reason=text("fReturnReason");
+      if(!customer||!product||!reason||!Number.isInteger(qty)||qty<1||!Number.isFinite(refund)||refund<0)return notify("Check customer, product, quantity, refund and reason.");
+      const id=nextRef("RET-",returnsData,3);
+      returnsData.unshift({id,customer,product,qty,reason,refund,status:"pending",date:new Date().toISOString().slice(0,10),by:role});
+      persistCollection("ububiko-returns-v1",returnsData);recordAudit("Return registered",product+" x"+qty);closeModal();render();notify(t("saved"));return;
+    }
+    previousSave();
+  };
+  /* Explicitly communicate the limits of a local-only demo. */
+  const note=document.getElementById("loginNote");
+  if(note)note.textContent=lang==="rw"?"Igerageza rya frontend gusa · Amakuru abikwa muri browser · Ntibikwiye amakuru y'ibanga.":lang==="fr"?"Démo frontend uniquement · Données stockées dans ce navigateur · Pas pour les données sensibles.":"Frontend-only demo · Data stays in this browser · Not for sensitive or production use.";
+})();
+
+
+/* UBUBIKO SMART — live API connection layer.
+   Set the API URL with window.UBUBIKO_API_BASE, ?api=... or localStorage "ububiko-api-base". */
+(function(){
+  const params=new URLSearchParams(location.search);
+  const DEFAULT_API="https://ububiko-smart-api-wwnp.onrender.com/api";
+  const configured=params.get("api")||window.UBUBIKO_API_BASE||localStorage.getItem("ububiko-api-base")||DEFAULT_API;
+  const API_BASE=String(configured).replace(/\/+$/,"");
+  if(params.get("api"))localStorage.setItem("ububiko-api-base",API_BASE);
+  const TOKEN_KEY="ububiko-api-token";
+  let token=sessionStorage.getItem(TOKEN_KEY)||"";
+  let currentUserId="";
+
+  const request=async(path,options={},authenticated=true)=>{
+    const headers={...(options.headers||{})};
+    if(options.body&&!headers["Content-Type"])headers["Content-Type"]="application/json";
+    if(authenticated&&token)headers.Authorization="Bearer "+token;
+    const response=await fetch(API_BASE+path,{...options,headers});
+    let data={};
+    try{data=await response.json()}catch(_){}
+    if(response.status===401){
+      sessionStorage.removeItem(TOKEN_KEY);token="";
+      throw new Error(data.message||"Session expired. Please sign in again.");
+    }
+    if(!response.ok)throw new Error(data.message||("API request failed ("+response.status+")."));
+    return data;
+  };
+  const api=(path,options={})=>request(path,options,true);
+  const day=value=>value?new Date(value).toISOString().slice(0,10):"";
+  const text=id=>String(document.getElementById(id)?.value||"").trim();
+  const val=id=>Number(document.getElementById(id)?.value);
+  const fail=error=>notify(error.message||String(error));
+
+  const mapProduct=(p,i)=>({id:i+1,backendId:p._id,name:p.name,sku:p.sku,category:p.category,qty:Number(p.qty)||0,min:Number(p.min)||0,price:Number(p.price)||0,icon:p.icon||"📦",archived:!!p.archived});
+  const mapMovement=m=>({id:m.reference,backendId:m._id,product:m.productName||"Unknown product",type:m.type,qty:Number(m.qty)||0,unitPrice:Number(m.unitPrice)||0,total:Number(m.total)||0,date:day(m.date),by:m.byName||m.by||"—",role:m.by||""});
+  const mapRequest=r=>({id:r.reference,backendId:r._id,product:r.productName||"Unknown product",qty:Number(r.qty)||0,status:r.status,by:r.requestedByName||"—",createdAt:r.createdAt});
+  const mapReturn=r=>({id:r.reference,backendId:r._id,customer:r.customer||"—",product:r.productName||"Unknown product",qty:Number(r.qty)||0,reason:r.reason||"",refund:Number(r.refund)||0,status:r.status,date:day(r.date),by:r.byName||r.by||"—"});
+  const mapSupplier=s=>({id:s._id,name:s.name,contact:s.contact||"",phone:s.phone||"",email:s.email||"",items:s.items||"",status:s.status||"active",notes:s.notes||""});
+  const mapCustomer=c=>({id:c._id,name:c.name,phone:c.phone||"",email:c.email||"",notes:c.notes||""});
+  const mapUser=u=>({id:u._id||u.id,username:u.username,name:u.name||u.username,role:u.role,blocked:!!u.blocked,builtIn:false});
+  const mapAudit=a=>({date:new Date(a.createdAt||a.date).toLocaleString(),actor:a.actorName||a.actor||"—",action:a.action,target:a.target||""});
+
+  async function loadAll(){
+    const optional=promise=>promise.catch(()=>({}));
+    const [p,mv,rq,rt,su,cu,us,au]=await Promise.all([
+      api("/products"),api("/movements"),api("/requests"),api("/returns"),
+      optional(api("/suppliers")),optional(api("/customers")),
+      role==="Admin"?optional(api("/users")):Promise.resolve({}),
+      ["Admin","Manager"].includes(role)?optional(api("/audit")):Promise.resolve({})
+    ]);
+    products=(p.products||[]).map(mapProduct);
+    movements=(mv.movements||[]).map(mapMovement);
+    requests=(rq.requests||[]).map(mapRequest);
+    returnsData=(rt.returns||[]).map(mapReturn);
+    suppliers=(su.suppliers||[]).map(mapSupplier);
+    customers=(cu.customers||[]).map(mapCustomer);
+    if(role==="Admin")userAccounts=(us.users||[]).map(mapUser);
+    if(["Admin","Manager"].includes(role))audit=(au.audit||[]).map(mapAudit);
+  }
+
+  const findProduct=id=>products.find(x=>String(x.id)===String(id));
+  const productByForm=()=>findProduct(document.getElementById("fProduct")?.value);
+  const finish=async()=>{await loadAll();closeModal();render();notify(t("saved"))};
+
+  function showApp(user){
+    role=user.role;
+    currentUsername=user.username;
+    currentUserId=user.id||"";
+    page="dashboard";
+    document.getElementById("loginError").textContent="";
+    document.getElementById("loginPassword").value="";
+    document.getElementById("loginShell").style.display="none";
+    document.getElementById("mainApp").classList.add("authenticated");
+    render();
+  }
+
+  login=async function(){
+    const errorEl=document.getElementById("loginError");
+    errorEl.textContent="";
+    const username=document.getElementById("loginUsername").value.trim().toLowerCase();
+    const password=document.getElementById("loginPassword").value;
+    if(!username||!password){errorEl.textContent=LOGIN_TEXT[lang].bad;return}
+    try{
+      const data=await request("/auth/login",{method:"POST",body:JSON.stringify({username,password})},false);
+      token=data.token;
+      sessionStorage.setItem(TOKEN_KEY,token);
+      role=data.user.role;
+      currentUsername=data.user.username;
+      currentUserId=data.user.id||"";
+      await loadAll();
+      showApp(data.user);
+    }catch(error){errorEl.textContent=error.message||LOGIN_TEXT[lang].bad}
+  };
+
+  logout=function(){
+    sessionStorage.removeItem(TOKEN_KEY);token="";currentUserId="";
+    products=[];movements=[];requests=[];returnsData=[];suppliers=[];customers=[];audit=[];
+    document.getElementById("mainApp").classList.remove("authenticated");
+    document.getElementById("loginShell").style.display="grid";
+    document.getElementById("loginUsername").value="";
+    document.getElementById("loginPassword").value="";
+    document.getElementById("loginError").textContent="";
+    updateLoginLanguage();
+  };
+
+  recordAudit=function(){/* The API writes the server-side audit log. */};
+
+  const previousSave=saveModal;
+  saveModal=async function(){
+    const kind=modalKind;
+    try{
+      if(kind==="product"){
+        if(!allowed("products","c"))return notify(t("noPermission"));
+        if(!text("fName")||!text("fCategory")||!Number.isInteger(val("fQty"))||val("fQty")<0||!Number.isInteger(val("fPrice"))||val("fPrice")<0||!Number.isInteger(val("fMin"))||val("fMin")<0)return notify("Complete all fields with valid non-negative whole numbers.");
+        await api("/products",{method:"POST",body:JSON.stringify({name:text("fName"),sku:"UB-"+String(Date.now()).slice(-6),category:text("fCategory"),qty:val("fQty"),min:val("fMin"),price:val("fPrice")})});
+        return await finish();
+      }
+      if(kind.startsWith("edit:")){
+        if(!allowed("products","u"))return notify(t("noPermission"));
+        const p=findProduct(kind.slice(5));if(!p)return notify(t("denied"));
+        await api("/products/"+p.backendId,{method:"PATCH",body:JSON.stringify({name:text("fName")||p.name,sku:text("fSku")||p.sku,category:text("fCategory")||p.category,min:val("fMin"),price:val("fPrice")})});
+        const delta=val("fQty")-p.qty;
+        if(delta)await api("/movements",{method:"POST",body:JSON.stringify({productId:p.backendId,type:delta>0?"stockIn":"stockOut",qty:Math.abs(delta)})});
+        return await finish();
+      }
+      if(kind==="in"||kind==="out"){
+        if(!allowed("movements","c"))return notify(t("noPermission"));
+        const p=productByForm(),q=val("fQty");
+        if(!p||!Number.isInteger(q)||q<1)return notify("Enter a valid quantity.");
+        await api("/movements",{method:"POST",body:JSON.stringify({productId:p.backendId,type:kind==="in"?"stockIn":"stockOut",qty:q})});
+        return await finish();
+      }
+      if(kind==="request"){
+        if(!allowed("requests","c"))return notify(t("noPermission"));
+        const p=productByForm(),q=val("fQty");
+        if(!p||!Number.isInteger(q)||q<1)return notify("Enter a valid request.");
+        await api("/requests",{method:"POST",body:JSON.stringify({productId:p.backendId,qty:q})});
+        return await finish();
+      }
+      if(kind==="supplier"||kind.startsWith("editSupplier:")){
+        const id=kind.startsWith("editSupplier:")?kind.slice("editSupplier:".length):"";
+        if(!allowed("suppliers",id?"u":"c"))return notify(t("noPermission"));
+        if(!text("fSupplierName")||!text("fSupplierPhone"))return notify("Company name and phone are required.");
+        const body=JSON.stringify({name:text("fSupplierName"),contact:text("fSupplierContact"),phone:text("fSupplierPhone"),email:text("fSupplierEmail"),items:text("fSupplierItems"),status:text("fSupplierStatus")||"active",notes:text("fSupplierNotes")});
+        await api(id?"/suppliers/"+id:"/suppliers",{method:id?"PATCH":"POST",body});
+        return await finish();
+      }
+      if(kind==="customer"||kind.startsWith("editCustomer:")){
+        const id=kind.startsWith("editCustomer:")?kind.slice("editCustomer:".length):"";
+        if(!allowed("customers",id?"u":"c"))return notify(t("noPermission"));
+        if(!text("fCustomerName")||!text("fCustomerPhone"))return notify("Name and phone are required.");
+        const body=JSON.stringify({name:text("fCustomerName"),phone:text("fCustomerPhone"),email:text("fCustomerEmail"),notes:text("fCustomerNotes")});
+        await api(id?"/customers/"+id:"/customers",{method:id?"PATCH":"POST",body});
+        return await finish();
+      }
+      if(kind==="return"){
+        if(!allowed("returns","c"))return notify(t("noPermission"));
+        const p=products.find(x=>x.name===text("fReturnProduct"));
+        if(!p||!Number.isInteger(val("fReturnQty"))||val("fReturnQty")<1||!text("fReturnReason"))return notify("Check customer, product, quantity, refund and reason.");
+        await api("/returns",{method:"POST",body:JSON.stringify({productId:p.backendId,customer:text("fReturnCustomer"),qty:val("fReturnQty"),reason:text("fReturnReason"),refund:val("fReturnRefund")})});
+        return await finish();
+      }
+      if(kind.startsWith("resetPassword:")){
+        if(role!=="Admin")return notify(t("noPermission"));
+        const u=userAccounts.find(x=>x.username===kind.slice("resetPassword:".length));
+        if(!u)return notify(t("denied"));
+        if(text("fResetPass").length<8||text("fResetPass")!==text("fResetPassConfirm"))return notify("Passwords must match and contain at least 8 characters.");
+        await api("/users/"+u.id+"/password",{method:"PATCH",body:JSON.stringify({password:text("fResetPass")})});
+        return await finish();
+      }
+      if(kind==="user"){
+        if(role!=="Admin")return notify(t("noPermission"));
+        const username=text("fUserName").toLowerCase(),password=text("fUserPass"),userRole=text("fUserRole");
+        if(!/^[a-z0-9._-]{3,24}$/.test(username)||password.length<8)return notify("Enter a valid username and a password of at least 8 characters.");
+        await api("/users",{method:"POST",body:JSON.stringify({username,name:username,password,role:userRole})});
+        return await finish();
+      }
+      return previousSave();
+    }catch(error){fail(error)}
+  };
+
+  const setRequestStatus=async(id,status)=>{
+    const r=requests.find(x=>String(x.id)===String(id));if(!r)return;
+    try{await api("/requests/"+r.backendId+"/status",{method:"PATCH",body:JSON.stringify({status})});await loadAll();render();notify(t("saved"))}catch(error){fail(error)}
+  };
+  approveRequest=id=>setRequestStatus(id,"approved");
+  rejectRequest=id=>setRequestStatus(id,"rejected");
+  processRequest=id=>setRequestStatus(id,"processed");
+
+  const setReturnStatus=async(id,status)=>{
+    const r=returnsData.find(x=>String(x.id)===String(id));if(!r)return;
+    try{await api("/returns/"+r.backendId+"/status",{method:"PATCH",body:JSON.stringify({status})});await loadAll();render();notify(t("saved"))}catch(error){fail(error)}
+  };
+  approveReturn=id=>setReturnStatus(id,"approved");
+  receiveReturn=id=>setReturnStatus(id,"restocked");
+
+  blockUser=async function(username){
+    const u=userAccounts.find(x=>x.username===username);if(!u)return;
+    if(String(u.id)===String(currentUserId))return notify(lang==="rw"?"Ntushobora guhagarika konti winjiyemo.":"You cannot block the account currently in use.");
+    try{await api("/users/"+u.id+"/block",{method:"PATCH",body:JSON.stringify({blocked:!u.blocked})});await loadAll();render();notify(t("saved"))}catch(error){fail(error)}
+  };
+
+  deleteSupplier=async function(id){
+    const s=suppliers.find(x=>String(x.id)===String(id));if(!s||!confirm("Delete supplier "+s.name+"?"))return;
+    try{await api("/suppliers/"+id,{method:"DELETE"});await loadAll();render();notify(t("saved"))}catch(error){fail(error)}
+  };
+
+  deleteCustomer=async function(id){
+    const c=customers.find(x=>String(x.id)===String(id));if(!c||!confirm("Delete customer "+c.name+"?"))return;
+    try{await api("/customers/"+id,{method:"DELETE"});await loadAll();render();notify(t("saved"))}catch(error){fail(error)}
+  };
+
+  archiveProduct=async function(id){
+    const p=findProduct(id);if(!p)return;
+    if(!p.archived&&p.qty>0)return notify(lang==="rw"?"Banza usohore stock isigaye mbere yo guhisha igicuruzwa.":"Move remaining stock before archiving this product.");
+    try{await api("/products/"+p.backendId,{method:"PATCH",body:JSON.stringify({archived:!p.archived})});await loadAll();render();notify(t("saved"))}catch(error){fail(error)}
+  };
+
+  changeOwnPassword=async function(){
+    if(text("newOwnPassword")!==text("confirmOwnPassword"))return notify("New passwords do not match.");
+    if(text("newOwnPassword").length<8)return notify("New password must be at least 8 characters.");
+    try{
+      await api("/auth/change-password",{method:"POST",body:JSON.stringify({currentPassword:text("currentOwnPassword"),newPassword:text("newOwnPassword")})});
+      ["currentOwnPassword","newOwnPassword","confirmOwnPassword"].forEach(id=>{const e=document.getElementById(id);if(e)e.value=""});
+      notify(lang==="rw"?"Ijambo ry'ibanga ryawe ryahinduwe.":"Your password has been updated.");
+    }catch(error){fail(error)}
+  };
+
+  importBackup=function(){notify("Backup restore is disabled in connected mode. Use the API-backed data instead.")};
+
+  async function init(){
+    const note=document.getElementById("loginNote");
+    try{
+      const response=await fetch(API_BASE+"/health");
+      const data=await response.json();
+      if(note)note.textContent="UBUBIKO API · "+(data.database==="connected"?"database online":"database offline")+" · "+API_BASE;
+    }catch(error){
+      if(note)note.textContent="API unavailable at "+API_BASE+" · Add ?api=https://your-api/api to connect.";
+    }
+    if(token){
+      try{const me=await api("/auth/me");role=me.user.role;currentUsername=me.user.username;currentUserId=me.user.id||"";await loadAll();showApp(me.user)}
+      catch{sessionStorage.removeItem(TOKEN_KEY);token=""}
+    }
+  }
+  init();
+})();
+
+</script>
+</body></html>

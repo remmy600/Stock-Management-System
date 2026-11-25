@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UBUBIKO SMART — Professional Edition</title>
+<style>
+:root{--navy:#10243a;--navy2:#173650;--gold:#d8ad52;--bg:#f3f6fa;--card:#fff;--text:#172638;--muted:#718096;--line:#e5eaf0;--green:#16845b;--red:#c64d4d;--blue:#3778b8;--shadow:0 8px 24px rgba(16,36,58,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,Segoe UI,Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:0}
+.app{display:flex;min-height:100vh}.sidebar{width:248px;background:var(--navy);color:#fff;padding:22px 15px;display:flex;flex-direction:column;flex-shrink:0}
+.brand{display:flex;align-items:center;gap:11px;padding:0 10px 25px;border-bottom:1px solid #ffffff20}.brandmark{width:39px;height:39px;border-radius:12px;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:900;font-size:20px}.brand b{display:block;font-size:15px;letter-spacing:.7px}.brand small{color:#b9c7d4;font-size:10px;letter-spacing:1.4px}
+.navlabel{color:#8fa4b8;font-size:10px;text-transform:uppercase;letter-spacing:1.5px;padding:22px 12px 8px}.nav button{width:100%;display:flex;align-items:center;gap:12px;color:#c8d4df;background:transparent;padding:11px 12px;border-radius:9px;text-align:left;margin:2px 0}.nav button[hidden]{display:none}.nav button:hover,.nav button.active{background:#ffffff16;color:#fff}.nav button.active{box-shadow:inset 3px 0 var(--gold)}.nav .ico{width:19px;text-align:center;font-size:16px}.sidebar-foot{margin-top:auto;padding:15px 10px 0;border-top:1px solid #ffffff20;color:#9eb0c0;font-size:11px}
+.main{flex:1;min-width:0}.topbar{height:72px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 30px;position:sticky;top:0;z-index:5}.crumb{font-weight:700;font-size:15px}.topright{display:flex;align-items:center;gap:10px}.pill{border:1px solid #f0dba9;background:#fff8e9;color:#89651e;padding:5px 10px;border-radius:30px;font-size:11px;font-weight:800;letter-spacing:.5px}.ghost{background:#f3f6f9;color:#31465b;padding:8px 11px;border-radius:8px}.avatar{width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700}
+.content{padding:28px 30px;max-width:1500px;margin:auto}.welcome{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;margin-bottom:23px}.eyebrow{color:#a47a2c;font-weight:800;font-size:10px;letter-spacing:1.8px;text-transform:uppercase}.welcome h1{margin:4px 0 3px;font-size:26px;color:var(--navy)}.welcome p{margin:0;color:var(--muted)}.btn{background:var(--navy);color:#fff;padding:10px 14px;border-radius:8px;font-weight:700}.btn:hover{background:var(--navy2)}.btn.gold{background:var(--gold);color:var(--navy)}.btn.light{background:#edf2f6;color:var(--navy)}.btn.danger{background:#fff0f0;color:var(--red)}.btn.small{padding:6px 9px;font-size:12px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}.stat,.panel{background:var(--card);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}.stat{padding:17px 18px}.stathead{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.staticon{width:34px;height:34px;border-radius:10px;background:#f6f0e3;color:#a77a27;display:grid;place-items:center;font-size:17px}.stat strong{display:block;font-size:25px;color:var(--navy);margin:10px 0 1px}.stat small{color:var(--muted)}.grid2{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin-bottom:18px}.panel{padding:18px}.panelhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.panelhead h3{margin:0;color:var(--navy);font-size:15px}.panelhead small{color:var(--muted)}.bars{height:180px;display:flex;align-items:flex-end;gap:15px;padding:10px 12px 0;border-bottom:1px solid var(--line)}.barcol{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;gap:7px}.bar{width:min(34px,70%);background:linear-gradient(180deg,#e4c47e,#b88a35);border-radius:6px 6px 0 0;min-height:8px}.barcol small{color:var(--muted);font-size:10px}.activity{width:100%;border-collapse:collapse}.activity th,.activity td{text-align:left;padding:11px 8px;border-bottom:1px solid var(--line);font-size:12px}.activity th{color:var(--muted);font-weight:600}.tag{display:inline-block;padding:3px 8px;border-radius:20px;font-size:10px;font-weight:800}.tag.in{background:#e8f7ef;color:#16845b}.tag.out{background:#fff0e8;color:#b96a32}.tag.pending{background:#fff7e5;color:#a47720}.tag.done{background:#e8f7ef;color:#16845b}.alert{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}.alert:last-child{border:0}.alert b{display:block;font-size:12px}.alert small{color:var(--muted)}.qty{color:var(--red);font-weight:800}
+.toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:18px 0}.search{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;width:min(330px,100%);outline:none}.search:focus,input:focus,select:focus{border-color:var(--gold);box-shadow:0 0 0 3px #d8ad5222}.tablewrap{overflow:auto}.data{width:100%;border-collapse:collapse;min-width:650px}.data th,.data td{padding:13px 11px;text-align:left;border-bottom:1px solid var(--line);font-size:12px}.data th{background:#f8fafc;color:#68798a;font-size:10px;text-transform:uppercase;letter-spacing:.8px}.data tr:hover td{background:#fbfcfe}.actions{display:flex;gap:6px}.empty{text-align:center;color:var(--muted);padding:35px}
+.footer{text-align:center;color:#8190a0;font-size:11px;padding:24px 10px}.footer b{color:#a47a2c}
+.modalback{position:fixed;inset:0;background:#07172788;display:none;align-items:center;justify-content:center;padding:15px;z-index:20}.modalback.show{display:flex}.modal{background:#fff;border-radius:14px;width:min(480px,100%);padding:22px;box-shadow:0 20px 60px #0003}.modal h3{margin:0 0 16px;color:var(--navy)}.field{margin:11px 0}.field label{display:block;font-size:11px;font-weight:700;color:#56687a;margin-bottom:5px}.field input,.field select{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;outline:none}.modalactions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.toast{position:fixed;bottom:22px;right:22px;background:var(--navy);color:#fff;padding:12px 16px;border-radius:9px;box-shadow:var(--shadow);display:none;z-index:30}.toast.show{display:block}.demo-note{background:#fff8e9;border:1px solid #f0dfb9;color:#795b22;border-radius:9px;padding:10px 13px;margin-bottom:17px;font-size:11px}
+.dark{--bg:#101b28;--card:#182738;--text:#e6edf4;--muted:#9baabd;--line:#2a3b4d;--navy:#0b1723;--navy2:#20394e}.dark .topbar{background:#182738}.dark .welcome h1,.dark .panelhead h3,.dark .stat strong{color:#e6edf4}.dark .ghost,.dark .btn.light,.dark .search,.dark .field input,.dark .field select{background:#223548;color:#e6edf4;border-color:#34495d}.dark .data th{background:#203246}.dark .demo-note{background:#3c3320;color:#f1d99b;border-color:#66552d}.dark .modal{background:#182738;color:#e6edf4}.dark .field label{color:#b7c5d3}
+@media(max-width:900px){.sidebar{width:205px}.stats{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+@media(max-width:620px){.sidebar{width:65px;padding:15px 7px}.brand{padding:0 5px 18px}.brand b,.brand small,.navlabel,.sidebar-foot{display:none}.nav button .txt{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.brandmark{width:42px}.nav button{justify-content:center;padding:12px 4px}.nav .ico{font-size:18px}.topbar{gap:6px;padding:0 8px}.crumb{min-width:0;flex:1;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.topright{gap:6px;flex-shrink:0}.topright .pill,.topright .avatar{display:none}.logout-btn{padding:8px;font-size:11px;white-space:nowrap}.content{padding:20px 13px}.welcome{align-items:flex-start;flex-direction:column}.welcome h1{font-size:22px}.stats{gap:9px}.stat{padding:13px}.stat strong{font-size:21px}.toolbar{align-items:stretch;flex-direction:column}.search{width:100%}}
+
+
+
+#appShell{display:none}#loginScreen{min-height:100vh;display:grid;place-items:center;padding:22px;background:radial-gradient(circle at top right,#244765,#10243a 55%,#091827)}
+.login-card{width:min(430px,100%);background:#fff;border-radius:18px;padding:32px;box-shadow:0 24px 70px #0005}.login-brand{display:flex;align-items:center;gap:12px;margin-bottom:24px}.login-brand .brandmark{width:48px;height:48px}.login-card h1{color:#10243a;font-size:24px;margin:0 0 5px}.login-card p{color:#718096;margin:0 0 22px;font-size:13px}.login-card .field{margin:14px 0}.login-card .field input{padding:12px}.login-submit{width:100%;padding:12px;margin-top:12px}.login-error{display:none;color:#b63e3e;background:#fff0f0;border-radius:8px;padding:9px 11px;font-size:12px;margin-top:12px}.login-hint{margin-top:18px;padding:12px;background:#f5f7fa;border-radius:9px;color:#66788a;font-size:11px;line-height:1.7}.logout-btn{background:#fff0f0;color:#b63e3e;padding:8px 11px;border-radius:8px;font-weight:700}.dark .login-card{background:#182738;color:#e6edf4}.dark .login-card h1{color:#e6edf4}.dark .login-hint{background:#223548;color:#c1cfdd}
+.nav .ico{font-size:10px;font-weight:700;letter-spacing:-.25px}</style>
+</head>
+<body>
+<section id="loginScreen" aria-labelledby="loginHeading"><div class="login-card"><div class="login-brand"><div class="brandmark">U</div><div><b style="color:#10243a;letter-spacing:.6px">UBUBIKO SMART</b><div style="font-size:10px;color:#718096;letter-spacing:1.2px">INVENTORY MANAGEMENT</div></div></div><h1 id="loginHeading">Welcome back</h1><p>Sign in to continue to your inventory dashboard.</p><form id="loginForm"><div class="field"><label for="loginUsername">Username</label><input id="loginUsername" autocomplete="username" placeholder="Enter username" required></div><div class="field"><label for="loginPassword">Password</label><input id="loginPassword" type="password" autocomplete="current-password" placeholder="Enter password" required></div><button class="btn gold login-submit" type="submit">Sign in →</button><div id="loginError" class="login-error" role="alert" aria-live="polite">Incorrect username or password.</div></form><div class="login-hint"><b>Demo accounts</b><br>admin / admin123<br>manager / manager123<br>cashier / cashier123<br>storekeeper / store123</div><div class="field" style="margin-top:16px"><label for="loginLanguageSelect">Language / Ururimi / Langue</label><select id="loginLanguageSelect" onchange="changeLanguage(this.value)"><option value="rw">Ikinyarwanda</option><option value="en">English</option><option value="fr">Français</option></select></div><div style="text-align:center;color:#9aa6b2;font-size:10px;margin-top:18px">Demo login only · Do not use real passwords</div></div></section>
+<div class="app" id="appShell">
+<aside class="sidebar">
+ <div class="brand"><div class="brandmark">U</div><div><b>UBUBIKO SMART</b><small>INVENTORY MANAGEMENT</small></div></div>
+ <div class="navlabel">Main menu</div>
+ <nav class="nav" id="nav">
+  <button class="active" data-page="dashboard"><span class="ico" aria-hidden="true">DB</span><span class="txt">Incamake / Dashboard</span></button>
+  <button data-page="products"><span class="ico" aria-hidden="true">PR</span><span class="txt">Ibicuruzwa / Products</span></button>
+  <button data-page="stock"><span class="ico" aria-hidden="true">ST</span><span class="txt">Stock movements</span></button>
+  <button data-page="requests"><span class="ico" aria-hidden="true">RQ</span><span class="txt">Stock requests</span></button>
+  <button data-page="returns"><span class="ico" aria-hidden="true">RT</span><span class="txt">Returns</span></button>
+  <div class="navlabel">Business</div>
+  <button data-page="admin"><span class="ico" aria-hidden="true">AD</span><span class="txt">Admin & Users</span></button>
+  <button data-page="audit"><span class="ico" aria-hidden="true">AU</span><span class="txt">Audit log</span></button>
+  <button data-page="assistant"><span class="ico" aria-hidden="true">AI</span><span class="txt">Stock AI Assistant</span></button>
+  <button data-page="suppliers"><span class="ico" aria-hidden="true">SU</span><span class="txt">Suppliers</span></button>
+  <button data-page="customers"><span class="ico" aria-hidden="true">CU</span><span class="txt">Customers</span></button>
+  <button data-page="reports"><span class="ico" aria-hidden="true">RP</span><span class="txt">Reports</span></button>
+  <button data-page="settings"><span class="ico" aria-hidden="true">SE</span><span class="txt">Settings</span></button>
+ </nav>
+ <div class="sidebar-foot">UBUBIKO SMART · DEMO<br>Presentation edition</div>
+</aside>
+<main class="main">
+ <header class="topbar"><div class="crumb" id="crumb">Incamake y'ububiko</div><div class="topright"><span class="pill">● DEMO MODE</span><button class="ghost" id="langBtn" type="button" aria-label="Change language" title="Change language">RW</button><button class="ghost" id="themeBtn" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle dark mode">◐</button><div class="avatar" id="userAvatar">A</div><button class="logout-btn" id="logoutBtn" type="button" aria-label="Log out" onclick="logout()">→ Logout</button></div></header>
+ <section class="content">
+  <div class="demo-note"><span aria-hidden="true">!</span> <b>LOCAL DEMO:</b> Data is stored only in this browser. Demo roles and permissions are not production-grade security.</div>
+  <div id="page"></div>
+  <div class="footer">Developed by <b>Remmy | L5 SWD</b> · @tigernsanz · UBUBIKO SMART</div>
+ </section>
+</main>
+</div>
+<div class="modalback" id="modalback" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><h3 id="modalTitle">Add item</h3><div id="modalFields"></div><div class="modalactions"><button class="btn light" id="cancelModal">Cancel</button><button class="btn gold" id="saveModal">Save</button></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const initial={
+ products:[
+  {id:1,name:"Umuceri wa Premium",category:"Ibiribwa",unit:"Kg",qty:50,min:10,price:1800},
+  {id:2,name:"Isukari",category:"Ibiribwa",unit:"Kg",qty:22,min:25,price:1500},
+  {id:3,name:"Isabune",category:"Isuku",unit:"Pcs",qty:9,min:15,price:1200},
+  {id:4,name:"Amazi 500ml",category:"Ibinyobwa",unit:"Pcs",qty:120,min:30,price:300},
+  {id:5,name:"Amavuta yo guteka",category:"Ibiribwa",unit:"Litre",qty:34,min:10,price:3200},
+  {id:6,name:"Umunyu",category:"Ibiribwa",unit:"Kg",qty:18,min:8,price:700}
+ ],
+ movements:[
+  {id:1,date:"2026-11-03",product:"Amazi 500ml",type:"OUT",qty:12,note:"Igurishwa"},
+  {id:2,date:"2026-11-02",product:"Umuceri wa Premium",type:"IN",qty:50,note:"Kwakira stock"},
+  {id:3,date:"2026-11-01",product:"Isukari",type:"OUT",qty:8,note:"Igurishwa"},
+  {id:4,date:"2026-10-30",product:"Isabune",type:"IN",qty:20,note:"Kwakira stock"}
+ ],
+ requests:[{id:1,requester:"Storekeeper",product:"Isukari",qty:20,status:"Pending"},{id:2,requester:"Cashier",product:"Amazi 500ml",qty:24,status:"Approved"}],
+ returns:[{id:1,product:"Amazi 500ml",qty:2,reason:"Ibicuruzwa byangiritse",date:"2026-11-02"}],
+ suppliers:[{id:1,name:"Kigali Wholesale",phone:"0788001122",email:"sales@kigali.example"},{id:2,name:"Rwanda Foods Ltd",phone:"0788112233",email:"info@foods.example"}],
+ customers:[{id:1,name:"Diane Uwase",phone:"0788123456",email:"diane@example.com"},{id:2,name:"Jean Claude",phone:"0788234567",email:"jean@example.com"}]
+};
+function cloneInitial(){return JSON.parse(JSON.stringify(initial))}
+function loadDemoData(){const stored=JSON.parse(localStorage.getItem("ububikoDemoData")||"null");if(!stored||typeof stored!=="object"||Array.isArray(stored))return cloneInitial();return Object.fromEntries(Object.keys(initial).map(key=>[key,Array.isArray(stored[key])?stored[key].filter(item=>item&&typeof item==="object"&&!Array.isArray(item)):cloneInitial()[key]]))}
+let db;try{db=loadDemoData()}catch(e){db=cloneInitial()}
+let current="dashboard", lang=localStorage.getItem("ububikoLanguage")||"rw", modalConfig=null; if(!["rw","en","fr"].includes(lang))lang="rw";
+let activeUser=null;try{activeUser=JSON.parse(sessionStorage.getItem("ububikoActiveUser")||"null")}catch(e){activeUser=null}if(activeUser&&(typeof activeUser.name!=="string"||!activeUser.name.trim()||!["Admin","Store Manager","Cashier","Storekeeper"].includes(activeUser.role)))activeUser=null;
+const demoAccounts=[{username:"admin",password:"admin123",name:"System Admin",role:"Admin"},{username:"manager",password:"manager123",name:"Store Manager",role:"Store Manager"},{username:"cashier",password:"cashier123",name:"Cashier User",role:"Cashier"},{username:"storekeeper",password:"store123",name:"Storekeeper User",role:"Storekeeper"}];
+let auditLog;try{auditLog=JSON.parse(localStorage.getItem("ububikoAudit")||"[]")}catch(e){auditLog=[]}if(!Array.isArray(auditLog))auditLog=[];
+const roles=["Admin","Store Manager","Cashier","Storekeeper"];
+const permissions={Admin:["*"],"Store Manager":["dashboard","products","stock","requests","returns","suppliers","customers","reports","assistant","audit","settings"],Cashier:["dashboard","products","stock","customers","assistant","settings"],Storekeeper:["dashboard","products","requests","returns","assistant","settings"]};
+function allowed(action){const role=activeUser?.role,access=permissions[role]||[];return access.includes("*")||access.includes(action)}
+function guard(action){if(!allowed(action)){toast("Access denied: insufficient role permissions.");audit("BLOCKED",action);return false}return true}
+function audit(action,detail){auditLog.unshift({id:Date.now(),time:new Date().toLocaleString(),user:activeUser.name,role:activeUser.role,action,detail});auditLog=auditLog.slice(0,200);localStorage.setItem("ububikoAudit",JSON.stringify(auditLog))}
+function setUser(name,role){if(!guard("admin"))return;if(!roles.includes(role)){toast("Choose a valid demo role.");return}const displayName=String(name||"Staff").trim().slice(0,80)||"Staff";activeUser={name:displayName,role};sessionStorage.setItem("ububikoActiveUser",JSON.stringify(activeUser));$("#userAvatar").textContent=displayName.charAt(0).toUpperCase();audit("SWITCH DEMO ROLE",role);render();toast("Active demo user: "+role)}
+function showAuthenticatedApp(){if(!activeUser){$("#loginScreen").style.display="grid";$("#appShell").style.display="none";applyLanguage();return}$("#loginScreen").style.display="none";$("#appShell").style.display="flex";$("#userAvatar").textContent=activeUser.name.charAt(0).toUpperCase();render()}
+function logout(){if(activeUser)audit("LOGOUT","User signed out");sessionStorage.removeItem("ububikoActiveUser");activeUser=null;showAuthenticatedApp();$("#loginPassword").value="";$("#loginUsername").value="";toast("You have been logged out.")}
+const $=s=>document.querySelector(s), money=n=>{const value=Number(n);return (Number.isFinite(value)?value:0).toLocaleString("en-US")+" RWF"};
+function persist(){localStorage.setItem("ububikoDemoData",JSON.stringify(db))}
+function toast(msg){let t=$("#toast");t.textContent=translateText(msg);t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
+const labels={dashboard:"Incamake y'ububiko",products:"Ibicuruzwa",stock:"Stock movements",requests:"Stock requests",returns:"Returns",suppliers:"Suppliers",customers:"Customers",reports:"Reports",settings:"Settings",admin:"Admin & Users",audit:"Audit log",assistant:"Stock AI Assistant"};
+function go(p){if(!guard(p))return;current=p;$("#crumb").textContent=labels[p]||p;render()}
+$("#nav").addEventListener("click",e=>{let b=e.target.closest("button[data-page]");if(b)go(b.dataset.page)});
+function pageHead(title,desc,action){return `<div class="welcome"><div><div class="eyebrow">UBUBIKO SMART · DEMO</div><h1>${title}</h1><p>${desc}</p></div>${action||""}</div>`}
+function stat(title,value,sub,ico){return `<div class="stat"><div class="stathead"><span>${title}</span><span class="staticon" aria-hidden="true">${ico}</span></div><strong>${value}</strong><small>${sub}</small></div>`}
+function table(headers,rows){return `<div class="panel tablewrap"><table class="data"><thead><tr>${headers.map(h=>`<th>${h}</th>`).join("")}</tr></thead><tbody>${rows||`<tr><td colspan="${headers.length}" class="empty">Nta makuru ahari.</td></tr>`}</tbody></table></div>`}
+function dashboard(){let value=db.products.reduce((s,p)=>s+p.qty*p.price,0),low=db.products.filter(p=>p.qty<=p.min);
+let rows=db.movements.slice(0,5).map(m=>`<tr><td>${escapeHTML(m.date)}</td><td>${escapeHTML(m.product)}</td><td><span class="tag ${m.type==="IN"?"in":"out"}">${escapeHTML(m.type)}</span></td><td>${Number(m.qty)||0}</td><td>${escapeHTML(m.note)}</td></tr>`).join("");
+return pageHead("Incamake y'ububiko","Muraho! Dore uko ububiko buhagaze uyu munsi.",`<button class="btn gold" onclick="openAdd('products')">+ Ongeramo igicuruzwa</button>`)+
+`<div class="stats">${stat("Ibicuruzwa",db.products.length,"Ibicuruzwa biri muri system","PR")}${stat("Agaciro ka stock",money(value),"Bibarwa ku giciro cyo kugura","RW" )}${stat("Ibyagurishijwe (demo)",money(17100),"Urugero rw'ibyagurishijwe","SA")}${stat("Stock iri hasi",low.length,"Bisaba kongerwamo stock","!")}</div>
+<div class="grid2"><div class="panel"><div class="panelhead"><h3>Stock overview</h3><small>Sample activity · 6 months</small></div><div class="bars">${[55,82,65,95,72,88].map((v,i)=>`<div class="barcol"><div class="bar" style="height:${v}%"></div><small>${["Jun","Jul","Aug","Sep","Oct","Nov"][i]}</small></div>`).join("")}</div></div>
+<div class="panel"><div class="panelhead"><h3>Stock alerts</h3><small>${low.length} alerts</small></div>${low.map(p=>`<div class="alert"><div><b>${escapeHTML(p.name)}</b><small>${escapeHTML(p.unit)} · Minimum ${Number(p.min)||0}</small></div><span class="qty">${Number(p.qty)||0} left</span></div>`).join("")||`<p class="empty">Stock imeze neza.</p>`}</div></div>
+<div class="panel"><div class="panelhead"><h3>Ibikorwa biheruka</h3><button class="btn light small" onclick="go('stock')">Reba byose →</button></div><div class="tablewrap"><table class="activity"><thead><tr><th>Itariki</th><th>Igicuruzwa</th><th>Ubwoko</th><th>Qty</th><th>Ibisobanuro</th></tr></thead><tbody>${rows}</tbody></table></div></div>`}
+const configs={
+ products:{title:"Ibicuruzwa",desc:"Manage products, categories, quantities and prices.",add:"+ Ongeramo igicuruzwa",fields:[["name","Izina ry'igicuruzwa","text"],["category","Category","text"],["unit","Unit (Kg, Pcs...)","text"],["qty","Quantity","number"],["min","Minimum stock","number"],["price","Purchase price (RWF)","number"]],cols:["Product","Category","Unit","Quantity","Min. stock","Purchase price","Actions"],data:()=>db.products,render:r=>[escapeHTML(r.name),escapeHTML(r.category),escapeHTML(r.unit),Number(r.qty)||0,Number(r.min)||0,money(r.price)]},
+ suppliers:{title:"Suppliers",desc:"Manage your product suppliers and their contact details.",add:"+ Add supplier",fields:[["name","Supplier name","text"],["phone","Phone","text"],["email","Email","email"]],cols:["Supplier","Phone","Email","Actions"],data:()=>db.suppliers,render:r=>[escapeHTML(r.name),escapeHTML(r.phone),escapeHTML(r.email)]},
+ customers:{title:"Customers",desc:"Manage customer information.",add:"+ Add customer",fields:[["name","Customer name","text"],["phone","Phone","text"],["email","Email","email"]],cols:["Customer","Phone","Email","Actions"],data:()=>db.customers,render:r=>[escapeHTML(r.name),escapeHTML(r.phone),escapeHTML(r.email)]},
+ requests:{title:"Stock requests",desc:"Review and process requests from store staff.",add:"+ New request",fields:[["requester","Requested by","text"],["product","Product","select",()=>db.products.map(p=>p.name)],["qty","Quantity","number"]],cols:["Requested by","Product","Quantity","Status","Actions"],data:()=>db.requests,render:r=>[escapeHTML(r.requester),escapeHTML(r.product),Number(r.qty)||0,`<span class="tag ${r.status==="Pending"?"pending":"done"}">${escapeHTML(r.status)}</span>`],extra:(r)=>r.status==="Pending"?`<button class="btn light small" onclick="approve(${Number(r.id)||0})">Approve</button>`:`<span class="tag done">Processed</span>`},
+ returns:{title:"Returns",desc:"Record returned or damaged goods.",add:"+ Record return",fields:[["product","Product","select",()=>db.products.map(p=>p.name)],["qty","Quantity","number"],["reason","Reason","text"],["date","Date","date"]],cols:["Product","Quantity","Reason","Date","Actions"],data:()=>db.returns,render:r=>[escapeHTML(r.product),Number(r.qty)||0,escapeHTML(r.reason),escapeHTML(r.date)]},
+ stock:{title:"Stock movements",desc:"Track stock coming into and leaving the store.",add:"+ Record movement",fields:[["product","Product","select",()=>db.products.map(p=>p.name)],["type","Movement type","select",["IN","OUT"]],["qty","Quantity","number"],["note","Description","text"],["date","Date","date"]],cols:["Date","Product","Type","Quantity","Description"],data:()=>db.movements,render:r=>[escapeHTML(r.date),escapeHTML(r.product),`<span class="tag ${r.type==="IN"?"in":"out"}">${escapeHTML(r.type)}</span>`,Number(r.qty)||0,escapeHTML(r.note)]}
+};
+function listPage(p){let c=configs[p],rows=c.data().map(r=>`<tr>${c.render(r).map(v=>`<td>${v}</td>`).join("")}${c.cols.includes("Actions")?`<td><div class="actions">${c.extra?c.extra(r):""}<button class="btn danger small" onclick="removeRow('${p}',${Number(r.id)||0})">Delete</button></div></td>`:""}</tr>`).join("");
+return pageHead(c.title,c.desc,`<button class="btn gold" onclick="openAdd('${p}')">${c.add}</button>`)+`<div class="toolbar"><input class="search" id="filter" aria-label="Search ${c.title}" placeholder="Search ${c.title.toLowerCase()}..." oninput="filterRows()"><small style="color:var(--muted)">${c.data().length} records</small></div><div id="tableArea">${table(c.cols,rows)}</div>`}
+function reports(){let total=db.products.reduce((s,p)=>s+p.qty*p.price,0),low=db.products.filter(p=>p.qty<=p.min);return pageHead("Reports","A quick summary of inventory performance.")+`<div class="stats">${stat("Total products",db.products.length,"Registered products","PR")}${stat("Stock valuation",money(total),"Purchase-price estimate","RW")}${stat("Low stock items",low.length,"Need attention","!")}${stat("Stock movements",db.movements.length,"Recorded transactions","ST")}</div><div class="panel"><div class="panelhead"><h3>Inventory valuation</h3><button class="btn gold small" onclick="window.print()">Print report</button></div>${table(["Product","Quantity","Unit price","Total value"],db.products.map(p=>`<tr><td>${escapeHTML(p.name)}</td><td>${Number(p.qty)||0} ${escapeHTML(p.unit)}</td><td>${money(p.price)}</td><td><b>${money(p.qty*p.price)}</b></td></tr>`).join(""))}</div>`}
+function settings(){return pageHead("Settings","Demo preferences and application information.")+`<div class="panel"><h3>System information</h3><p><b>Application:</b> UBUBIKO SMART</p><p><b>Mode:</b> Offline presentation demo</p><p><b>Database:</b> Browser local storage (sample data)</p><div class="field"><label for="languageSelect">Language / Ururimi / Langue</label><select id="languageSelect" onchange="changeLanguage(this.value)"><option value="rw" ${lang==="rw"?"selected":""}>Ikinyarwanda</option><option value="en" ${lang==="en"?"selected":""}>English</option><option value="fr" ${lang==="fr"?"selected":""}>Français</option></select></div><p><b>Language:</b> ${lang==="rw"?"Ikinyarwanda":lang==="en"?"English":"Français"}</p><hr style="border:0;border-top:1px solid var(--line)"><button class="btn light" onclick="exportData()">Export demo data (JSON)</button> <button class="btn danger" onclick="resetDemo()">Reset demo data</button><p style="color:var(--muted);font-size:12px;margin-top:15px">Reset restores the original sample data. It does not affect any online database.</p></div>`}
+
+
+
+function adminPage(){return pageHead("Admin control center","Manage demo users, roles and access permissions.")+`<div class="panel"><div class="panelhead"><h3>Current session</h3><small>${escapeHTML(activeUser.name)} · ${escapeHTML(activeUser.role)}</small></div><div class="field"><label for="demoRole">Switch demo user (simulation only)</label><select id="demoRole">${roles.map(r=>`<option ${r===activeUser.role?"selected":""}>${r}</option>`).join("")}</select></div><div class="field"><label for="demoName">Display name</label><input id="demoName" value="${escapeHTML(activeUser.name)}" maxlength="80"></div><button class="btn gold" onclick="setUser($('#demoName').value||'Staff',$('#demoRole').value)">Apply role</button></div><div class="panel" style="margin-top:16px"><h3>Role permissions</h3>${roles.map(r=>`<div class="alert"><div><b>${r}</b><small>${r==='Admin'?'Full demo access':(permissions[r]||[]).join(', ')}</small></div><span class="tag ${r==='Admin'?'done':'pending'}">${r==='Admin'?'Full access':'Restricted'}</span></div>`).join('')}<p style="color:var(--muted);font-size:12px">This is client-side demo access control. It can be bypassed by editing browser storage or JavaScript; it is not suitable for protecting real business data.</p></div>`}
+function auditPage(){return pageHead("Audit log","Recent actions and blocked permission attempts.")+table(["Time","User","Role","Action","Details"],auditLog.map(x=>`<tr><td>${escapeHTML(x.time)}</td><td>${escapeHTML(x.user)}</td><td>${escapeHTML(x.role)}</td><td>${escapeHTML(x.action)}</td><td>${escapeHTML(x.detail)}</td></tr>`).join(''))}
+function assistantPage(){return pageHead("UBUBIKO SMART Assistant","Ask questions about stock, products, requests, returns and reports.")+`<div class="panel"><div id="chatHistory" style="min-height:180px;max-height:360px;overflow:auto;padding:8px"><p><b>UBUBIKO Assistant:</b> Muraho! Nshobora kugufasha gusuzuma stock, ibicuruzwa biri hafi gushira, agaciro ka stock n'ibikorwa.</p></div><div class="toolbar"><input class="search" id="chatInput" aria-label="Ask the stock assistant" style="width:100%;flex:1" placeholder="Ask about stock, low inventory, value, requests..." onkeydown="if(event.key==='Enter'&&!event.isComposing&&event.keyCode!==229)askAssistant()"><button class="btn gold" onclick="askAssistant()">Send</button></div></div>`}
+function askAssistant(){const el=$('#chatInput'),q=(el.value||'').trim();if(!q)return;const h=$('#chatHistory');const low=q.toLowerCase();let answer='I can only answer UBUBIKO SMART questions about inventory, products, stock movements, requests, returns and reports.';const total=db.products.reduce((a,p)=>a+p.qty*p.price,0),lowItems=db.products.filter(p=>p.qty<=p.min);if(/low|hasi|make|shira| 부족/.test(low))answer=lowItems.length?`There are ${lowItems.length} low-stock products: ${lowItems.map(p=>`${p.name} (${p.qty} left; minimum ${p.min})`).join(', ')}.`:'No products are currently below their minimum stock level.';else if(/value|agaciro|worth|inventory total/.test(low))answer=`Current inventory purchase value is ${money(total)} across ${db.products.length} products.`;else if(/product|ibicuruzwa|how many/.test(low))answer=`There are ${db.products.length} registered products: ${db.products.map(p=>`${p.name} (${p.qty} ${p.unit})`).join(', ')}.`;else if(/request|ubusabe/.test(low))answer=`Stock requests: ${db.requests.length} total; ${db.requests.filter(r=>r.status==='Pending').length} pending and ${db.requests.filter(r=>r.status==='Approved').length} approved.`;else if(/movement|stock in|stock out|ibyinjira|ibyavuyemo/.test(low))answer=`Recorded stock movements: ${db.movements.length} (${db.movements.filter(m=>m.type==='IN').length} IN and ${db.movements.filter(m=>m.type==='OUT').length} OUT).`;else if(/return|garura|byagaruwe/.test(low))answer=`There are ${db.returns.length} recorded returns.`;h.innerHTML+=`<p><b>You:</b> ${escapeHTML(q)}</p><p><b>UBUBIKO Assistant:</b> ${escapeHTML(answer)}</p>`;el.value='';h.scrollTop=h.scrollHeight}
+function escapeHTML(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+
+
+const translations={
+rw:{
+"INVENTORY MANAGEMENT":"IMICUNGIRE Y'UBUBIKO","Main menu":"Ibikorwa by'ingenzi","Business":"Imicungire y'ubucuruzi",
+"Stock movements":"Ibicuruzwa byinjiye n'iby asohotse","Stock requests":"Ubusabe bw'ibicuruzwa","Returns":"Ibicuruzwa byagaruwe",
+"Admin & Users":"Abayobozi n'abakozi","Audit log":"Amateka y'ibikorwa","Stock AI Assistant":"Umufasha w'ububiko",
+"Suppliers":"Abagemura ibicuruzwa","Customers":"Abakiriya","Reports":"Raporo","Settings":"Igenamiterere",
+"Welcome back":"Murakaza neza","Sign in to continue to your inventory dashboard.":"Injira kugira ngo ukomeze gucunga ububiko bwawe.",
+"Username":"Izina ryo kwinjiriraho","Password":"Ijambo ry'ibanga","Enter username":"Andika izina ryo kwinjiriraho",
+"Enter password":"Andika ijambo ry'ibanga","Sign in →":"Injira →","Incorrect username or password.":"Izina cyangwa ijambo ry'ibanga si byo.",
+"Demo accounts":"Konti zo kugerageza","Demo login only · Do not use real passwords":"Konti zo kugerageza gusa · Ntukoreshe amagambo y'ibanga nyayo",
+"DEMO MODE":"UBURYO BWO KUGERAGEZA","Logout":"Sohoka","LOCAL DEMO:":"IGERAGEZA RIKORERA KURI IKI GICURANGWA:",
+"Data is stored only in this browser. Demo roles and permissions are not production-grade security.":"Amakuru abikwa muri iyi browser gusa. Uburenganzira bwo muri demo si umutekano wizewe w'ubucuruzi.",
+"Presentation edition":"Verisiyo yo kwerekana","Incamake y'ububiko":"Incamake y'ububiko","Ibicuruzwa":"Ibicuruzwa",
+"Stock movements":"Ibicuruzwa byinjiye n'iby asohotse","Stock requests":"Ubusabe bw'ibicuruzwa","Returns":"Ibicuruzwa byagaruwe",
+"Add product":"Ongeramo igicuruzwa","Add new":"Ongeramo gishya","Cancel":"Kureka","Save":"Bika","Delete":"Siba",
+"Search":"Shakisha","Date":"Itariki","Product":"Igicuruzwa","Products":"Ibicuruzwa","Category":"Icyiciro","Unit":"Igipimo",
+"Quantity":"Ingano","Min. stock":"Ingano ntarengwa y'ibicuruzwa","Purchase price":"Igiciro cyo kugura",
+"Supplier":"Utanga ibicuruzwa","Supplier name":"Izina ry'utanga ibicuruzwa","Phone":"Telefoni","Email":"Imeyili",
+"Customer":"Umukiriya","Customer name":"Izina ry'umukiriya","Requested by":"Uwasabye","Status":"Imiterere",
+"Actions":"Ibikorwa","Reason":"Impamvu","Movement type":"Ubwoko bw'igikorwa","Description":"Ibisobanuro",
+"Stock IN":"Ibicuruzwa byinjiye","Stock OUT":"Ibicuruzwa byasohotse","IN":"Byinjiye","OUT":"Byasohotse",
+"Pending":"Birategereje","Approved":"Byemejwe","Rejected":"Byanzwe","Processed":"Byatanzwe",
+"Review and process requests from store staff.":"Suzuma kandi utunganye ubusabe bw'abakozi b'ububiko.",
+"Manage products, categories, quantities and prices.":"Cunga ibicuruzwa, ibyiciro, ingano n'ibiciro.",
+"Manage your product suppliers and their contact details.":"Cunga abagemura ibicuruzwa n'amakuru yabo yo kubavugisha.",
+"Manage customer information.":"Cunga amakuru y'abakiriya.","Record returned or damaged goods.":"Andika ibicuruzwa byagaruwe cyangwa byangiritse.",
+"Track stock coming into and leaving the store.":"Kurikirana ibicuruzwa byinjira n'ibisohoka mu bubiko.",
+"New request":"Saba ibicuruzwa","Add supplier":"Ongeramo utanga ibicuruzwa","Add customer":"Ongeramo umukiriya",
+"Record return":"Andika igicuruzwa cyagaruwe","Record movement":"Andika igikorwa cy'ibicuruzwa",
+"Total products":"Ibicuruzwa byose","Registered products":"Ibicuruzwa byanditswe","Stock valuation":"Agaciro k'ibicuruzwa",
+"Purchase-price estimate":"Agaciro kabazwe ku giciro cyo kugura","Low stock items":"Ibicuruzwa biri hafi gushira",
+"Need attention":"Bisaba kwitabwaho","Stock movements":"Ibikorwa by'ibicuruzwa","Recorded transactions":"Ibikorwa byanditswe",
+"Recent activity":"Ibikorwa biheruka","Inventory valuation":"Agaciro k'ububiko","Print report":"Capisha raporo",
+"System information":"Amakuru ya sisitemu","Application:":"Porogaramu:","Mode:":"Uburyo:","Database:":"Ububiko bw'amakuru:",
+"Language:":"Ururimi:","Kinyarwanda interface labels":"Imigaragarire y'Ikinyarwanda","English navigation":"Imigaragarire y'Icyongereza",
+"Export demo data (JSON)":"Ohereza amakuru ya demo (JSON)","Reset demo data":"Subizaho amakuru ya demo",
+"Reset restores the original sample data. It does not affect any online database.":"Gusubizaho bisubura amakuru y'icyitegererezo. Nta bubiko bw'amakuru bwo kuri internet bigira icyo bihinduraho.",
+"Admin control center":"Aho umuyobozi acungira sisitemu","Manage demo users, roles and access permissions.":"Cunga abakoresha ba demo, inshingano n'uburenganzira bwo gukoresha sisitemu.",
+"Current session":"Konti iri gukoresha sisitemu","Switch demo user (simulation only)":"Hindura umukoresha wa demo (igerageza gusa)",
+"Display name":"Izina rigaragara","Apply role":"Emeza inshingano","Role permissions":"Uburenganzira bw'inshingano",
+"Full demo access":"Uburenganzira bwose muri demo","Full access":"Uburenganzira bwose","Restricted":"Bufite aho bugarukira",
+"Audit log":"Amateka y'ibikorwa","Recent actions and blocked permission attempts.":"Ibikorwa biheruka n'ibigeragezo byabujijwe kubera kubura uburenganzira.",
+"Time":"Igihe","User":"Umukoresha","Role":"Inshingano","Action":"Igikorwa","Details":"Ibisobanuro",
+"Ask questions about stock, products, requests, returns and reports.":"Baza ibibazo ku bubiko, ibicuruzwa, ubusabe, ibyagejejwe n'ibisubizwa na raporo.",
+"Ask about stock, low inventory, value, requests...":"Baza ku bubiko, ibicuruzwa bike, agaciro kabyo cyangwa ubusabe...",
+"Send":"Ohereza","Welcome! Here is today's inventory overview.":"Murakaza neza! Dore uko ububiko buhagaze uyu munsi.",
+"Inventory overview":"Incamake y'ububiko","No records found.":"Nta makuru ahari.","View all":"Reba byose",
+"Needs replenishment":"Bisaba kongerwamo ibicuruzwa","Calculated at purchase price":"Bibazwe hakurikijwe igiciro cyo kugura",
+"Add item":"Ongeramo ikintu","Select":"Hitamo","Save successfully in this demo.":"Amakuru yabitswe muri iyi demo.",
+"Delete this demo record?":"Urashaka gusiba aya makuru yo muri demo?","Record deleted from demo.":"Aya makuru yasibwe muri demo.",
+"Request approved.":"Ubusabe bwemejwe.","This request has already been processed.":"Ubu busabe bwamaze gutunganywa.",
+"Access denied: insufficient role permissions.":"Wangiwe: nta burenganzira buhagije ufite.",
+"Choose a valid demo role.":"Hitamo inshingano yemewe muri demo.","Please complete all required fields.":"Uzuza ibisabwa byose.",
+"Enter a valid non-negative whole number.":"Andika umubare wuzuye kandi utari munsi ya zeru.",
+"Not enough stock for this OUT movement.":"Nta bicuruzwa bihagije bihari kugira ngo bisohoke.",
+"Select a product from the inventory list.":"Hitamo igicuruzwa kiri ku rutonde rw'ububiko.",
+"Restore original demo data? Your local demo changes will be lost.":"Subizaho amakuru ya mbere? Impinduka wakoze muri demo zizabura.",
+"Demo data restored.":"Amakuru ya demo yasubijweho.","You have been logged out.":"Wasohotse muri konti.",
+"Welcome, ":"Murakaza neza, ","Language: ":"Ururimi: ","Add product":"Ongeramo igicuruzwa",
+"System Admin":"Umuyobozi wa sisitemu","Store Manager":"Umuyobozi w'ububiko","Cashier":"Ushinzwe kwakira no kwishyurisha",
+"Storekeeper":"Ushinzwe ububiko","Admin":"Umuyobozi mukuru","Inventory Management":"Imicungire y'ububiko",
+"Sales (demo)":"Ibyagurishijwe (demo)","No products are currently below their minimum stock level.":"Nta bicuruzwa biri munsi y'ingano ntarengwa yabyo.",
+"Current inventory purchase value is ":"Agaciro k'ibicuruzwa biri mu bubiko ni "," across ":" mu bicuruzwa ",
+" products.":" byose.","There are ":"Hari "," low-stock products: ":" ibicuruzwa biri hafi gushira: ",
+" left; minimum ":" bisigaye; ingano ntarengwa ni ","Stock requests: ":"Ubusabe bw'ibicuruzwa: "," total; ":" bwose; ",
+" pending and ":" burategereje kandi "," approved.":" bwar eme jwe.","Recorded stock movements: ":"Ibikorwa by'ibicuruzwa byanditswe: ",
+" (":" ("," IN and ":" byinjiye na "," OUT).":" byasohotse).","There are ":"Hari "," recorded returns.":" ibicuruzwa byagaruwe byanditswe."
+},
+en:{
+"INVENTORY MANAGEMENT":"INVENTORY MANAGEMENT","Main menu":"Main menu","Business":"Business",
+"Stock movements":"Stock movements","Stock requests":"Stock requests","Returns":"Returns","Admin & Users":"Admin & Users",
+"Audit log":"Audit log","Stock AI Assistant":"Stock AI Assistant","Suppliers":"Suppliers","Customers":"Customers","Reports":"Reports","Settings":"Settings",
+"Welcome back":"Welcome back","Murakaza neza":"Welcome","Incamake y'ububiko":"Inventory overview","Ibicuruzwa":"Products",
+"Ibicuruzwa byinjiye n'iby asohotse":"Stock movements","Ubusabe bw'ibicuruzwa":"Stock requests","Ibicuruzwa byagaruwe":"Returns",
+"Abayobozi n'abakozi":"Admin & Users","Amateka y'ibikorwa":"Audit log","Umufasha w'ububiko":"Stock AI Assistant",
+"Abagemura ibicuruzwa":"Suppliers","Abakiriya":"Customers","Raporo":"Reports","Igenamiterere":"Settings",
+"Umuyobozi mukuru":"Admin","Umuyobozi w'ububiko":"Store Manager","Ushinzwe kwakira no kwishyurisha":"Cashier","Ushinzwe ububiko":"Storekeeper",
+"Byemejwe":"Approved","Byanzwe":"Rejected","Byatanzwe":"Processed","Birategereje":"Pending",
+"Yinjira":"IN","Byinjiye":"IN","Byasohotse":"OUT","Ongeramo igicuruzwa":"Add product","Shakisha":"Search",
+"Agaciro ka stock":"Stock value","Stock iri hasi":"Low stock","Ibikorwa biheruka":"Recent activity","Nta makuru ahari.":"No records found.",
+"Reba byose":"View all","Ibyinjira":"Stock IN","Ibyasohotse":"Stock OUT","Itariki":"Date","Izina ry'igicuruzwa":"Product name",
+"Uwasabye":"Requested by","Ingano":"Quantity","Ibisobanuro":"Description","Igicuruzwa":"Product","Icyiciro":"Category",
+"Telefoni":"Phone","Imeyili":"Email","Impamvu":"Reason","Ibikorwa":"Actions","Injira →":"Sign in →","Sohoka":"Logout",
+"Murakaza neza! Dore uko ububiko buhagaze uyu munsi.":"Welcome! Here is today's inventory overview."
+},
+fr:{
+"INVENTORY MANAGEMENT":"GESTION DES STOCKS","Main menu":"Menu principal","Business":"Gestion commerciale",
+"Stock movements":"Mouvements de stock","Stock requests":"Demandes de stock","Returns":"Retours","Admin & Users":"Administration et utilisateurs",
+"Audit log":"Journal des activités","Stock AI Assistant":"Assistant intelligent de stock","Suppliers":"Fournisseurs","Customers":"Clients","Reports":"Rapports","Settings":"Paramètres",
+"Welcome back":"Bon retour","Incamake y'ububiko":"Vue d'ensemble du stock","Ibicuruzwa":"Produits",
+"Ibicuruzwa byinjiye n'iby asohotse":"Mouvements de stock","Ubusabe bw'ibicuruzwa":"Demandes de stock","Ibicuruzwa byagaruwe":"Produits retournés",
+"Abayobozi n'abakozi":"Administration et utilisateurs","Amateka y'ibikorwa":"Journal des activités","Umufasha w'ububiko":"Assistant intelligent de stock",
+"Abagemura ibicuruzwa":"Fournisseurs","Abakiriya":"Clients","Raporo":"Rapports","Igenamiterere":"Paramètres",
+"Umuyobozi mukuru":"Administrateur","Umuyobozi w'ububiko":"Responsable du stock","Ushinzwe kwakira no kwishyurisha":"Caissier","Ushinzwe ububiko":"Magasinier",
+"Byemejwe":"Approuvé","Byanzwe":"Refusé","Byatanzwe":"Traité","Birategereje":"En attente",
+"Ongeramo igicuruzwa":"Ajouter un produit","Shakisha":"Rechercher","Agaciro ka stock":"Valeur du stock","Stock iri hasi":"Stock faible",
+"Ibikorwa biheruka":"Activités récentes","Nta makuru ahari.":"Aucun enregistrement.","Reba byose":"Tout voir",
+"Ibyinjira":"Entrées de stock","Ibyasohotse":"Sorties de stock","Itariki":"Date","Izina ry'igicuruzwa":"Nom du produit",
+"Uwasabye":"Demandé par","Ingano":"Quantité","Ibisobanuro":"Description","Igicuruzwa":"Produit","Icyiciro":"Catégorie",
+"Telefoni":"Téléphone","Imeyili":"E-mail","Impamvu":"Motif","Ibikorwa":"Actions","Injira →":"Se connecter →","Sohoka":"Déconnexion",
+"Murakaza neza! Dore uko ububiko buhagaze uyu munsi.":"Bienvenue ! Voici l'état du stock aujourd'hui."
+}
+};
+function translateText(value){
+ const dict=translations[lang]||{};
+ let out=String(value);
+ const keys=Object.keys(dict).sort((a,b)=>b.length-a.length);
+ for(const key of keys){if(out.includes(key))out=out.split(key).join(dict[key]);}
+ return out;
+}
+function applyLanguage(){
+ document.documentElement.lang=lang;
+ const langButton=$("#langBtn");if(langButton)langButton.textContent=lang.toUpperCase();
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+ nodes.forEach(node=>{
+  if(!node.dataset.i18nOriginal)node.dataset.i18nOriginal=node.nodeValue;
+  if(node.dataset.i18nOriginal.trim())node.nodeValue=translateText(node.dataset.i18nOriginal);
+ });
+ document.querySelectorAll("input,button,select,textarea,[aria-label],[title]").forEach(el=>{
+  ["placeholder","aria-label","title","value"].forEach(attr=>{
+   if(!el.hasAttribute(attr))return;
+   const key="i18nOriginal"+attr.replace(/(^|-)([a-z])/g,(_,a,b)=>b.toUpperCase());
+   if(!el.dataset[key])el.dataset[key]=el.getAttribute(attr);
+   el.setAttribute(attr,translateText(el.dataset[key]));
+  });
+ });
+ ["#languageSelect","#loginLanguageSelect"].forEach(sel=>{const el=$(sel);if(el)el.value=lang});
+}
+function changeLanguage(next){
+ if(!["rw","en","fr"].includes(next))return;
+ lang=next;localStorage.setItem("ububikoLanguage",lang);
+ render();toast(lang==="rw"?"Ururimi rwahinduwe: Ikinyarwanda":lang==="en"?"Language changed: English":"Langue modifiée : Français");
+}
+
+
+function render(){if(!activeUser)return;if(!allowed(current))current="dashboard";$("#crumb").textContent=labels[current]||current;document.querySelectorAll("#nav button").forEach(b=>{const permitted=allowed(b.dataset.page);b.hidden=!permitted;b.classList.toggle("active",b.dataset.page===current);if(b.dataset.page===current)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")});let p=$("#page");if(current==="dashboard")p.innerHTML=dashboard();else if(configs[current])p.innerHTML=listPage(current);else if(current==="reports")p.innerHTML=reports();else if(current==="admin")p.innerHTML=adminPage();else if(current==="audit")p.innerHTML=auditPage();else if(current==="assistant")p.innerHTML=assistantPage();else p.innerHTML=settings();applyLanguage()}
+function openAdd(p){const c=configs[p];if(!c||!guard(p))return;const now=new Date(),today=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(now.getDate()).padStart(2,"0")}`;modalConfig=p;$("#modalTitle").textContent=c.title+" — Add new";$("#modalFields").innerHTML=c.fields.map(f=>{const id=`field-${p}-${f[0]}`,label=`<label for="${id}">${escapeHTML(f[1])}</label>`;if(f[2]==="select"){const options=typeof f[3]==="function"?f[3]():f[3];return `<div class="field">${label}<select id="${id}" name="${f[0]}" required><option value="" disabled selected>Select ${escapeHTML(f[1].toLowerCase())}</option>${options.map(x=>`<option value="${escapeHTML(x)}">${escapeHTML(x)}</option>`).join("")}</select></div>`}const constraint=f[2]==="number"?`min="${f[0]==="qty"?"1":"0"}" step="1"`:"",defaultValue=f[2]==="date"?`value="${today}"`:"";return `<div class="field">${label}<input id="${id}" name="${f[0]}" type="${f[2]}" ${constraint} ${defaultValue} required></div>`}).join("");$("#modalback").classList.add("show");$("#modalFields input, #modalFields select")?.focus()}
+function closeModal(){$("#modalback").classList.remove("show");modalConfig=null}
+$("#cancelModal").onclick=closeModal;
+$("#modalback").addEventListener("click",event=>{if(event.target===$("#modalback"))closeModal()});
+document.addEventListener("keydown",event=>{if(event.key==="Escape"&&$("#modalback").classList.contains("show"))closeModal()});
+$("#saveModal").onclick=()=>{const c=configs[modalConfig];if(!c||!guard(modalConfig))return;const collection=modalConfig==="stock"?"movements":modalConfig;if(!Array.isArray(db[collection])){toast("This record type isn't available.");return}const obj={id:Date.now()};for(const f of c.fields){const el=$(`#modalFields [name="${f[0]}"]`);if(!el||!el.checkValidity()){el?.reportValidity();el?.focus();return}const value=el.value.trim();if(!value){toast("Please complete all required fields.");el.focus();return}if(f[2]==="number"){const number=Number(value);if(!Number.isFinite(number)||!Number.isInteger(number)||number<(f[0]==="qty"?1:0)){toast("Enter a valid non-negative whole number.");el.focus();return}obj[f[0]]=number}else obj[f[0]]=value}
+if(modalConfig==="stock"){const product=db.products.find(p=>String(p.name||"").toLowerCase()===obj.product.toLowerCase());if(!product){toast("Select a product from the inventory list.");return}product.qty=Number(product.qty)||0;if(obj.type==="OUT"&&product.qty<obj.qty){toast("Not enough stock for this OUT movement.");return}product.qty+=obj.type==="IN"?obj.qty:-obj.qty}
+if(modalConfig==="returns"){const product=db.products.find(p=>String(p.name||"").toLowerCase()===obj.product.toLowerCase());if(!product){toast("Select a product from the inventory list.");return}product.qty=Number(product.qty)||0;product.qty+=obj.qty}
+db[collection].unshift(obj);audit("CREATE",modalConfig+": "+(obj.name||obj.product||"record"));persist();closeModal();render();toast("Saved successfully in this demo.")};
+function removeRow(p,id){if(!guard(p))return;if(!confirm("Delete this demo record?"))return;db[p]=db[p].filter(x=>x.id!==id);audit("DELETE",p+" #"+id);persist();render();toast("Record deleted from demo.")}
+function approve(id){if(!guard("requests"))return;const r=db.requests.find(x=>x.id===id);if(!r||r.status!=="Pending"){toast("This request has already been processed.");return}r.status="Approved";audit("APPROVE","Request #"+id);persist();render();toast("Request approved.")}
+function filterRows(){let q=$("#filter").value.toLowerCase();document.querySelectorAll("#tableArea tbody tr").forEach(r=>r.style.display=r.innerText.toLowerCase().includes(q)?"":"none")}
+function exportData(){const blob=new Blob([JSON.stringify(db,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="ububiko-smart-demo-data.json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
+function resetDemo(){if(!guard("admin"))return;if(confirm("Restore original demo data? Your local demo changes will be lost.")){db=JSON.parse(JSON.stringify(initial));audit("RESET","Demo data restored");persist();render();toast("Demo data restored.")}}
+$("#themeBtn").onclick=()=>{document.body.classList.toggle("dark");$("#themeBtn").setAttribute("aria-pressed",String(document.body.classList.contains("dark")))};
+$("#langBtn").onclick=()=>changeLanguage(lang==="rw"?"en":lang==="en"?"fr":"rw");
+$("#loginForm").addEventListener("submit",e=>{e.preventDefault();const username=$("#loginUsername").value.trim().toLowerCase(),password=$("#loginPassword").value;const account=demoAccounts.find(a=>a.username===username&&a.password===password);if(!account){$("#loginError").style.display="block";auditLog.unshift({id:Date.now(),time:new Date().toLocaleString(),user:username||"Unknown",role:"Guest",action:"LOGIN FAILED",detail:"Invalid credentials"});localStorage.setItem("ububikoAudit",JSON.stringify(auditLog.slice(0,200)));return}activeUser={name:account.name,role:account.role};sessionStorage.setItem("ububikoActiveUser",JSON.stringify(activeUser));$("#loginError").style.display="none";audit("LOGIN","Successful sign in");showAuthenticatedApp();toast("Welcome, "+activeUser.name)}); 
+if(activeUser){audit("SESSION RESTORED","Active browser session");showAuthenticatedApp()}else{showAuthenticatedApp()}
+
+/* Live API connection bridge. Keeps the existing UI but uses the backend when reachable. */
+(function(){
+  const params=new URLSearchParams(location.search);
+  const DEFAULT_API="https://ububiko-smart-api-wwnp.onrender.com/api";
+  const configured=params.get("api")||window.UBUBIKO_API_BASE||localStorage.getItem("ububiko-api-base")||DEFAULT_API;
+  const API_BASE=String(configured).replace(/\/+$/,"");
+  if(params.get("api"))localStorage.setItem("ububiko-api-base",API_BASE);
+  const TOKEN_KEY="ububiko-api-token-pro";
+  let token=sessionStorage.getItem(TOKEN_KEY)||"";
+  const req=async(path,options={},auth=true)=>{
+    const headers={...(options.headers||{})};
+    if(options.body&&!headers["Content-Type"])headers["Content-Type"]="application/json";
+    if(auth&&token)headers.Authorization="Bearer "+token;
+    const res=await fetch(API_BASE+path,{...options,headers});
+    let body={}; try{body=await res.json()}catch{}
+    if(res.status===401){sessionStorage.removeItem(TOKEN_KEY);token="";throw new Error(body.message||"Session expired. Please sign in again.")}
+    if(!res.ok)throw new Error(body.message||("API request failed ("+res.status+")"));
+    return body;
+  };
+  const api=(path,options={})=>req(path,options,true);
+  const day=v=>v?new Date(v).toISOString().slice(0,10):new Date().toISOString().slice(0,10);
+  const byId=id=>db.products.find(p=>String(p.id)===String(id));
+  const byBackendId=id=>db.products.find(p=>String(p.backendId)===String(id));
+
+  function mapFromApi(data){
+    db.products=(data.products||[]).map((p,i)=>({id:i+1,backendId:p._id,name:p.name,category:p.category,unit:p.unit||"Pcs",qty:Number(p.qty)||0,min:Number(p.min)||0,price:Number(p.price)||0,archived:!!p.archived}));
+    db.movements=(data.movements||[]).map(m=>({id:m._id,backendId:m._id,date:day(m.date),product:m.productName||"",type:m.type==="stockIn"?"IN":"OUT",qty:Number(m.qty)||0,note:m.byName||m.by||""}));
+    db.requests=(data.requests||[]).map(r=>({id:r._id,backendId:r._id,requester:r.requestedByName||"—",product:r.productName||"",qty:Number(r.qty)||0,status:(r.status||"pending").replace(/^./,c=>c.toUpperCase())}));
+    db.returns=(data.returns||[]).map(r=>({id:r._id,backendId:r._id,product:r.productName||"",qty:Number(r.qty)||0,reason:r.reason||"",date:day(r.date),status:r.status}));
+    db.suppliers=(data.suppliers||[]).map(s=>({id:s._id,backendId:s._id,name:s.name,phone:s.phone||"",email:s.email||""}));
+    db.customers=(data.customers||[]).map(c=>({id:c._id,backendId:c._id,name:c.name,phone:c.phone||"",email:c.email||""}));
+  }
+
+  async function loadAll(){
+    const optional=p=>p.catch(()=>({}));
+    const isAdmin=activeUser?.role==="Admin";
+    const isManager=["Admin","Store Manager"].includes(activeUser?.role);
+    const [products,movements,requests,returns,suppliers,customers]=await Promise.all([
+      api("/products"),api("/movements"),api("/requests"),api("/returns"),
+      optional(api("/suppliers")),optional(api("/customers"))
+    ]);
+    mapFromApi({products:products.products,movements:movements.movements,requests:requests.requests,returns:returns.returns,suppliers:suppliers.suppliers,customers:customers.customers});
+    if(isAdmin||isManager){
+      const audit=await optional(api("/audit"));
+      if(Array.isArray(audit.audit)) auditLog=audit.audit.map(a=>({id:a._id,time:new Date(a.createdAt||Date.now()).toLocaleString(),user:a.actorName||"—",role:a.role||"",action:a.action||"",detail:a.target||""}));
+    }
+  }
+
+  async function finish(msg="Saved successfully."){
+    await loadAll(); closeModal(); render(); toast(msg);
+  }
+
+  const loginForm=document.getElementById("loginForm");
+  loginForm.replaceWith(loginForm.cloneNode(true));
+  document.getElementById("loginForm").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const username=document.getElementById("loginUsername").value.trim().toLowerCase();
+    const password=document.getElementById("loginPassword").value;
+    const err=document.getElementById("loginError"); err.style.display="none";
+    try{
+      const data=await req("/auth/login",{method:"POST",body:JSON.stringify({username,password})},false);
+      token=data.token; sessionStorage.setItem(TOKEN_KEY,token);
+      activeUser={name:data.user.name||data.user.username,role:data.user.role==="Manager"?"Store Manager":data.user.role,username:data.user.username,id:data.user.id};
+      sessionStorage.setItem("ububikoActiveUser",JSON.stringify(activeUser));
+      await loadAll();
+      showAuthenticatedApp();
+      toast("Welcome, "+activeUser.name);
+    }catch(error){err.textContent=error.message||"Incorrect username or password."; err.style.display="block";}
+  });
+
+  const oldLogout=logout;
+  logout=function(){sessionStorage.removeItem(TOKEN_KEY);token="";oldLogout();};
+
+  const oldRemove=removeRow;
+  removeRow=async function(p,id){
+    if(!guard(p))return;
+    const map={products:["/products/","product"],suppliers:["/suppliers/","supplier"],customers:["/customers/","customer"],requests:["/requests/","request"],returns:["/returns/","return"]};
+    const row=(db[p]||[]).find(x=>String(x.id)===String(id));
+    if(!row) return oldRemove(p,id);
+    if(!confirm("Delete this record?"))return;
+    try{
+      if(p==="products") await api("/products/"+row.backendId,{method:"DELETE"});
+      else if(p==="suppliers") await api("/suppliers/"+row.backendId,{method:"DELETE"});
+      else if(p==="customers") await api("/customers/"+row.backendId,{method:"DELETE"});
+      else return toast("This record cannot be deleted from the connected API.");
+      await finish("Record deleted.");
+    }catch(error){toast(error.message)}
+  };
+
+  const oldApprove=approve;
+  approve=async function(id){
+    if(!guard("requests"))return;
+    const r=db.requests.find(x=>String(x.id)===String(id));
+    if(!r) return oldApprove(id);
+    try{await api("/requests/"+r.backendId+"/status",{method:"PATCH",body:JSON.stringify({status:"approved"})}); await finish("Request approved.")}catch(error){toast(error.message)}
+  };
+
+  const oldSave=saveModal.onclick;
+  saveModal.onclick=async ()=>{
+    const c=configs[modalConfig]; if(!c||!guard(modalConfig))return;
+    try{
+      if(modalConfig==="products"){
+        const name=$("#field-products-name").value.trim(), category=$("#field-products-category").value.trim();
+        const unit=$("#field-products-unit").value.trim(), qty=Number($("#field-products-qty").value), min=Number($("#field-products-min").value), price=Number($("#field-products-price").value);
+        await api("/products",{method:"POST",body:JSON.stringify({name,sku:"UB-"+Date.now().toString().slice(-6),category,qty,min,price,icon:"📦"})});
+        return await finish();
+      }
+      if(modalConfig==="stock"){
+        const product=byId(db.products.find(p=>p.name===$("#field-stock-product").value)?.id) || db.products.find(p=>p.name===$("#field-stock-product").value);
+        const type=$("#field-stock-type").value, qty=Number($("#field-stock-qty").value);
+        if(!product) return toast("Select a valid product.");
+        await api("/movements",{method:"POST",body:JSON.stringify({productId:product.backendId,type:type==="IN"?"stockIn":"stockOut",qty})});
+        return await finish();
+      }
+      if(modalConfig==="requests"){
+        const product=db.products.find(p=>p.name===$("#field-requests-product").value);
+        const qty=Number($("#field-requests-qty").value);
+        if(!product) return toast("Select a valid product.");
+        await api("/requests",{method:"POST",body:JSON.stringify({productId:product.backendId,qty})});
+        return await finish();
+      }
+      if(modalConfig==="suppliers"){
+        await api("/suppliers",{method:"POST",body:JSON.stringify({name:$("#field-suppliers-name").value.trim(),phone:$("#field-suppliers-phone").value.trim(),email:$("#field-suppliers-email").value.trim(),status:"active"})});
+        return await finish();
+      }
+      if(modalConfig==="customers"){
+        await api("/customers",{method:"POST",body:JSON.stringify({name:$("#field-customers-name").value.trim(),phone:$("#field-customers-phone").value.trim(),email:$("#field-customers-email").value.trim()})});
+        return await finish();
+      }
+      if(modalConfig==="returns"){
+        const product=db.products.find(p=>p.name===$("#field-returns-product").value);
+        await api("/returns",{method:"POST",body:JSON.stringify({productId:product.backendId,customer:"Walk-in customer",qty:Number($("#field-returns-qty").value),reason:$("#field-returns-reason").value.trim(),refund:0})});
+        return await finish();
+      }
+      return oldSave();
+    }catch(error){toast(error.message)}
+  };
+
+  resetDemo=function(){toast("Reset is disabled while connected to the live API.")};
+  exportData=async function(){
+    try{
+      const data={products:db.products,movements:db.movements,requests:db.requests,returns:db.returns,suppliers:db.suppliers,customers:db.customers,exportedAt:new Date().toISOString(),source:API_BASE};
+      const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+      const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="ububiko-smart-api-export.json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+    }catch(e){toast("Export failed.")}
+  };
+
+  async function init(){
+    const note=document.querySelector(".demo-note");
+    try{
+      const h=await fetch(API_BASE+"/health"); const hd=await h.json();
+      if(note) note.innerHTML='<b>CONNECTED:</b> Using live API '+escapeHTML(API_BASE)+' · database '+escapeHTML(hd.database||"unknown");
+      if(token){
+        const me=await api("/auth/me");
+        activeUser={name:me.user.name||me.user.username,role:me.user.role==="Manager"?"Store Manager":me.user.role,username:me.user.username,id:me.user.id};
+        sessionStorage.setItem("ububikoActiveUser",JSON.stringify(activeUser));
+        await loadAll(); showAuthenticatedApp();
+      } else {
+        showAuthenticatedApp();
+      }
+    }catch(e){
+      if(note) note.innerHTML='<b>API OFFLINE:</b> Could not reach '+escapeHTML(API_BASE)+'. Showing local demo mode. Add ?api=https://your-api/api to configure.';
+    }
+  }
+  init();
+})();
+</script>
+</body>
+</html>
